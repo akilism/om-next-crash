@@ -1,0 +1,5 @@
+Figwheel: Starting server at http://localhost:3450
+Figwheel: Watching build - dev
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+{:type :reader-exception, :line 42, :column 1, :file "/Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs"}
+ERROR: EOF while reading, starting at line 40 and column 1 on file /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs, line 42, column 1
