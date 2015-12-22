@@ -132,3 +132,19 @@ body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.sub-area-menu {
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  position: absolute;
+  border: 1px solid black;
+  background: #fff;
+  top: 10px;
+  left: 10px;
+}
+
+.sub-area-menu-item {
+  margin: 0 15px;
+}

@@ -934,3 +934,64 @@ Compiling src/ta_crash/core.cljs
 Compiling target/figwheel_temp/dev/figwheel/connect.cljs
 notifying browser that file changed:  out/ta_crash/area_menu.js
 [32mSuccessfully compiled "resources/public/js/main.js" in 1.283 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mERROR: EOF while reading, starting at line 43 and column 1 on file /Users/akilharris/projects/om-next-crash/src/ta_crash/area-menu.cljs, line 83, column 1
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.889 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.005 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.328 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.138 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.026 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.212 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.148 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.359 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.689 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.087 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.062 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.641 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mANALYSIS ERROR: No such namespace: yesql.core, could not locate yesql/core.cljs, yesql/core.cljc, or Closure namespace "yesql.core" on file null, line null, column null
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.847 seconds.[0m

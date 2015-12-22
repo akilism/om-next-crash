@@ -6,11 +6,13 @@
             [goog.dom :as gdom]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
+            [yesql.core :refer [defqueries]]
             [ta-crash.area-menu :as area-menu]
             [ta-crash.carto-query :as carto-query]
             [ta-crash.stat-group :as stat-group]))
 
 (enable-console-print!)
+(defqueries "ta_crash/sql/crash_queries.sql")
 
 (def init-data
   {:geo-area {:type :geo-area/precinct
@@ -70,52 +72,42 @@
    [{:display-name "Borough"
      :item-type :group
      :area-type :borough
-     :table "nyc_borough"
-     :cols [:borough :identifier]}
+     :query ()}
     {:display-name "Community Board District"
      :item-type :group
-     :area-type :community_board
-     :table "nyc_community_board"
-     :cols [:identifier]}
+     :area-type :community-board
+     :query ()}
     {:display-name "City Counctil District"
      :item-type :group
-     :area-type :city_council
-     :table "nyc_city_council"
-     :cols [:identifier]}
+     :area-type :city-council
+     :query ()}
     {:display-name "Neighborhood"
      :item-type :group
      :area-type :neighborhood
-     :table "nyc_neighborhood"
-     :cols [:borough :identifier]}
+     :query ()}
     {:display-name "NYPD Precinct"
      :item-type :group
      :area-type :precinct
-     :table "nyc_nypd_precinct"
-     :cols [:borough :identifier]}
+     :query ()}
     {:display-name "Zip Code"
      :item-type :group
-     :area-type :zip_code
-     :table "nyc_zip_codes"
-     :cols [:borough :identifier]}]})
+     :area-type :zip-code
+     :query ()}]})
 
-;(map (fn [item]
-;       (let [table (:table item)
-;             cols (:cols item)]
-;         (carto-query/select-distinct-cols cols table
-;            #(println (:rows (js->clj % :keywordize-keys true)))
-;            #(println "ERROR: " %)))) (:menu/items menu-data))
+(defmulti query-carto (fn [type &_] type))
 
-;query distinct cols specified in menu-data for the first item in menu-data
-;(let [item (first (:menu/items menu-data))
-;      table (:table item)
-;      cols (:cols item)]
-;  (carto-query/select-distinct-cols cols table))
-
-
-(defn query-carto
-  ([cols table] (query-carto (chan) cols table))
-  ([c cols table]
+(defmethod query-carto :select-distinct
+  ([type cols table] (query-carto type (chan) cols table))
+  ([c _ cols table]
    (carto-query/select-distinct-cols cols table
+      #(put! c (:rows (js->clj % :keywordize-keys true)))
+      #(println "ERROR: " %))
+   c))
+
+(defmethod query-carto :select
+  ([type cols table] (query-carto type (chan) cols table))
+  ([c _ cols table]
+   (carto-query/select-cols cols table
       #(put! c (:rows (js->clj % :keywordize-keys true)))
       #(println "ERROR: " %))
    c))
@@ -142,8 +134,8 @@
 (defn carto-loop [c]
   (go
     (loop [[area-type cols table cb] (<! c)]
-      (let [result (<! (query-carto cols table))]
-        (cb {:area/items (map #(assoc % :parent area-type :item-type :area) result)}))
+      (let [result (<! (query-carto :select-distinct cols table))]
+        (cb {:area/items (map #(assoc % :parent area-type :item-type :sub) result)}))
       (recur (<! c)))))
 
 (defn send-to-chan [c]

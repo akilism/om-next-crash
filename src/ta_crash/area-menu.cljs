@@ -24,6 +24,26 @@
     4 "Queens"
     5 "Staten Island"))
 
+(defmethod get-area-display :city-council
+  [id _]
+  id)
+
+(defmethod get-area-display :community-board
+  [id _]
+  id)
+
+(defmethod get-area-display :neighborhood
+  [id _]
+  id)
+
+(defmethod get-area-display :precinct
+  [id _]
+  id)
+
+(defmethod get-area-display :zip-code
+  [id _]
+  id)
+
 (defn build-sub-item
   [item sub-item]
   (assoc sub-item :table (:table item)
