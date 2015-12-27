@@ -995,3 +995,8 @@ Compiling src/ta_crash/core.cljs
 [31mCompiling "resources/public/js/main.js" failed.
 [0mANALYSIS ERROR: No such namespace: yesql.core, could not locate yesql/core.cljs, yesql/core.cljc, or Closure namespace "yesql.core" on file null, line null, column null
 [32mSuccessfully compiled "resources/public/js/main.js" in 1.847 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mANALYSIS ERROR: No such namespace: yesql.core, could not locate yesql/core.cljs, yesql/core.cljc, or Closure namespace "yesql.core" on file null, line null, column null
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.365 seconds.[0m

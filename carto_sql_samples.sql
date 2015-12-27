@@ -31,7 +31,6 @@ FROM
   table_20k_crashes c
 JOIN
   nyc_borough b
-
 WHERE
   contributing_factor_vehicle_1 = 'Unspecified'
   AND
@@ -116,7 +115,7 @@ WHERE
   ST_Within(c.the_geom, (SELECT the_geom from current_geometry ORDER BY cartodb_id DESC LIMIT 1))
 
 
-  SELECT
+SELECT
   sum(c.number_of_cyclist_injured) as cyclist_injured,
   sum(c.number_of_cyclist_killed) as cyclist_killed,
   sum(c.number_of_motorist_injured) as motorist_injured,
@@ -167,7 +166,7 @@ group by
 order by
   count_factor desc
 
-
+--aggregated vehicle-types
 WITH all_vehicle_types as (
   SELECT
     vehicle_type_code_1 as vehicle_type_code
