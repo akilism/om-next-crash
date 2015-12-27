@@ -66,12 +66,19 @@
     (assoc acc :seq-query (into [] (concat (:seq-query acc) (insert-symbols v))) :input-params (concat (:input-params acc) (get-inputs v true)))
     (assoc acc :seq-query (conj (:seq-query acc) (clojure.string/trim v)))))
 
+(defn format-inputs
+  [inputs]
+  (if inputs
+    [{:keys inputs}]
+    []))
+
 (defmacro def-sql-query [sql-query]
   (let [[str-name# str-doc# & query-lines#] (clojure.string/split-lines (clojure.string/trim sql-query))
       fn-name# (get-fn-name str-name#)
       doc-string# (get-doc-string str-doc#)
-      query# (reduce reducer {:input-params [] :seq-query []} query-lines#)]
+      query# (reduce reducer {:input-params [] :seq-query []} query-lines#)
+      inputs# (format-inputs (:input-params query#))]
     `(defn ~(symbol fn-name#)
-       doc-string#
-       ~(into [] (:input-params query#))
+       {:doc ~doc-string#}
+       ~inputs#
        (clojure.string/join " " ~(:seq-query query#)))))

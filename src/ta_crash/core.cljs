@@ -1,14 +1,14 @@
 (ns ta-crash.core
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require-macros [sqlize.core :refer [def-sql-query]])
   (:require [cljs.pprint :as pprint]
             [cljs.core.async :as async :refer [<! >! put! chan]]
             [clojure.string :as string]
             [goog.dom :as gdom]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [ta-crash.area-menu :as area-menu]
             [ta-crash.carto-query :as carto-query]
+            [ta-crash.sql-queries :as queries]
+            [ta-crash.area-menu :as area-menu]
             [ta-crash.stat-group :as stat-group]))
 
 (enable-console-print!)
@@ -71,52 +71,63 @@
    [{:display-name "Borough"
      :item-type :group
      :area-type :borough
-     :query ()}
-    {:display-name "Community Board District"
-     :item-type :group
-     :area-type :community-board
-     :query ()}
+     :query queries/distinct-borough}
     {:display-name "City Counctil District"
      :item-type :group
      :area-type :city-council
-     :query ()}
+     :query queries/distinct-city-council}
+    {:display-name "Community Board District"
+     :item-type :group
+     :area-type :community-board
+     :query queries/distinct-community-board}
     {:display-name "Neighborhood"
      :item-type :group
      :area-type :neighborhood
-     :query ()}
+     :query queries/distinct-neighborhood}
     {:display-name "NYPD Precinct"
      :item-type :group
      :area-type :precinct
-     :query ()}
+     :query queries/distinct-precinct}
     {:display-name "Zip Code"
      :item-type :group
      :area-type :zip-code
-     :query ()}]})
+     :query queries/distinct-zip-code}]})
 
-(defmulti query-carto (fn [type &_] type))
 
-(defmethod query-carto :select-distinct
-  ([type cols table] (query-carto type (chan) cols table))
-  ([c _ cols table]
-   (carto-query/select-distinct-cols cols table
+(defn execute-query-carto
+  ([query params] (execute-query-carto (chan) query params))
+  ([c query params]
+   (println (query params))
+   (carto-query/execute-query (query params)
       #(put! c (:rows (js->clj % :keywordize-keys true)))
       #(println "ERROR: " %))
    c))
+;(defmulti query-carto (fn [type &_] type))
 
-(defmethod query-carto :select
-  ([type cols table] (query-carto type (chan) cols table))
-  ([c _ cols table]
-   (carto-query/select-cols cols table
-      #(put! c (:rows (js->clj % :keywordize-keys true)))
-      #(println "ERROR: " %))
-   c))
+;(defmethod query-carto :select-distinct
+;  ([type cols table] (query-carto type (chan) cols table))
+;  ([c _ cols table]
+;   (carto-query/select-distinct-cols cols table
+;      #(put! c (:rows (js->clj % :keywordize-keys true)))
+;      #(println "ERROR: " %))
+;   c))
+
+;(defmethod query-carto :select
+;  ([type cols table] (query-carto type (chan) cols table))
+;  ([c _ cols table]
+;   (carto-query/select-cols cols table
+;      #(put! c (:rows (js->clj % :keywordize-keys true)))
+;      #(println "ERROR: " %))
+;   c))
 
 (defmulti read om/dispatch)
 
 (defmethod read :group/items
-  [{:keys [state] :as env} k _]
-  (let [st @state]
-    {:value (into [] (map #(get-in st %)) (get st k))}))
+  [{:keys [state ast] :as env} k {:keys [params query]}]
+  (merge
+    {:value (get @state k [])}
+    (when query
+    {:search ast})))
 
 (defmethod read :menu/items
   [{:keys [state] :as env} k _]
@@ -124,16 +135,24 @@
     {:value (get st k)}))
 
 (defmethod read :area/items
-  [{:keys [state ast] :as env} k {:keys [area-type cols table]}]
+  [{:keys [state ast] :as env} k {:keys [area-type query]}]
   (merge
     {:value (get @state k [])}
-    (when-not (string/blank? table)
+    (when query
     {:search ast})))
+
+;(defn carto-loop [c]
+;  (go
+;    (loop [[area-type cols table cb] (<! c)]
+;      (let [result (<! (query-carto :select-distinct cols table))]
+;        (cb {:area/items (map #(assoc % :parent area-type :item-type :sub) result)}))
+;      (recur (<! c)))))
 
 (defn carto-loop [c]
   (go
-    (loop [[area-type cols table cb] (<! c)]
-      (let [result (<! (query-carto :select-distinct cols table))]
+    (loop [[area-type query params cb] (<! c)]
+      (let [result (<! (execute-query-carto query params))]
+        (println result)
         (cb {:area/items (map #(assoc % :parent area-type :item-type :sub) result)}))
       (recur (<! c)))))
 
@@ -142,9 +161,9 @@
     (when search
       (let [{[search] :children} (om/query->ast search)
             area-type (get-in search [:params :area-type])
-            cols (get-in search [:params :cols])
-            table (get-in search [:params :table])]
-        (put! c [area-type cols table cb])))))
+            query (get-in search [:params :query])
+            params (get-in search [:params :params])]
+        (put! c [area-type query params cb])))))
 
 (def send-chan (chan))
 
@@ -157,13 +176,13 @@
 
 (carto-loop send-chan)
 
-(om/add-root! reconciler
-  area-menu/AreaMenu (gdom/getElement "app"))
+;(om/add-root! reconciler
+;  area-menu/AreaMenu (gdom/getElement "app"))
 
 ;(def reconciler
 ;  (om/reconciler
 ;    {:state init-data
 ;     :parser (om/parser {:read read})}))
 
-;(om/add-root! reconciler
-;  stat-group/StatGroup (gdom/getElement "app"))
+(om/add-root! reconciler
+  stat-group/StatGroup (gdom/getElement "app"))

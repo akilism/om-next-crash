@@ -46,16 +46,16 @@
 
 (defn build-sub-item
   [item sub-item]
-  (assoc sub-item :table (:table item)
+  (assoc sub-item :query (:query item)
     :display-name (get-area-display (:identifier sub-item) (:area-type item))))
 
 (defui AreaMenu
   static om/IQueryParams
   (params [_]
-    {:area-type "" :table "" :cols []})
+    {:area-type "" :query false})
   static om/IQuery
   (query [_]
-    '[:menu/items (:area/items {:area-type ?area-type :table ?table :cols ?cols})])
+    '[:menu/items (:area/items {:area-type ?area-type :query ?query})])
   Object
   (render [this]
     (let [{items :menu/items sub-items :area/items} (om/props this)
@@ -73,10 +73,10 @@
 
 (def area-menu (om/factory AreaMenu))
 
-(defn menu-item [item am]
-  (let [{:keys [area-type cols item-type display-name sub-menu table]} item]
+(defn menu-item [item area-mnu]
+  (let [{:keys [area-type query item-type display-name sub-menu]} item]
     (dom/li #js {:className (str (name item-type) "-area-menu-item area-menu-item")
-                 :onClick #(om/set-query! am {:params {:area-type area-type :table table :cols cols}})}
+                 :onClick #(om/set-query! area-mnu {:params {:area-type area-type :query query}})}
       display-name
       (when-not (empty? sub-menu)
         (area-menu {:menu/items sub-menu})))))
