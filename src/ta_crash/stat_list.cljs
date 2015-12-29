@@ -21,10 +21,7 @@
       (om/set-query! this {:params {:params {:end-date end-date :start-date start-date} :query query}})))
   (render [this]
     (let [{:keys [stat-list/items end-date start-date query]} (om/props this)]
-      (print (om/props this))
       (dom/div #js {:className "stat-box"}
-        ";*("))))
+        (apply dom/ul #js {:className "stat-list"} (map stat-list-item/stat-list-item items))))))
 
 (def stat-list (om/factory StatList))
-
-;(apply dom/ul #js {:className "stat-list"} (map stat-list-item/stat-list-item items))

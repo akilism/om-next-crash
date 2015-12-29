@@ -1,5 +1,6 @@
 (ns ta-crash.formatter
-  (:require [cljs.pprint :as pprint]))
+  (:require [cljs.pprint :as pprint]
+            [clojure.string :as str]))
 
 ;[{:cyclist_killed 0,
 ;  :total_crashes 9429,
@@ -39,8 +40,19 @@
 
 (defn for-area-menu
   [raw-rows cb area-type]
-  (cb {:area/items (map #(assoc % :parent area-type :item-type :sub) raw-rows)}))
+  (let [items (map #(assoc % :parent area-type :item-type :sub) raw-rows)]
+    (cb {:area/items items})))
+
+(defn factor-id
+  [val]
+  (str/replace (str/replace val #"[()]" "") #"[ //]" "-"))
+
+(defn get-id
+  [type val]
+  (condp = type
+    :factor (factor-id val)))
 
 (defn for-stat-list
   [raw-rows cb type]
-  (cb {:stat-list/items (map #({:text (:factor %) :value (:factor_count %)}) raw-rows)}))
+  (let [items (into [](map (fn [i] {:display (:factor i) :count (:count_factor i) :type :factor :id (get-id :factor (:factor i))}) raw-rows))]
+    (cb {:stat-list/items items})))
