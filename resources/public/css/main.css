@@ -46,7 +46,7 @@ body {
 }
 
 .item:hover {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: #F9F9CE;
 }
 
 .default-item {
@@ -117,6 +117,7 @@ body {
   margin: 4vh auto;
   height: 70vh;
   width: 90vw;
+  border: 1px solid black;
 }
 
 .area-menu {

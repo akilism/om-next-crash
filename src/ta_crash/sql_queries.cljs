@@ -167,8 +167,8 @@
   -- Counts all death / injury stats for a given date range
   SELECT
     count(c.cartodb_id) as total_crashes,
-    (select count(cartodb_id) from table_20k_crashes where (number_of_cyclist_injured > 0) or (number_of_motorist_injured > 0) or (number_of_pedestrians_injured > 0) or (number_of_persons_injured > 0)) as total_crashes_with_injury,
-    (select count(cartodb_id) from table_20k_crashes where (number_of_cyclist_killed > 0) or (number_of_motorist_killed > 0) or (number_of_pedestrians_killed > 0) or (number_of_persons_killed > 0)) as total_crashes_with_death,
+    (select count(cartodb_id) from table_20k_crashes where (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
+    (select count(cartodb_id) from table_20k_crashes where (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
     sum(c.number_of_cyclist_injured) as cyclist_injured,
     sum(c.number_of_cyclist_killed) as cyclist_killed,
     sum(c.number_of_motorist_injured) as motorist_injured,

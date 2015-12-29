@@ -2,15 +2,6 @@
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]))
 
-
-;(defui MenuItem
-;  Object
-;  (render [this]
-;    (let [{:keys [name type table cols]} (om/props this)]
-;      (dom/li #js {:className "area-menu-item" :onClick #(println table cols)} name))))
-
-;(def menu-item (om/factory MenuItem))
-
 (declare menu-item)
 
 (defmulti get-area-display (fn [_ type] type))

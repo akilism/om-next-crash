@@ -1514,3 +1514,1480 @@ Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
 Compiling target/figwheel_temp/dev/figwheel/connect.cljs
 notifying browser that file changed:  out/ta_crash/sql_queries.js
 [32mSuccessfully compiled "resources/public/js/main.js" in 1.533 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.71 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/search at line 179 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/search at line 180 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.815 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.87 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.615 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.352 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.448 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.577 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.317 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.511 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mERROR: Nested #()s are not allowed on file /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs, line 166, column 62
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.463 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.formatter/for-area-menu at line 166 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.508 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+WARNING: Use of undeclared Var ta-crash.formatter/area-type at line 41 /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.663 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.514 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.158 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.545 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.519 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.485 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.139 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/carto_query.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/carto_query.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.136 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.658 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.028 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.127 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/order at line 25 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.303 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.169 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 3.003 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.524 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.207 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.356 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.376 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.319 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.239 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/doc at line 67 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.839 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.313 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.82 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.328 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/sql_queries.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/sql_queries.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.984 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/sql_queries.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/sql_queries.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.942 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mANALYSIS ERROR: No such namespace: ta-crash.stat-list-item, could not locate ta_crash/stat_list_item.cljs, ta_crash/stat_list_item.cljc, or Closure namespace "ta-crash.stat-list-item" on file null, line null, column null
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.094 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mANALYSIS ERROR: No such namespace: ta-crash.stat-list-item, could not locate ta_crash/stat_list_item.cljs, ta_crash/stat_list_item.cljc, or Closure namespace "ta-crash.stat-list-item" on file null, line null, column null
+[32mSuccessfully compiled "resources/public/js/main.js" in 3.269 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list_item.cljs
+Compiling src/ta_crash/stat_list.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_list_item.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.683 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+WARNING: Wrong number of args (1) passed to cljs.core/apply at line 19 src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 3.174 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+WARNING: No such namespace: stat-list-item, could not locate stat_list_item.cljs, stat_list_item.cljc, or Closure namespace "" at line 19 src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var stat-list-item/stat-list-item at line 19 src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.337 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.796 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.689 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/stat-group at line 169 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.327 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/Stat-List at line 21 src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.531 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.231 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.533 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/pprint at line 170 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/props at line 170 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.018 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.615 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.775 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.654 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.867 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.632 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.823 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.428 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.918 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.282 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.691 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.335 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.946 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.339 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.632 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.814 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.426 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.632 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.596 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.286 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.912 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/carto_query.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/carto_query.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.176 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.194 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.251 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.738 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.288 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.581 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.375 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.517 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.357 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/?params at line 25 src/ta_crash/stat_group.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/?query at line 25 src/ta_crash/stat_group.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/?params at line 25 src/ta_crash/stat_group.cljs
+WARNING: Use of undeclared Var ta-crash.stat-group/?query at line 25 src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.039 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.613 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.409 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.817 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.222 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.292 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.373 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.846 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.451 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.467 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.5 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.238 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.478 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.366 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.263 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.583 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.777 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.356 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.764 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.558 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.566 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.465 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.819 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.439 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.33 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.549 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.233 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.415 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.249 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/goog/deps.js
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.336 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mERROR: EOF while reading, starting at line 19 and column 1 on file /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs, line 33, column 1
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.33 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.727 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.091 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.532 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/goog/deps.js
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.007 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: No such namespace: stat-group, could not locate stat_group.cljs, stat_group.cljc, or Closure namespace "" at line 144 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var stat-group/StatGroup at line 144 src/ta_crash/core.cljs
+WARNING: No such namespace: stat-group, could not locate stat_group.cljs, stat_group.cljc, or Closure namespace "" at line 147 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var stat-group/stat-group at line 147 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/goog/deps.js
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.665 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.102 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.377 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.0 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.737 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.821 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.575 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.131 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.883 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.648 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.399 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.674 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.097 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.341 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.07 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.954 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/stat-list at line 138 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.971 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.836 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.349 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.466 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.97 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.279 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.351 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.213 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.776 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.803 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.441 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.28 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.865 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.946 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.384 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/items at line 168 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.927 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.537 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.884 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/menu-data at line 150 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.218 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.026 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.774 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.132 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.988 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.596 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.325 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.294 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.299 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.702 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.849 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.667 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.684 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.834 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.322 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.268 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.27 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.849 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.685 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.465 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.503 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.1 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+WARNING: Use of undeclared Var ta-crash.core/StatGroup at line 175 src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.766 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.389 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.813 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/static at line 12 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/query at line 13 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/_ at line 13 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/Object at line 15 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/render at line 16 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/this at line 16 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/this at line 17 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var ta-crash.stat-list/this at line 18 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+[31mCompiling "resources/public/js/main.js" failed.
+[0mERROR: Unmatched delimiter ) on file /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs, line 20, column 98
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.433 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.406 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.954 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.434 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.725 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.792 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.303 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.28 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.95 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.339 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/area-menu.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/area_menu.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.622 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: No such namespace: pprint, could not locate pprint.cljs, pprint.cljc, or Closure namespace "" at line 11 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var pprint/pprint at line 11 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: No such namespace: pprint, could not locate pprint.cljs, pprint.cljc, or Closure namespace "" at line 11 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+WARNING: Use of undeclared Var pprint/pprint at line 11 /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.354 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.311 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.441 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.464 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.356 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.312 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.986 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.737 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.793 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.736 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.334 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.803 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.357 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.346 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.842 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.173 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.112 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.603 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 2.961 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.763 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.642 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.135 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.617 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.535 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.987 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.702 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.951 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.569 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.513 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.092 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.225 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.943 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.743 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.83 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.633 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.953 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.748 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.786 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.141 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.721 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.651 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/carto_query.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/carto_query.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.844 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_group.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_group.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.846 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.292 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.037 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.679 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.641 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.331 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.061 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.724 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.698 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.466 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.887 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.891 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.775 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.035 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.022 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.299 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/carto_query.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/carto_query.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.14 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.636 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.98 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.544 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.082 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.647 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.491 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.555 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.924 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.532 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.291 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 6.041 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 3.383 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.681 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.573 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.647 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.415 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling /Users/akilharris/projects/om-next-crash/src/ta_crash/stat_list.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/stat_list.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.213 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/core.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.031 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 1.43 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/ta_crash/formatter.cljs
+Compiling src/ta_crash/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  out/ta_crash/formatter.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.396 seconds.[0m

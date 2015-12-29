@@ -1,26 +1,35 @@
 (ns ta-crash.stat-group
-  (:require [om.next :as om :refer-macros [defui]]
+  (:require [cljs.pprint :as pprint]
+            [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [ta-crash.sql-queries :as queries]
-            [ta-crash.group-item :as group-item]
-            [ta-crash.carto-map :as carto-map]))
+            [ta-crash.group-item :as group-item]))
+
+(def group-order [:total-crashes
+                  :total-killed
+                  :total-injured
+                  :total-persons-killed
+                  :total-pedestrian-killed
+                  :total-cyclist-killed
+                  :total-motorist-killed
+                  :total-persons-injured
+                  :total-pedestrian-injured
+                  :total-cyclist-injured
+                  :total-motorist-injured])
 
 (defui StatGroup
   static om/IQueryParams
-  (params [_]
-    {:params {:end-date "12-26-2015" :start-date "12-1-2015"} :query queries/stats-date})
+  (params [this]
+    ;(let [{:keys [end-date start-date query]} (om/props this)])
+     {:params {:end-date "" :start-date ""} :query false})
   static om/IQuery
   (query [_]
     '[(:group/items {:params ?params :query ?query})])
-;  static om/IQuery
-;  (query [_]
-;    [{:group/items (om/get-query group-item/GroupItem)}])
   Object
   (render [this]
     (let [{:keys [group/items]} (om/props this)]
-      (dom/div nil
-        (dom/div #js {:className "content-box"}
-          (dom/div #js {:className "stat-box"}
-            (apply dom/div #js {:className "stat-group"} (map group-item/group-item items)))
-          (dom/div #js {:className "factor-box"} "Factors"))
-        (carto-map/carto-map)))))
+      (dom/div #js {:className "stat-box"}
+        (apply dom/div #js {:className "stat-group"}
+               (map group-item/group-item
+                    (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order)))))))
+
+(def stat-group (om/factory StatGroup))
