@@ -3,9 +3,18 @@
 }
 
 body {
-  font-size: 18px;
+  font-size: 16px;
+  font-family: 'Slabo 27px', serif;
   color: #4E4C50;
   background-color: #F1F1EB;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .content-box {
@@ -20,6 +29,7 @@ body {
 
 .stat-box, .factor-box {
   width: 90vw;
+  margin-top: 30px;
 }
 
 @media screen and (min-width: 960px) {
@@ -36,7 +46,7 @@ body {
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  margin: 5vh auto 0 auto;
+  margin: 0 0 0 20px;
 }
 
 
@@ -127,6 +137,7 @@ body {
   list-style: none;
   padding: 0;
   margin: 0 9vw;
+  width: 100vw;
 }
 
 .area-menu-item {
@@ -148,4 +159,61 @@ body {
 
 .sub-area-menu-item {
   margin: 0 15px;
+}
+
+.stat-list {
+  margin: 0;
+}
+
+.stat-list-item {
+  font-size: 1rem;
+  line-height: 1;
+  padding: 5px 0 5px 5px;
+  margin: 0;
+}
+
+.cal-holder {
+  position: absolute;
+  background-color: #F1F1EB;
+}
+
+.calendar-day,
+.calendar-day-of-week {
+  padding: 3px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.calendar-day.inactive {
+  opacity: 0;
+}
+
+.calendar-day.active:hover {
+  background-color: #F9F9CE;
+  cursor: pointer;
+}
+
+.calendar-day-of-week {
+  font-weight: bold;
+}
+
+.calendar-header-row {
+  text-align: center;
+}
+
+.date-range-block {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.5em;
+}
+
+.date-range {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.date-range-spacer {
+  margin: 0 0.5em;
 }

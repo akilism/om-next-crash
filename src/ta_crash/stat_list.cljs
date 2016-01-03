@@ -7,18 +7,20 @@
 (defui StatList
   static om/IQueryParams
   (params [this]
-    ;(let [{:keys [end-date start-date query]} (om/props this)]
-      ;{:params {:end-date end-date :start-date start-date} :query query})
       {:params {:end-date "" :start-date ""} :query false})
   static om/IQuery
   (query [_]
     '[(:stat-list/items {:params ?params :query ?query})])
   Object
-  (componentWillMount [this]
-    (let [{:keys [end-date start-date query]} (om/props this)]
-  ;    (println "props" end-date)
-  ;    (println "params" (:end-date (om/get-params this)))
+  (setQuery
+    ([this] (let [{:keys [end-date start-date query]} (om/props this)]
       (om/set-query! this {:params {:params {:end-date end-date :start-date start-date} :query query}})))
+    ([this props] (om/set-query! this {:params {:params {:end-date (:end-date props) :start-date (:start-date props)}
+                                                :query (:query props)}})))
+  (componentWillMount [this]
+    (.setQuery this))
+  (componentWillReceiveProps [this next-props]
+    (.setQuery this next-props))
   (render [this]
     (let [{:keys [stat-list/items end-date start-date query]} (om/props this)]
       (dom/div #js {:className "stat-box"}

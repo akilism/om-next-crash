@@ -275,3 +275,11 @@
     ((date <= date ':end-date')
     AND
      (date >= date ':start-date'))")
+
+(def-sql-query "--name: date-bounds
+  -- Selects max and min date from all crashes
+  SELECT
+    MAX(date) as max_date,
+    MIN(date) as min_date
+  FROM
+    table_20k_crashes")

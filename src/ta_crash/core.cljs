@@ -10,6 +10,7 @@
             [ta-crash.formatter :as data-formatter]
             [ta-crash.sql-queries :as queries]
             [ta-crash.area-menu :as area-menu]
+            [ta-crash.date-range :as date-range]
             [ta-crash.stat-group :as stat-group]
             [ta-crash.stat-list :as stat-list]
             [ta-crash.carto-map :as carto-map]))
@@ -36,7 +37,11 @@
       :count 839}]})
 
 (def init-data
-  {:group/items []
+  {:selected-date-max nil
+   :selected-date-min nil
+   :date-max nil
+   :date-min nil
+   :group/items []
    :stat-list/items []
    :menu/items
    [{:display-name "Borough"
@@ -101,6 +106,21 @@
     (when query
       {:stat-list ast})))
 
+(defmethod read :default
+  [{:keys [state] :as env} k _]
+  (let [st @state]
+    {:value (get st k)}))
+
+(defmulti mutate om/dispatch)
+
+(defmethod mutate 'date/change
+  [{:keys [state] :as env} key {:keys [date-key date] :as params}]
+  (println "date/change:" date-key " -> " (.format date "YYYY-MM-DD"))
+  (condp = key
+    'date/change {:value {:keys [date-key]}
+          :action #(swap! state update-in [date-key] (fn [_] date))}
+    :else {:value :not-found}))
+
 (defn carto-loop [c]
   (go
     (loop [[area-type query params formatter cb] (<! c)]
@@ -135,16 +155,18 @@
 
 (defn send-to-chan [c]
   (fn [{:keys [area-menu stat-group stat-list]} cb]
-    (cond
-      area-menu (get-area-menu c cb area-menu)
-      stat-group (get-stat-group c cb stat-group)
+    (when
+      area-menu (get-area-menu c cb area-menu))
+    (when
+      stat-group (get-stat-group c cb stat-group))
+    (when
       stat-list (get-stat-list c cb stat-list))))
 
 (def send-chan (chan))
 
 (def reconciler
   (om/reconciler
-    {:parser (om/parser {:read read})
+    {:parser (om/parser {:read read :mutate mutate})
      :remotes [:remote :stat-group :area-menu :stat-list]
      :send (send-to-chan send-chan)
      :state init-data}))
@@ -154,22 +176,60 @@
 (defui Root
   static om/IQuery
   (query [_]
-    '[{:stat-list/items (om/get-query stat-list/StatList)}
-      {:menu/items (om/get-query area-menu/AreaMenu)}
-      {:group/items (om/get-query stat-group/StatGroup)}])
+    '[{:menu/items (om/get-query area-menu/AreaMenu)}
+      {:group/items (om/get-query stat-group/StatGroup)}
+      {:stat-list/items (om/get-query stat-list/StatList)}
+      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min])
   Object
+  (date-change
+    [this {:keys [key date]}]
+    (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items]))
+  (month-change
+    [this {:keys [key date]}]
+    (om/merge! reconciler (merge (om/props this) {key date})))
+  (componentWillMount [this]
+    (go
+      (let [result (<! (execute-query-carto queries/date-bounds []))
+            date-max (js/moment (:max_date (first result)))
+            date-min (js/moment (:min_date (first result)))]
+        (om/merge! reconciler (merge (om/props this)
+           {:date-max date-max
+            :date-min date-min
+            :cal-date-max date-max
+            :cal-date-min date-min
+            :selected-date-max date-max
+            :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [menu/items stat-list/items group/items]} (om/props this)])
-    ;(pprint/pprint (:stat-list/items (om/props this)))
-    ;(pprint/pprint (om/get-query area-menu/AreaMenu))
-    ;(pprint/pprint (om/get-query stat-list/StatList))
-    (dom/div nil
-      (area-menu/area-menu {:menu/items (:menu/items (om/props this))})
-      (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
-                              :end-date "12-26-2015"
-                              :start-date "1-1-2015"
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min]} (om/props this)]
+      ;(println "Root render: selected-date-max:" selected-date-max)
+      (dom/div #js {:className "root"}
+        (area-menu/area-menu {:menu/items (:menu/items (om/props this))})
+        (when (and selected-date-max selected-date-min)
+          (date-range/date-range {:date-max date-max
+                                  :date-min date-min
+                                  :cal-date-max cal-date-max
+                                  :cal-date-min cal-date-min
+                                  :selected-date-max selected-date-max
+                                  :selected-date-min selected-date-min
+                                  :date-change  #(.date-change this %)
+                                  :month-change  #(.month-change this %)}))
+        (stat-group/stat-group {:group/items (:group/items (om/props this))
+                                :end-date (if selected-date-max
+                                            (.format selected-date-max "YYYY-MM-DD")
+                                            "2015-12-26")
+                                :start-date (if selected-date-min
+                                              (.format selected-date-min "YYYY-MM-DD")
+                                              "2015-01-01")
+                                :query queries/stats-date})
+        (stat-list/stat-list {:stat-list/items (take 15 (:stat-list/items (om/props this)))
+                              :end-date (if selected-date-max
+                                          (.format selected-date-max "YYYY-MM-DD")
+                                          "2015-12-26")
+                              :start-date (if selected-date-min
+                                            (.format selected-date-min "YYYY-MM-DD")
+                                            "2015-01-01")
                               :query queries/all-factors-date})
-      (carto-map/carto-map))))
+        (carto-map/carto-map)))))
 
 (om/add-root! reconciler
   Root (gdom/getElement "app"))

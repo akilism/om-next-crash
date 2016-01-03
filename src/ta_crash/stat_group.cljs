@@ -19,12 +19,20 @@
 (defui StatGroup
   static om/IQueryParams
   (params [this]
-    ;(let [{:keys [end-date start-date query]} (om/props this)])
      {:params {:end-date "" :start-date ""} :query false})
   static om/IQuery
   (query [_]
     '[(:group/items {:params ?params :query ?query})])
   Object
+  (setQuery
+    ([this] (let [{:keys [end-date start-date query]} (om/props this)]
+      (om/set-query! this {:params {:params {:end-date end-date :start-date start-date} :query query}})))
+    ([this props] (om/set-query! this {:params {:params {:end-date (:end-date props) :start-date (:start-date props)}
+                                                :query (:query props)}})))
+  (componentWillMount [this]
+    (.setQuery this))
+  (componentWillReceiveProps [this next-props]
+    (.setQuery this next-props))
   (render [this]
     (let [{:keys [group/items]} (om/props this)]
       (dom/div #js {:className "stat-box"}
