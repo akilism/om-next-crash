@@ -4,30 +4,29 @@
             [ta-crash.date-picker :as date-picker]))
 
 (defui DateRange
-  static om/IQuery
-  (query [_]
-    [:selected-date-max :selected-date-min :date-max :date-min :cal-date-max :cal-date-min :date-change :month-change])
   Object
   (show-cal
     [this key evt]
-    (println (om/props this))
-    (om/set-state! this {key (not (key (om/get-state this)))
-                         :pos {:x (+ 10 (.-clientX evt)) :y (+ 10 (.-clientY evt))}}))
+    (condp = key
+      :show-max (om/update-state! this merge {key (not (key (om/get-state this)))
+                                              :show-min false
+                                              :pos {:x (+ 10 (.-clientX evt)) :y (+ 10 (.-clientY evt))}})
+      :show-min (om/update-state! this merge {key (not (key (om/get-state this)))
+                                              :show-max false
+                                              :pos {:x (+ 10 (.-clientX evt)) :y (+ 10 (.-clientY evt))}})))
   (componentWillMount [this]
     (om/set-state! this {:show-max false :show-min false :pos {:x 0 :y 0}}))
   (month-change
     [this key date]
     (let [{:keys [month-change]} (om/props this)]
-      ;(println key date)
       (month-change {:key key :date date})))
   (date-change
     [this key date]
     (let [{:keys [date-change]} (om/props this)]
-      (date-change {:key key :date (:date date)})))
+      (date-change {:key key :date (:date date)})
+      (om/update-state! this merge {:show-min false :show-max false})))
   (render [this]
     (let [{:keys [date-max date-min cal-date-max cal-date-min selected-date-max selected-date-min]} (om/props this)]
-      ;(println "DateRange render: cal-date-max:" cal-date-max)
-      (println (:date-change (om/props this)))
       (dom/div #js {:className "date-range-block"}
         (dom/span #js {:className "min-date date-range" :onClick #(.show-cal this :show-min %)} (.format selected-date-min "DD-MM-YYYY"))
         (dom/div #js {:className "date-range-spacer"} " to ")
