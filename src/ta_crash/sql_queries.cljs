@@ -7,21 +7,27 @@
     borough,
     identifier
   FROM
-    nyc_borough")
+    nyc_borough
+  ORDER BY
+    identifier")
 
 (def-sql-query "-- name: distinct-city-council
   -- Selects distinct city council districts
   SELECT DISTINCT
     identifier
   FROM
-    nyc_city_council")
+    nyc_city_council
+  ORDER BY
+    identifier")
 
 (def-sql-query "-- name: distinct-community-board
   -- Selects distinct community boards
   SELECT DISTINCT
     identifier
   FROM
-    nyc_community_board")
+    nyc_community_board
+  ORDER BY
+    identifier")
 
 (def-sql-query "-- name: distinct-neighborhood
   -- Selects distinct neighborhoods
@@ -29,7 +35,9 @@
     borough,
     identifier
   FROM
-    nyc_neighborhood")
+    nyc_neighborhood
+  ORDER BY
+    borough, identifier")
 
 (def-sql-query "-- name: distinct-precinct
   -- Selects distinct nypd precincts
@@ -37,7 +45,9 @@
     borough,
     identifier
   FROM
-    nyc_nypd_precinct")
+    nyc_nypd_precinct
+  ORDER BY
+    borough, identifier")
 
 (def-sql-query "-- name: distinct-zip-code
   -- Selects distinct zip codes
@@ -45,7 +55,9 @@
     borough,
     identifier
   FROM
-    nyc_zip_codes")
+    nyc_zip_codes
+  ORDER BY
+    borough, identifier")
 
 (def-sql-query "-- name: all-factors-date
   -- Counts all factors for a given date range.

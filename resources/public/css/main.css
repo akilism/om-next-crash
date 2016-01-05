@@ -207,6 +207,7 @@ body {
   display: flex;
   justify-content: flex-start;
   font-size: 1.5em;
+  margin: 10px 0 0 15px;
 }
 
 .date-range {
@@ -216,4 +217,40 @@ body {
 
 .date-range-spacer {
   margin: 0 0.5em;
+}
+
+.full-opacity {
+  opacity: 1;
+}
+
+.zero-opacity {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.area-sub-menu {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  transition: opacity 250ms ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  z-index: 8;
+}
+
+.area-sub-menu-item {
+  width: 100%;
+  text-align: left;
+  padding: 20px;
+  background-color: #FFFFEC;
+}
+
+.area-sub-menu-item:hover {
+  background-color: #F9F9CE;
+}
+
+.area-sub-menu-item-full {
+  width: 100%;
 }

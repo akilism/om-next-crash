@@ -40,7 +40,7 @@
 
 (defn for-area-menu
   [raw-rows cb area-type]
-  (let [items (map #(assoc % :parent area-type :item-type :sub) raw-rows)]
+  (let [items (into [] (map #(assoc % :parent area-type :item-type :sub) raw-rows))]
     (cb {:area/items items})))
 
 (defn factor-id
@@ -54,5 +54,5 @@
 
 (defn for-stat-list
   [raw-rows cb type]
-  (let [items (into [](map (fn [i] {:display (:factor i) :count (:count_factor i) :type :factor :id (get-id :factor (:factor i))}) raw-rows))]
+  (let [items (into [] (map (fn [i] {:display (:factor i) :count (:count_factor i) :type :factor :id (get-id :factor (:factor i))}) raw-rows))]
     (cb {:stat-list/items items})))

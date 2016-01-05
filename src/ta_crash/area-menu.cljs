@@ -1,8 +1,7 @@
 (ns ta-crash.area-menu
-  (:require [om.next :as om :refer-macros [defui]]
+  (:require [cljs.pprint :as pprint]
+            [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]))
-
-(declare menu-item)
 
 (defmulti get-area-display (fn [_ type] type))
 
@@ -17,28 +16,66 @@
 
 (defmethod get-area-display :city-council
   [id _]
-  id)
+  (str "District " id))
 
 (defmethod get-area-display :community-board
   [id _]
-  id)
+  (str "Community Board " id))
 
-(defmethod get-area-display :neighborhood
-  [id _]
-  id)
-
-(defmethod get-area-display :precinct
-  [id _]
-  id)
-
-(defmethod get-area-display :zip-code
-  [id _]
-  id)
+(defmethod get-area-display :default [id _] id)
 
 (defn build-sub-item
   [item sub-item]
   (assoc sub-item :query (:query item)
     :display-name (get-area-display (:identifier sub-item) (:area-type item))))
+
+(defui AreaMenuItem
+  static om/IQuery
+  (query [_]
+    '[:area-type :query :item-type :display-name :area-menu])
+  Object
+  (render [this]
+    (let [{:keys [area-menu area-type query item-type display-name]} (om/props this)
+          {:keys [item-click-handler]} (om/get-computed this)]
+      (dom/li #js {:className (str (name item-type) "-area-menu-item area-menu-item")
+                   :onClick #(item-click-handler area-type query %)}
+      display-name))))
+
+(def area-menu-item (om/factory AreaMenuItem))
+
+(defui SubMenuItem
+  static om/IQuery
+  (query [_]
+    '[:identifier :parent :item-type])
+  Object
+  (render [this]
+    (let [{:keys [identifier parent item-type]} (om/props this)
+          area-change (:area-change (om/get-computed this))]
+      (dom/div #js {:className "area-sub-menu-item" :onClick #(area-change {:type parent :identifier identifier})} (get-area-display identifier parent)))))
+
+(def sub-menu-item (om/factory SubMenuItem))
+
+(defui SubMenu
+  static om/IQuery
+  (query [_]
+    '[{:area-items (om/get-query SubMenuItem)} :show-sub :pos])
+  Object
+  (render [this]
+    (let [items (:area/items (om/props this))
+          {:keys [show-sub pos]} (om/props this)
+          area-change (:area-change (om/get-computed this))]
+      (apply dom/div #js {:className (if show-sub (str "area-sub-menu full-opacity") (str "area-sub-menu zero-opacity"))
+                          :style #js {:left (:x pos) :top (:y pos)}}
+        (map #(sub-menu-item (om/computed % {:area-change area-change})) items)))))
+
+(def sub-menu (om/factory SubMenu))
+
+(defn get-sub-menu-pos
+  [evt]
+  (pprint/pprint (.-clientX evt.target))
+  (let [x (.-offsetLeft evt.target)
+        y (.-offsetTop evt.target)]
+    {:x x :y (+ 20 y)}))
 
 (defui AreaMenu
   static om/IQueryParams
@@ -46,28 +83,38 @@
     {:area-type "" :query false})
   static om/IQuery
   (query [_]
-    '[:menu/items (:area/items {:area-type ?area-type :query ?query})])
+    '[(:area/items {:area-type ?area-type :query ?query})
+      {:menu/items (om/get-query AreaMenuItem)}])
   Object
+  (toggle-menu [this show pos]
+    (om/set-state! this {:show-sub show :pos pos}))
+  (menu-item-click
+    [this area-type query evt]
+    (let [prev-area-type (:area-type (om/get-params this))]
+      (if (= area-type prev-area-type)
+        (do (.toggle-menu this false (get-sub-menu-pos evt))
+          (om/set-query! this {:params {:area-type nil :query false}}))
+        (do (.toggle-menu this true (get-sub-menu-pos evt))
+          (om/set-query! this {:params {:area-type area-type :query query}})))))
+  (componentWillMount [this]
+    (om/set-state! this {:show-sub false :pos {:x 10 :y 10}}))
   (render [this]
-    (let [{items :menu/items sub-items :area/items} (om/props this)
-          sub-parent (:parent (first sub-items))]
-      (if (:item-type (first items))
-        (let [item-type (name (:item-type (first items)))]
-          (apply dom/ul
-            #js {:className (str item-type "-area-menu area-menu")}
-            (map (fn [i]
-                    (if (= sub-parent (:area-type i))
-                      (menu-item (assoc i :sub-menu (map (fn [si] (build-sub-item i si)) sub-items)) this)
-                      (menu-item i this)))
-                    items)))
+    (let [area-items (:area/items (om/props this))
+          menu-items (:menu/items (om/props this))
+          area-change (:area-change (om/get-computed this))
+          {:keys [show-sub pos]} (om/get-state this)]
+      (if (:item-type (first menu-items))
+        (let [item-type (name (:item-type (first menu-items)))]
+          (dom/div nil
+            (apply dom/ul
+              #js {:className (str item-type "-area-menu area-menu")}
+              (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
+            (when (< 0 (count area-items)) (sub-menu (om/computed {:area/items area-items
+                                                                   :show-sub show-sub
+                                                                   :pos pos}
+                                                                  {:area-change (fn [selected-area]
+                                                                                  (.toggle-menu this false {:x 0 :y 0})
+                                                                                  (area-change selected-area))})))))
         (dom/span nil "Error")))))
 
 (def area-menu (om/factory AreaMenu))
-
-(defn menu-item [item area-mnu]
-  (let [{:keys [area-type query item-type display-name sub-menu]} item]
-    (dom/li #js {:className (str (name item-type) "-area-menu-item area-menu-item")
-                 :onClick #(om/set-query! area-mnu {:params {:area-type area-type :query query}})}
-      display-name
-      (when-not (empty? sub-menu)
-        (area-menu {:menu/items sub-menu})))))

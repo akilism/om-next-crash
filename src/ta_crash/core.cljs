@@ -17,32 +17,15 @@
 
 (enable-console-print!)
 
-(def old-init-data
-  {:geo-area {:type :geo-area/precinct
-              :id "83"
-              :display "83rd Precinct"
-              :geoJson {}}
-   :group/items
-    [{:type :group/header-item
-      :id :total-crashes
-      :display "Total crashes"
-      :count 13839}
-     {:type :group/sub-header-item
-      :id :total-injuries
-      :display "Crashes resulting in an injury"
-      :count 3839}
-     {:type :group/sub-header-item
-      :id :total-deaths
-      :display "Crashes resulting in a death"
-      :count 839}]})
-
 (def init-data
   {:selected-date-max nil
    :selected-date-min nil
    :date-max nil
    :date-min nil
+   :active-area {}
    :group/items []
    :stat-list/items []
+   :area/items []
    :menu/items
    [{:display-name "Borough"
      :item-type :group
@@ -89,11 +72,13 @@
 
 (defmethod read :menu/items
   [{:keys [state] :as env} k _]
+  ;(println "read " k)
   (let [st @state]
     {:value (get st k)}))
 
 (defmethod read :area/items
   [{:keys [state ast] :as env} k {:keys [area-type query]}]
+  ;(println "read" k area-type)
   (merge
     {:value (get @state k [])}
     (when query
@@ -119,6 +104,14 @@
   (condp = key
     'date/change {:value {:keys [date-key]}
           :action #(swap! state update-in [date-key] (fn [_] date))}
+    :else {:value :not-found}))
+
+(defmethod mutate 'area/change
+  [{:keys [state] :as env} key {:keys [area-type identifier] :as params}]
+  (println "area/change:" area-type " -> " identifier)
+  (condp = key
+    'area/change {:value {:keys [:active-area]}
+          :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
     :else {:value :not-found}))
 
 (defn carto-loop [c]
@@ -176,11 +169,16 @@
 (defui Root
   static om/IQuery
   (query [_]
+    ;(pprint/pprint (om/get-query area-menu/AreaMenu))
     '[{:menu/items (om/get-query area-menu/AreaMenu)}
+      {:area/items (om/get-query area-menu/SubMenu)}
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
-      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min])
+      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area])
   Object
+  (area-change
+    [this {:keys [type identifier]}]
+    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items]))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items]))
@@ -201,18 +199,22 @@
             :selected-date-min date-min})))))
   (render [this]
     (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min]} (om/props this)]
-      ;(println "Root render: selected-date-max:" selected-date-max)
+      ;(println "Root render:" (:area/items (om/props this)))
+      ;(pprint/pprint (om/props this))
+      (pprint/pprint (:active-area (om/props this)))
       (dom/div #js {:className "root"}
-        (area-menu/area-menu {:menu/items (:menu/items (om/props this))})
+        (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
+                                           :area/items (:area/items (om/props this))}
+                                          {:area-change #(.area-change this %)}))
         (when (and selected-date-max selected-date-min)
-          (date-range/date-range {:date-max date-max
+          (date-range/date-range (om/computed {:date-max date-max
                                   :date-min date-min
                                   :cal-date-max cal-date-max
                                   :cal-date-min cal-date-min
                                   :selected-date-max selected-date-max
-                                  :selected-date-min selected-date-min
-                                  :date-change  #(.date-change this %)
-                                  :month-change  #(.month-change this %)}))
+                                  :selected-date-min selected-date-min }
+                                  {:date-change #(.date-change this %)
+                                   :month-change #(.month-change this %)})))
         (stat-group/stat-group {:group/items (:group/items (om/props this))
                                 :end-date (if selected-date-max
                                             (.format selected-date-max "YYYY-MM-DD")
