@@ -198,10 +198,9 @@
             :selected-date-max date-max
             :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min]} (om/props this)]
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area]} (om/props this)]
       ;(println "Root render:" (:area/items (om/props this)))
       ;(pprint/pprint (om/props this))
-      (pprint/pprint (:active-area (om/props this)))
       (dom/div #js {:className "root"}
         (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
                                            :area/items (:area/items (om/props this))}
@@ -222,7 +221,9 @@
                                 :start-date (if selected-date-min
                                               (.format selected-date-min "YYYY-MM-DD")
                                               "2015-01-01")
-                                :query queries/stats-date})
+                                :active-area active-area
+                                :query queries/stats-date
+                                :query-area queries/stats-date-by-area})
         (stat-list/stat-list {:stat-list/items (take 15 (:stat-list/items (om/props this)))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
@@ -230,7 +231,9 @@
                               :start-date (if selected-date-min
                                             (.format selected-date-min "YYYY-MM-DD")
                                             "2015-01-01")
-                              :query queries/all-factors-date})
+                              :active-area active-area
+                              :query queries/all-factors-date
+                              :query-area queries/all-factors-date-by-area})
         (carto-map/carto-map)))))
 
 (om/add-root! reconciler

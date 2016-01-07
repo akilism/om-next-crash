@@ -295,3 +295,119 @@
     MIN(date) as min_date
   FROM
     table_20k_crashes")
+
+(def-sql-query "--name: stats-date-by-area
+  -- Counts all death / injury stats for a given date range filtered by some geometry table
+  SELECT
+    count(c.cartodb_id) as total_crashes,
+    (select count(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
+    (select count(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
+    sum(c.number_of_cyclist_injured) as cyclist_injured,
+    sum(c.number_of_cyclist_killed) as cyclist_killed,
+    sum(c.number_of_motorist_injured) as motorist_injured,
+    sum(c.number_of_motorist_killed) as motorist_killed,
+    sum(c.number_of_pedestrians_injured) as pedestrians_injured,
+    sum(c.number_of_pedestrians_killed) as pedestrians_killed,
+    sum(c.number_of_persons_injured) as persons_injured,
+    sum(c.number_of_persons_killed) as persons_killed
+  FROM
+    table_20k_crashes c
+  JOIN
+    :geo-table a
+  ON
+    ST_Within(c.the_geom, a.the_geom)
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (a.identifier = :identifier)")
+
+
+(def-sql-query "-- name: all-factors-date-by-area
+  -- Counts all factors for a given date range filtered by some geometry table.
+  WITH all_factors as (
+    SELECT
+      c.contributing_factor_vehicle_1 as factor
+    FROM
+      table_20k_crashes c
+    JOIN
+      :geo-table a
+    ON
+      ST_Within(c.the_geom, a.the_geom)
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (a.identifier = :identifier)
+    UNION ALL
+    SELECT
+      c.contributing_factor_vehicle_2 as factor
+    FROM
+      table_20k_crashes c
+    JOIN
+      :geo-table a
+    ON
+      ST_Within(c.the_geom, a.the_geom)
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (a.identifier = :identifier)
+      UNION ALL
+    SELECT
+      c.contributing_factor_vehicle_3 as factor
+    FROM
+      table_20k_crashes c
+    JOIN
+      :geo-table a
+    ON
+      ST_Within(c.the_geom, a.the_geom)
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (a.identifier = :identifier)
+      UNION ALL
+    SELECT
+      c.contributing_factor_vehicle_4 as factor
+    FROM
+      table_20k_crashes c
+    JOIN
+      :geo-table a
+    ON
+      ST_Within(c.the_geom, a.the_geom)
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (a.identifier = :identifier)
+      UNION ALL
+    SELECT
+      c.contributing_factor_vehicle_5 as factor
+    FROM
+      table_20k_crashes c
+    JOIN
+      :geo-table a
+    ON
+      ST_Within(c.the_geom, a.the_geom)
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (a.identifier = :identifier)
+  )
+  SELECT
+    count(af.factor) as count_factor,
+    af.factor
+  FROM
+    all_factors af
+  GROUP BY
+    af.factor
+  ORDER BY
+    count_factor desc")

@@ -1,4 +1,6 @@
 (ns sqlize.core)
+; This is taken from the yesql idea
+; https://github.com/krisajenkins/yesql
 
 ; (def sample-query "-- name: stats-date
 ; -- Counts all death / injury stats for a given date range
