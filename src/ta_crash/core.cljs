@@ -22,7 +22,7 @@
    :selected-date-min nil
    :date-max nil
    :date-min nil
-   :active-area {}
+   :active-area {:identifier "citywide"}
    :group/items []
    :stat-list/items []
    :area/items []
@@ -178,7 +178,7 @@
   Object
   (area-change
     [this {:keys [type identifier]}]
-    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items]))
+    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :active-area]))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items]))
@@ -234,7 +234,13 @@
                               :active-area active-area
                               :query queries/all-factors-date
                               :query-area queries/all-factors-date-by-area})
-        (carto-map/carto-map)))))
+        (carto-map/carto-map {:end-date (if selected-date-max
+                                          (.format selected-date-max "YYYY-MM-DD")
+                                          "2015-12-26")
+                              :start-date (if selected-date-min
+                                            (.format selected-date-min "YYYY-MM-DD")
+                                            "2015-01-01")
+                              :active-area active-area})))))
 
 (om/add-root! reconciler
   Root (gdom/getElement "app"))

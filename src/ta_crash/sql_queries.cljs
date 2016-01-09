@@ -108,7 +108,7 @@
       (date >= date ':start-date')
   )
   SELECT
-    count(af.factor) as count_factor,
+    COUNT(af.factor) as count_factor,
     af.factor
   FROM
     all_factors af
@@ -166,7 +166,7 @@
       (date >= date ':start-date')
   )
   select
-    count(avt.vehicle_type) as count_vehicle_type,
+    COUNT(avt.vehicle_type) as count_vehicle_type,
     avt.vehicle_type
   from
     all_vehicle_types avt
@@ -178,17 +178,17 @@
 (def-sql-query "-- name: stats-date
   -- Counts all death / injury stats for a given date range
   SELECT
-    count(c.cartodb_id) as total_crashes,
-    (select count(cartodb_id) from table_20k_crashes where (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
-    (select count(cartodb_id) from table_20k_crashes where (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
-    sum(c.number_of_cyclist_injured) as cyclist_injured,
-    sum(c.number_of_cyclist_killed) as cyclist_killed,
-    sum(c.number_of_motorist_injured) as motorist_injured,
-    sum(c.number_of_motorist_killed) as motorist_killed,
-    sum(c.number_of_pedestrians_injured) as pedestrians_injured,
-    sum(c.number_of_pedestrians_killed) as pedestrians_killed,
-    sum(c.number_of_persons_injured) as persons_injured,
-    sum(c.number_of_persons_killed) as persons_killed
+    COUNT(c.cartodb_id) as total_crashes,
+    (select COUNT(cartodb_id) from table_20k_crashes where (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
+    (select COUNT(cartodb_id) from table_20k_crashes where (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed
   FROM
     table_20k_crashes c
   WHERE
@@ -299,17 +299,17 @@
 (def-sql-query "--name: stats-date-by-area
   -- Counts all death / injury stats for a given date range filtered by some geometry table
   SELECT
-    count(c.cartodb_id) as total_crashes,
-    (select count(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
-    (select count(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
-    sum(c.number_of_cyclist_injured) as cyclist_injured,
-    sum(c.number_of_cyclist_killed) as cyclist_killed,
-    sum(c.number_of_motorist_injured) as motorist_injured,
-    sum(c.number_of_motorist_killed) as motorist_killed,
-    sum(c.number_of_pedestrians_injured) as pedestrians_injured,
-    sum(c.number_of_pedestrians_killed) as pedestrians_killed,
-    sum(c.number_of_persons_injured) as persons_injured,
-    sum(c.number_of_persons_killed) as persons_killed
+    COUNT(c.cartodb_id) as total_crashes,
+    (select COUNT(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
+    (select COUNT(c.cartodb_id) from table_20k_crashes c join :geo-table a on ST_Within(c.the_geom, a.the_geom) where (a.identifier = :identifier) AND (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed
   FROM
     table_20k_crashes c
   JOIN
@@ -322,7 +322,6 @@
     (date >= date ':start-date')
   AND
     (a.identifier = :identifier)")
-
 
 (def-sql-query "-- name: all-factors-date-by-area
   -- Counts all factors for a given date range filtered by some geometry table.
@@ -403,7 +402,7 @@
       (a.identifier = :identifier)
   )
   SELECT
-    count(af.factor) as count_factor,
+    COUNT(af.factor) as count_factor,
     af.factor
   FROM
     all_factors af
@@ -411,3 +410,105 @@
     af.factor
   ORDER BY
     count_factor desc")
+
+(def-sql-query "--name: crashes-by-date
+  -- Selects crashes for map by date.
+  SELECT
+    COUNT(c.cartodb_id) as total_crashes,
+    (SELECT
+        COUNT(c.cartodb_id)
+     FROM
+        table_20k_crashes c
+     WHERE
+        (number_of_persons_injured > 0)
+     AND
+        (date <= date ':end-date')
+     AND
+        (date >= date ':start-date')) as total_crashes_with_injury,
+    (SELECT
+        COUNT(c.cartodb_id)
+     FROM
+        table_20k_crashes c
+     WHERE
+        (number_of_persons_killed > 0)
+     AND
+        (date <= date ':end-date')
+     AND
+        (date >= date ':start-date')) as total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    c.the_geom_webmercator
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  GROUP BY
+    c.the_geom_webmercator")
+
+(def-sql-query "--name: crashes-by-date-area
+  -- Selects crashes for map by area and date.
+  SELECT
+    COUNT(c.cartodb_id) as total_crashes,
+    (SELECT
+        COUNT(c.cartodb_id)
+     FROM
+        table_20k_crashes c
+     JOIN
+        :geo-table a
+     ON
+        ST_Within(c.the_geom, a.the_geom)
+     WHERE
+        (a.identifier = :identifier)
+     AND
+        (number_of_persons_injured > 0)
+     AND
+        (date <= date ':end-date')
+     AND
+        (date >= date ':start-date')) as total_crashes_with_injury,
+    (SELECT
+        COUNT(c.cartodb_id)
+     FROM
+        table_20k_crashes c
+     JOIN
+        :geo-table a
+     ON
+        ST_Within(c.the_geom, a.the_geom)
+     WHERE
+        (a.identifier = :identifier)
+     AND
+        (number_of_persons_killed > 0)
+     AND
+        (date <= date ':end-date')
+     AND
+        (date >= date ':start-date')) as total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    c.the_geom_webmercator
+  FROM
+    table_20k_crashes c
+  JOIN
+    :geo-table a
+  ON
+    ST_Within(c.the_geom, a.the_geom)
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (a.identifier = :identifier)
+  GROUP BY
+    c.the_geom_webmercator")

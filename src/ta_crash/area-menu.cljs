@@ -72,7 +72,6 @@
 
 (defn get-sub-menu-pos
   [evt]
-  (pprint/pprint (.-clientX evt.target))
   (let [x (.-offsetLeft evt.target)
         y (.-offsetTop evt.target)]
     {:x x :y (+ 20 y)}))
@@ -90,12 +89,13 @@
     (om/set-state! this {:show-sub show :pos pos}))
   (menu-item-click
     [this area-type query evt]
-    (let [prev-area-type (:area-type (om/get-params this))]
-      (if (= area-type prev-area-type)
-        (do (.toggle-menu this false (get-sub-menu-pos evt))
-          (om/set-query! this {:params {:area-type nil :query false}}))
-        (do (.toggle-menu this true (get-sub-menu-pos evt))
-          (om/set-query! this {:params {:area-type area-type :query query}})))))
+    (let [prev-area-type (:area-type (om/get-params this))
+          show-sub (:show-sub (om/get-state this))]
+      (if (and (= area-type prev-area-type) show-sub)
+        (do (om/set-query! this {:params {:area-type nil :query false}})
+          (.toggle-menu this false (get-sub-menu-pos evt)))
+        (do (om/set-query! this {:params {:area-type area-type :query query}})
+          (.toggle-menu this true (get-sub-menu-pos evt))))))
   (componentWillMount [this]
     (om/set-state! this {:show-sub false :pos {:x 10 :y 10}}))
   (render [this]
@@ -106,15 +106,17 @@
       (if (:item-type (first menu-items))
         (let [item-type (name (:item-type (first menu-items)))]
           (dom/div nil
+
             (apply dom/ul
               #js {:className (str item-type "-area-menu area-menu")}
               (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
-            (when (< 0 (count area-items)) (sub-menu (om/computed {:area/items area-items
-                                                                   :show-sub show-sub
-                                                                   :pos pos}
-                                                                  {:area-change (fn [selected-area]
-                                                                                  (.toggle-menu this false {:x 0 :y 0})
-                                                                                  (area-change selected-area))})))))
+            (sub-menu (om/computed {:area/items area-items
+                                   :show-sub show-sub
+                                   :pos pos}
+                                  {:area-change (fn [selected-area]
+                                                  (.toggle-menu this false {:x 0 :y 0})
+                                                  (area-change selected-area))}))
+            (when (< 0 (count area-items)) )))
         (dom/span nil "Error")))))
 
 (def area-menu (om/factory AreaMenu))

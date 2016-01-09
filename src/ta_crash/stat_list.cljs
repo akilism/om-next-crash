@@ -13,6 +13,11 @@
     :precinct "nyc_nypd_precinct"
     :zipcode "nyc_zip_codes"))
 
+(defn get-geo-identifier [identifier]
+  (if (string? identifier)
+    (str "'" identifier "'")
+    identifier))
+
 (defui StatList
   static om/IQueryParams
   (params [this]
@@ -23,15 +28,15 @@
   Object
   (get-query [this props]
     (let [{:keys [query active-area query-area]} props]
-      (if (empty? active-area)
+      (if (or (empty? active-area) (= "citywide" (:identifier active-area)))
         query
         query-area)))
   (get-query-params [this props]
     (let [{:keys [end-date start-date active-area]} props
           {:keys [area-type identifier]} active-area]
-      (if (empty? active-area)
+      (if (or (empty? active-area) (= "citywide" identifier))
         {:end-date end-date :start-date start-date}
-        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (if (string? identifier) (str "'" identifier "'") identifier)})))
+        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (get-geo-identifier identifier)})))
   (set-query
     ([this] (let [{:keys [end-date start-date]} (om/props this)]
       (om/set-query! this {:params {:params (.get-query-params this (om/props this)) :query (.get-query this (om/props this))}})))
