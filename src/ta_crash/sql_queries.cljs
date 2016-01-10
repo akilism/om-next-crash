@@ -1,5 +1,6 @@
 (ns ta-crash.sql-queries
-  (:require-macros [sqlize.core :refer [def-sql-query]]))
+  (:require-macros [sqlize.core :refer [def-sql-query]])
+  (:require [clojure.string :as string]))
 
 (def-sql-query "-- name: distinct-borough
   -- Selects distinct boroughs
