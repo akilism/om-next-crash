@@ -65,12 +65,12 @@
   (get-prev
     [this date-a date-b month-change-handler]
     (if-not (.isBefore date-a date-b "month")
-      (dom/a #js {:onClick #(month-change-handler date-a) :dataMonth (.format date-a "YYYY-MM-DD")} "<")
+      (dom/a #js {:className "month-prev" :onClick #(month-change-handler date-a) :dataMonth (.format date-a "YYYY-MM-DD")} "<")
       ""))
   (get-next
     [this date-a date-b month-change-handler]
     (if (or (.isBefore date-a date-b "month") (.isSame date-a date-b "month"))
-      (dom/a #js {:onClick #(month-change-handler date-a)} ">")
+      (dom/a #js {:className "month-next" :onClick #(month-change-handler date-a)} ">")
       ""))
   (draw-cal
     [this date date-max date-min month-change-handler day-change-handler]
@@ -79,7 +79,7 @@
         (dom/thead nil
           (dom/tr #js {:className "calendar-header-row"}
             (dom/td nil (.get-prev this (.subtract (.clone date) 1 "month") date-min month-change-handler))
-            (dom/td #js {:colSpan 5} (.format date "MMM"))
+            (dom/td #js {:className "calendar-header-month" :colSpan 5} (.format date "MMM"))
             (dom/td nil (.get-next this (.add (.clone date) 1 "month") date-max month-change-handler))))
         (dom/tbody nil calendar))))
   (render [this]

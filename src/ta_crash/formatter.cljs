@@ -55,4 +55,4 @@
 (defn for-stat-list
   [raw-rows cb type]
   (let [items (into [] (map (fn [i] {:display (:factor i) :count (:count_factor i) :type :factor :id (get-id :factor (:factor i))}) raw-rows))]
-    (cb {:stat-list/items items})))
+    (cb {:stat-list/items (filter #(not (= "" (:id %))) items)})))

@@ -1,33 +1,13 @@
 (ns ta-crash.area-menu
   (:require [cljs.pprint :as pprint]
             [om.next :as om :refer-macros [defui]]
-            [om.dom :as dom]))
-
-(defmulti get-area-display (fn [_ type] type))
-
-(defmethod get-area-display :borough
-  [id _]
-  (condp = id
-    1 "Manhattan"
-    2 "Bronx"
-    3 "Brooklyn"
-    4 "Queens"
-    5 "Staten Island"))
-
-(defmethod get-area-display :city-council
-  [id _]
-  (str "District " id))
-
-(defmethod get-area-display :community-board
-  [id _]
-  (str "Community Board " id))
-
-(defmethod get-area-display :default [id _] id)
+            [om.dom :as dom]
+            [ta-crash.display :as display]))
 
 (defn build-sub-item
   [item sub-item]
   (assoc sub-item :query (:query item)
-    :display-name (get-area-display (:identifier sub-item) (:area-type item))))
+    :display-name (display/get-area-display (:identifier sub-item) (:area-type item))))
 
 (defui AreaMenuItem
   static om/IQuery
@@ -51,7 +31,7 @@
   (render [this]
     (let [{:keys [identifier parent item-type]} (om/props this)
           area-change (:area-change (om/get-computed this))]
-      (dom/div #js {:className "area-sub-menu-item" :onClick #(area-change {:type parent :identifier identifier})} (get-area-display identifier parent)))))
+      (dom/div #js {:className "area-sub-menu-item" :onClick #(area-change {:type parent :identifier identifier})} (display/get-area-display identifier parent)))))
 
 (def sub-menu-item (om/factory SubMenuItem))
 
@@ -105,10 +85,10 @@
           {:keys [show-sub pos]} (om/get-state this)]
       (if (:item-type (first menu-items))
         (let [item-type (name (:item-type (first menu-items)))]
-          (dom/div nil
+          (dom/div #js {:className "area-menu"}
 
             (apply dom/ul
-              #js {:className (str item-type "-area-menu area-menu")}
+              #js {:className (str item-type "-area-menu")}
               (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
             (sub-menu (om/computed {:area/items area-items
                                    :show-sub show-sub

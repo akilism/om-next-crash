@@ -23,7 +23,7 @@
     :community-board "nyc_community_board"
     :neighborhood "nyc_neighborhood"
     :precinct "nyc_nypd_precinct"
-    :zipcode "nyc_zip_codes"))
+    :zip-code "nyc_zip_codes"))
 
 (defn get-geo-identifier [identifier]
   (if (string? identifier)

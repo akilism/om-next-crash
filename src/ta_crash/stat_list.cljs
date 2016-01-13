@@ -11,7 +11,7 @@
     :community-board "nyc_community_board"
     :neighborhood "nyc_neighborhood"
     :precinct "nyc_nypd_precinct"
-    :zipcode "nyc_zip_codes"))
+    :zip-code "nyc_zip_codes"))
 
 (defn get-geo-identifier [identifier]
   (if (string? identifier)
@@ -49,6 +49,7 @@
   (render [this]
     (let [{:keys [stat-list/items end-date start-date query]} (om/props this)]
       (dom/div #js {:className "stat-box"}
+        (dom/div #js {:className "stat-list-title"} "Contributing Factors")
         (apply dom/ul #js {:className "stat-list"} (map stat-list-item/stat-list-item items))))))
 
 (def stat-list (om/factory StatList))

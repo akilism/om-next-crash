@@ -10,6 +10,7 @@
             [ta-crash.formatter :as data-formatter]
             [ta-crash.sql-queries :as queries]
             [ta-crash.area-menu :as area-menu]
+            [ta-crash.header :as header]
             [ta-crash.date-range :as date-range]
             [ta-crash.stat-group :as stat-group]
             [ta-crash.stat-list :as stat-list]
@@ -22,7 +23,7 @@
    :selected-date-min nil
    :date-max nil
    :date-min nil
-   :active-area {:identifier "citywide"}
+   :active-area {:area-type :citywide :identifier "citywide"}
    :group/items []
    :stat-list/items []
    :area/items []
@@ -202,18 +203,28 @@
       ;(println "Root render:" (:area/items (om/props this)))
       ;(pprint/pprint (om/props this))
       (dom/div #js {:className "root"}
+        (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
         (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
                                            :area/items (:area/items (om/props this))}
                                           {:area-change #(.area-change this %)}))
-        (when (and selected-date-max selected-date-min)
-          (date-range/date-range (om/computed {:date-max date-max
+        ;(when (and selected-date-max selected-date-min)
+        ;  (date-range/date-range (om/computed {:date-max date-max
+        ;                          :date-min date-min
+        ;                          :cal-date-max cal-date-max
+        ;                          :cal-date-min cal-date-min
+        ;                          :selected-date-max selected-date-max
+        ;                          :selected-date-min selected-date-min }
+        ;                          {:date-change #(.date-change this %)
+        ;                           :month-change #(.month-change this %)})))
+        (header/header (om/computed {:date-max date-max
                                   :date-min date-min
                                   :cal-date-max cal-date-max
                                   :cal-date-min cal-date-min
                                   :selected-date-max selected-date-max
-                                  :selected-date-min selected-date-min }
+                                  :selected-date-min selected-date-min
+                                  :active-area active-area }
                                   {:date-change #(.date-change this %)
-                                   :month-change #(.month-change this %)})))
+                                   :month-change #(.month-change this %)}))
         (stat-group/stat-group {:group/items (:group/items (om/props this))
                                 :end-date (if selected-date-max
                                             (.format selected-date-max "YYYY-MM-DD")

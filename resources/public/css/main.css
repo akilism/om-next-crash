@@ -15,6 +15,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 0 3vw;
 }
 
 .content-box {
@@ -27,6 +28,171 @@ body {
   margin: 0 auto;
 }
 
+.full-opacity {
+  opacity: 1;
+}
+
+.zero-opacity {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Area Menu Styles */
+.area-menu {
+  width: 100%;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.area-menu ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.area-menu-item {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Area Sub Menu Styles*/
+.sub-area-menu {
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  position: absolute;
+  border: 1px solid black;
+  background: #fff;
+  top: 10px;
+  left: 10px;
+}
+
+.sub-area-menu-item {
+  margin: 0 15px;
+}
+
+.area-sub-menu {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  z-index: 8;
+}
+
+.area-sub-menu-item {
+  width: 100%;
+  text-align: left;
+  padding: 20px;
+  background-color: #FFFFEC;
+}
+
+.area-sub-menu-item:hover {
+  background-color: #F9F9CE;
+}
+
+.area-sub-menu-item-full {
+  width: 100%;
+}
+/* Area Sub Menu Styles: End */
+/* Area Menu Styles: End */
+
+/* Header Styles */
+.header {
+  border-bottom: 2px solid #000;
+  margin: 15px 0 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  line-height: 0.75;
+}
+
+.area-header {
+  font-size: 3.5rem;
+  text-transform: capitalize;
+  margin: 0 20px 0 0;
+  padding: 0;
+}
+
+/* Date Range Styles */
+.date-range-block {
+  /*width: 100%;*/
+  min-width: 450px;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.date-range {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0000FF;
+}
+
+.date-range-spacer {
+  margin: 0 0.25em;
+}
+
+.date-range-spacer:first-child {
+  margin: 0 0.25em 0 0;
+}
+
+/* Calendar Styles */
+.cal-holder {
+  position: absolute;
+  background-color: #F1F1EB;
+}
+
+.calendar {
+  border: 1px solid black;
+}
+
+.calendar-header-month {
+  padding: 10px 0;
+}
+
+.month-next,
+.month-prev {
+  cursor: pointer;
+}
+
+.calendar-day,
+.calendar-day-of-week {
+  padding: 3px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.calendar-day.inactive {
+  opacity: 0;
+}
+
+.calendar-day.active:hover {
+  background-color: #F9F9CE;
+  cursor: pointer;
+}
+
+.calendar-day-of-week {
+  font-weight: bold;
+}
+
+.calendar-header-row {
+  text-align: center;
+}
+/* Calendar Styles: End */
+/* Date Range Styles: End */
+/* Header Styles: End */
+
+
 .stat-box, .factor-box {
   width: 90vw;
   margin-top: 30px;
@@ -38,7 +204,6 @@ body {
   }
 }
 
-
 .stat-group {
   display: flex;
   flex-direction: row;
@@ -46,9 +211,8 @@ body {
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  margin: 0 0 0 20px;
+  margin: 0;
 }
-
 
 .item {
   cursor: pointer;
@@ -71,7 +235,7 @@ body {
   font-weight: bold;
   font-size: 2em;
   border: 1px solid #4E4C50;
-  width: 100vw;
+  width: 100%;
   margin: 3vh 0 0 0;
   padding: 0.35em;
 }
@@ -123,46 +287,16 @@ body {
 
 }
 
-.carto-map {
-  margin: 4vh auto;
-  height: 70vh;
-  width: 90vw;
-  border: 1px solid black;
-}
-
-.area-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  list-style: none;
-  padding: 0;
-  margin: 0 9vw;
-  width: 100vw;
-}
-
-.area-menu-item {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.sub-area-menu {
-  justify-content: space-between;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 10px 20px;
-  position: absolute;
-  border: 1px solid black;
-  background: #fff;
-  top: 10px;
-  left: 10px;
-}
-
-.sub-area-menu-item {
-  margin: 0 15px;
-}
-
 .stat-list {
   margin: 0;
+  padding: 0 0 0 30px;
+}
+
+.stat-list-title {
+  border-bottom: 1px solid black;
+  font-size: 1.5em;
+  line-height: 0.75;
+  margin-left: 30px;
 }
 
 .stat-list-item {
@@ -172,85 +306,9 @@ body {
   margin: 0;
 }
 
-.cal-holder {
-  position: absolute;
-  background-color: #F1F1EB;
-}
-
-.calendar-day,
-.calendar-day-of-week {
-  padding: 3px;
-  vertical-align: middle;
-  text-align: center;
-  border: 1px solid #000;
-}
-
-.calendar-day.inactive {
-  opacity: 0;
-}
-
-.calendar-day.active:hover {
-  background-color: #F9F9CE;
-  cursor: pointer;
-}
-
-.calendar-day-of-week {
-  font-weight: bold;
-}
-
-.calendar-header-row {
-  text-align: center;
-}
-
-.date-range-block {
+.carto-map {
+  margin: 4vh 0;
+  height: 70vh;
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 1.5em;
-  margin: 10px 0 0 15px;
-}
-
-.date-range {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.date-range-spacer {
-  margin: 0 0.5em;
-}
-
-.full-opacity {
-  opacity: 1;
-}
-
-.zero-opacity {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.area-sub-menu {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  /*transition: opacity 250ms ease-out;*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20vw;
-  z-index: 8;
-}
-
-.area-sub-menu-item {
-  width: 100%;
-  text-align: left;
-  padding: 20px;
-  background-color: #FFFFEC;
-}
-
-.area-sub-menu-item:hover {
-  background-color: #F9F9CE;
-}
-
-.area-sub-menu-item-full {
-  width: 100%;
+  border: 1px solid black;
 }
