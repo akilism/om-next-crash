@@ -1,9 +1,9 @@
-(ns ta-crash.stat-list
-  (:require [om.next :as om :refer-macros [defui]]
+(ns ta-crash.rank-list
+  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [cljs.pprint :as pprint]
+            [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [ta-crash.sql-queries :as queries]
-            [ta-crash.props :as props]
-            [ta-crash.stat-list-item :as stat-list-item]))
+            [ta-crash.props :as props]))
 
 (defn get-geo-table [type]
   (condp = type
@@ -19,25 +19,25 @@
     (str "'" identifier "'")
     identifier))
 
-(defui StatList
+(defui RankList
   static om/IQueryParams
   (params [this]
-      {:params {:end-date "" :start-date "" :geo-table "" :identifier ""} :query false})
+      {:params {:end-date "" :start-date "" :geo-table "" :identifier "" :order-col "total_crashes" :order-dir "DESC"} :query false})
   static om/IQuery
   (query [_]
-    '[(:stat-list/items {:params ?params :query ?query})])
+    '[(:rank-list/items {:params ?params :query ?query})])
   Object
   (get-query [this props]
     (let [{:keys [query active-area query-area]} props]
       (if (or (empty? active-area) (= "citywide" (:identifier active-area)))
-        query
-        query-area)))
+        false
+        query)))
   (get-query-params [this props]
     (let [{:keys [end-date start-date active-area]} props
           {:keys [area-type identifier]} active-area]
-      (if (or (empty? active-area) (= "citywide" identifier))
-        {:end-date end-date :start-date start-date}
-        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (get-geo-identifier identifier)})))
+      (if (or (empty? active-area) (= "citywide" (:identifier active-area)))
+        {:end-date "" :start-date "" :geo-table "" :identifier "" :order-col "total_crashes" :order-dir "DESC"}
+        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (get-geo-identifier identifier) :order-col "total_crashes" :order-dir "DESC"})))
   (set-query
     ([this] (let [{:keys [end-date start-date]} (om/props this)]
       (om/set-query! this {:params {:params (.get-query-params this (om/props this)) :query (.get-query this (om/props this))}})))
@@ -49,9 +49,8 @@
     (when (not (props/same-props? (om/props this) next-props))
         (.set-query this next-props)))
   (render [this]
-    (let [{:keys [stat-list/items end-date start-date query]} (om/props this)]
-      (dom/div #js {:className "stat-box"}
-        (dom/div #js {:className "stat-list-title"} "Contributing Factors")
-        (apply dom/ul #js {:className "stat-list"} (map stat-list-item/stat-list-item items))))))
+    (let [{:keys [rank-list/items start-date end-date active-area]} (om/props this)]
+      (pprint/pprint items)
+      (dom/div nil "some rank list."))))
 
-(def stat-list (om/factory StatList))
+(def rank-list (om/factory RankList))

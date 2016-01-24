@@ -54,7 +54,7 @@
   [evt]
   (let [x (.-offsetLeft evt.target)
         y (.-offsetTop evt.target)]
-    {:x x :y (+ 20 y)}))
+    {:x x :y (+ 47 y)}))
 
 (defui AreaMenu
   static om/IQueryParams

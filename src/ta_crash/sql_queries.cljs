@@ -533,7 +533,7 @@
   SELECT
     concat_ws(',', c.latitude, c.longitude) as pos,
     concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
-    c.the_geom_webmercator,
+    c.the_geom,
     COUNT(c.cartodb_id) as total_crashes,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
@@ -551,7 +551,7 @@
      FROM
       table_20k_crashes c1
      WHERE
-      (c1.the_geom_webmercator = c.the_geom_webmercator)
+      (c1.the_geom = c.the_geom)
      AND
       (c1.number_of_persons_injured > 0)
      AND
@@ -563,7 +563,7 @@
      FROM
       table_20k_crashes c1
      WHERE
-      c1.the_geom_webmercator = c.the_geom_webmercator
+      c1.the_geom = c.the_geom
      AND
       (c1.number_of_persons_killed > 0)
      AND
@@ -583,6 +583,6 @@
   AND
     (a.identifier = :identifier)
   GROUP BY
-    c.the_geom_webmercator, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
   ORDER BY
     :order-col :order-dir")

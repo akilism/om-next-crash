@@ -2,6 +2,7 @@
   (:require [cljs.pprint :as pprint]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
+            [ta-crash.props :as props]
             [ta-crash.group-item :as group-item]))
 
 (def group-order [:total-crashes
@@ -57,7 +58,8 @@
   (componentWillMount [this]
     (.set-query this))
   (componentWillReceiveProps [this next-props]
-    (.set-query this next-props))
+    (when (not (props/same-props? (om/props this) next-props))
+        (.set-query this next-props)))
   (render [this]
     (let [{:keys [group/items]} (om/props this)]
       (dom/div #js {:className "stat-box"}

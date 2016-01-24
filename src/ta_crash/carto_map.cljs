@@ -3,6 +3,7 @@
   (:require [cljs.pprint :as pprint]
             [cljs.core.async :as async :refer [<! >! put! chan]]
             [ta-crash.sql-queries :as queries]
+            [ta-crash.props :as props]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]))
 
@@ -46,23 +47,6 @@
   (create-handler
     [this vis layers]
     (om/set-state! this {:vis vis}))
-  (same-props?
-    [this next-props]
-    (let
-      [curr-props (om/props this)
-       curr-area (:active-area curr-props)
-       curr-start-date (:start-date curr-props)
-       curr-end-date (:end-date curr-props)
-       next-area (:active-area next-props)
-       next-start-date (:start-date next-props)
-       next-end-date (:end-date curr-props)]
-      (and
-        (= (:area-type curr-area) (:area-type next-area))
-        (= (:identifier curr-area) (:identifier next-area))
-        (= curr-start-date next-start-date)
-        (= curr-end-date next-end-date)
-        (not (nil? next-start-date))
-        (not (nil? next-end-date)))))
   (map-new-parameters
     [this vis props]
     (let [data-layer (nth (.getLayers vis) 1)
@@ -87,7 +71,7 @@
   (componentWillReceiveProps
     [this next-props]
     (let [vis (:vis (om/get-state this))]
-      (when (and vis (not (.same-props? this next-props)))
+      (when (and vis (not (props/same-props? (om/props this) next-props)))
         (.map-new-parameters this vis next-props))))
   (render [this]
     (let [{:keys [text type]} (om/props this)]
