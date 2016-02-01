@@ -60,5 +60,5 @@
 (defn for-rank-list
   [raw-rows cb type]
   (let []
-    (pprint/pprint raw-rows)
+    (pprint/pprint (str "rank count: " (count raw-rows)))
     (cb {:rank-list/items raw-rows})))

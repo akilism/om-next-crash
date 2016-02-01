@@ -180,8 +180,8 @@
   -- Counts all death / injury stats for a given date range
   SELECT
     COUNT(c.cartodb_id) as total_crashes,
-    (select COUNT(cartodb_id) from table_20k_crashes where (number_of_persons_injured > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_injury,
-    (select COUNT(cartodb_id) from table_20k_crashes where (number_of_persons_killed > 0) AND (date <= date ':end-date') AND (date >= date ':start-date')) as total_crashes_with_death,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
     SUM(c.number_of_motorist_injured) as motorist_injured,
@@ -309,38 +309,8 @@
     SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
     SUM(c.number_of_persons_injured) as persons_injured,
     SUM(c.number_of_persons_killed) as persons_killed,
-    (SELECT
-      COUNT(c.cartodb_id)
-     FROM
-      table_20k_crashes c
-     JOIN
-      :geo-table a
-     ON
-     ST_Within(c.the_geom, a.the_geom)
-     WHERE
-      (a.identifier = :identifier)
-     AND
-      (number_of_persons_injured > 0)
-     AND
-      (date <= date ':end-date')
-     AND
-      (date >= date ':start-date')) as total_crashes_with_injury,
-    (SELECT
-      COUNT(c.cartodb_id)
-     FROM
-      table_20k_crashes c
-     JOIN
-      :geo-table a
-     ON
-     ST_Within(c.the_geom, a.the_geom)
-     WHERE
-      (a.identifier = :identifier)
-     AND
-      (number_of_persons_killed > 0)
-     AND
-      (date <= date ':end-date')
-     AND
-      (date >= date ':start-date')) as total_crashes_with_death
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
   FROM
     table_20k_crashes c
   JOIN
@@ -446,26 +416,8 @@
     SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
     SUM(c.number_of_persons_injured) as persons_injured,
     SUM(c.number_of_persons_killed) as persons_killed,
-    (SELECT
-        COUNT(c.cartodb_id)
-     FROM
-        table_20k_crashes c
-     WHERE
-        (number_of_persons_injured > 0)
-     AND
-        (date <= date ':end-date')
-     AND
-        (date >= date ':start-date')) as total_crashes_with_injury,
-    (SELECT
-        COUNT(c.cartodb_id)
-     FROM
-        table_20k_crashes c
-     WHERE
-        (number_of_persons_killed > 0)
-     AND
-        (date <= date ':end-date')
-     AND
-        (date >= date ':start-date')) as total_crashes_with_death
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
   FROM
     table_20k_crashes c
   WHERE
@@ -489,30 +441,8 @@
     SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
     SUM(c.number_of_persons_injured) as persons_injured,
     SUM(c.number_of_persons_killed) as persons_killed,
-    (SELECT
-      COUNT(c1.cartodb_id)
-     FROM
-      table_20k_crashes c1
-     WHERE
-      (c1.the_geom_webmercator = c.the_geom_webmercator)
-     AND
-      (c1.number_of_persons_injured > 0)
-     AND
-      (c1.date <= date ':end-date')
-     AND
-      (c1.date >= date ':start-date')) as total_crashes_with_injury,
-    (SELECT
-      COUNT(c1.cartodb_id)
-     FROM
-      table_20k_crashes c1
-     WHERE
-      c1.the_geom_webmercator = c.the_geom_webmercator
-     AND
-      (c1.number_of_persons_killed > 0)
-     AND
-      (c1.date <= date ':end-date')
-     AND
-      (c1.date >= date ':start-date')) as total_crashes_with_death
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
   FROM
     table_20k_crashes c
   JOIN
@@ -546,30 +476,8 @@
     ((SUM(c.number_of_persons_killed) * 2.75) +
      (SUM(c.number_of_persons_injured) * 1.5) +
      (COUNT(c.cartodb_id) * 0.75)) as dval,
-    (SELECT
-      COUNT(c1.cartodb_id)
-     FROM
-      table_20k_crashes c1
-     WHERE
-      (c1.the_geom = c.the_geom)
-     AND
-      (c1.number_of_persons_injured > 0)
-     AND
-      (c1.date <= date ':end-date')
-     AND
-      (c1.date >= date ':start-date')) as total_crashes_with_injury,
-    (SELECT
-      COUNT(c1.cartodb_id)
-     FROM
-      table_20k_crashes c1
-     WHERE
-      c1.the_geom = c.the_geom
-     AND
-      (c1.number_of_persons_killed > 0)
-     AND
-      (c1.date <= date ':end-date')
-     AND
-      (c1.date >= date ':start-date')) as total_crashes_with_death
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
   FROM
     table_20k_crashes c
   JOIN

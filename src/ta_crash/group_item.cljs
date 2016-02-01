@@ -16,10 +16,12 @@
      :group/sub-header-item (om/get-query sub-header-item/SubHeaderItem)})
   Object
   (render [this]
-    (let [{:keys [type id] :as props} (om/props this)]
+    (let [{:keys [type id] :as props} (om/props this)
+          {:keys [stat-change]} (om/get-computed this)]
       (({:group/default-item default-item/default-item
          :group/header-item header-item/header-item
          :group/sub-header-item sub-header-item/sub-header-item} type)
-        (om/props this)))))
+        (om/computed (om/props this)
+                     {:item-click-handler stat-change})))))
 
 (def group-item (om/factory GroupItem))

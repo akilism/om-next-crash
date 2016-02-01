@@ -25,6 +25,7 @@
    :date-max nil
    :date-min nil
    :active-area {:area-type :citywide :identifier "citywide"}
+   :active-stat nil
    :group/items []
    :stat-list/items []
    :rank-list/items []
@@ -107,6 +108,14 @@
 
 (defmulti mutate om/dispatch)
 
+(defmethod mutate 'area/change
+  [{:keys [state] :as env} key {:keys [area-type identifier] :as params}]
+  (println "area/change:" area-type " -> " identifier)
+  (condp = key
+    'area/change {:value {:keys [:active-area]}
+          :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
+    :else {:value :not-found}))
+
 (defmethod mutate 'date/change
   [{:keys [state] :as env} key {:keys [date-key date] :as params}]
   (println "date/change:" date-key " -> " (.format date "YYYY-MM-DD"))
@@ -115,12 +124,12 @@
           :action #(swap! state update-in [date-key] (fn [_] date))}
     :else {:value :not-found}))
 
-(defmethod mutate 'area/change
-  [{:keys [state] :as env} key {:keys [area-type identifier] :as params}]
-  (println "area/change:" area-type " -> " identifier)
+(defmethod mutate 'stat/change
+  [{:keys [state] :as env} key {:keys [id] :as params}]
+  (println "stat/change:" id)
   (condp = key
-    'area/change {:value {:keys [:active-area]}
-          :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
+    'stat/change {:value {:keys [:active-stat]}
+          :action #(swap! state update :active-stat (fn [_] id))}
     :else {:value :not-found}))
 
 (defn carto-loop [c]
@@ -161,7 +170,6 @@
         area-type (get-in rank-list [:params :area-type])
         query (get-in rank-list [:params :query])
         params (get-in rank-list [:params :params])]
-    (println (query params))
     (put! c [area-type query params data-formatter/for-rank-list cb])))
 
 (defn send-to-chan [c]
@@ -189,12 +197,12 @@
 (defui Root
   static om/IQuery
   (query [_]
-    ;(pprint/pprint (om/get-query area-menu/AreaMenu))
+    (pprint/pprint (om/get-query area-menu/AreaMenu))
     '[{:menu/items (om/get-query area-menu/AreaMenu)}
       {:area/items (om/get-query area-menu/SubMenu)}
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
-      ;{:rank-list/items (om/get-query rank-list/RankList)}
+      {:rank-list/items (om/get-query rank-list/RankList)}
       :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area])
   Object
   (area-change
@@ -206,6 +214,10 @@
   (month-change
     [this {:keys [key date]}]
     (om/merge! reconciler (merge (om/props this) {key date})))
+  (stat-change
+    [this {:keys [key id]}]
+    (println "stat-change: " key " : " id)
+    (om/transact! this `[(stat/change {~key ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
   (componentWillMount [this]
     (go
       (let [result (<! (execute-query-carto queries/date-bounds []))
@@ -220,7 +232,7 @@
             :selected-date-min date-min})))))
   (render [this]
     (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area]} (om/props this)]
-      ;(println "Root render:" (:area/items (om/props this)))
+      ;(println "Root render:" (:rank-list/items (om/props this)))
       ;(pprint/pprint (om/props this))
       (dom/div #js {:className "root"}
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
@@ -246,16 +258,17 @@
         ;                          {:date-change #(.date-change this %)
         ;                           :month-change #(.month-change this %)})))
 
-        (stat-group/stat-group {:group/items (:group/items (om/props this))
-                                :end-date (if selected-date-max
-                                            (.format selected-date-max "YYYY-MM-DD")
-                                            "2015-12-26")
-                                :start-date (if selected-date-min
-                                              (.format selected-date-min "YYYY-MM-DD")
-                                              "2015-01-01")
-                                :active-area active-area
-                                :query queries/stats-date
-                                :query-area queries/stats-date-by-area})
+        (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
+                                              :end-date (if selected-date-max
+                                                          (.format selected-date-max "YYYY-MM-DD")
+                                                          "2015-12-26")
+                                              :start-date (if selected-date-min
+                                                            (.format selected-date-min "YYYY-MM-DD")
+                                                            "2015-01-01")
+                                              :active-area active-area
+                                              :query queries/stats-date
+                                              :query-area queries/stats-date-by-area}
+                                            {:stat-change #(.stat-change this %)}))
         (stat-list/stat-list {:stat-list/items (take 15 (:stat-list/items (om/props this)))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
@@ -266,15 +279,15 @@
                               :active-area active-area
                               :query queries/all-factors-date
                               :query-area queries/all-factors-date-by-area})
-;        (rank-list/rank-list {:rank-list/items (take 15 (:rank-list/items (om/props this)))
-;                              :end-date (if selected-date-max
-;                                          (.format selected-date-max "YYYY-MM-DD")
-;                                          "2015-12-26")
-;                              :start-date (if selected-date-min
-;                                            (.format selected-date-min "YYYY-MM-DD")
-;                                            "2015-01-01")
-;                              :active-area active-area
-;                              :query queries/intersections-by-date-area-with-order})
+        (rank-list/rank-list {:rank-list/items (take 15 (:rank-list/items (om/props this)))
+                              :end-date (if selected-date-max
+                                          (.format selected-date-max "YYYY-MM-DD")
+                                          "2015-12-26")
+                              :start-date (if selected-date-min
+                                            (.format selected-date-min "YYYY-MM-DD")
+                                            "2015-01-01")
+                              :active-area active-area
+                              :query queries/intersections-by-date-area-with-order})
         (carto-map/carto-map {:end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
                                           "2015-12-26")

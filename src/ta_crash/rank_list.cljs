@@ -36,8 +36,8 @@
     (let [{:keys [end-date start-date active-area]} props
           {:keys [area-type identifier]} active-area]
       (if (or (empty? active-area) (= "citywide" (:identifier active-area)))
-        {:end-date "" :start-date "" :geo-table "" :identifier "" :order-col "total_crashes" :order-dir "DESC"}
-        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (get-geo-identifier identifier) :order-col "total_crashes" :order-dir "DESC"})))
+        {:end-date "" :start-date "" :geo-table "" :identifier "" :order-col "persons_killed" :order-dir "DESC"}
+        {:end-date end-date :start-date start-date :geo-table (get-geo-table area-type) :identifier (get-geo-identifier identifier) :order-col "persons_killed" :order-dir "DESC"})))
   (set-query
     ([this] (let [{:keys [end-date start-date]} (om/props this)]
       (om/set-query! this {:params {:params (.get-query-params this (om/props this)) :query (.get-query this (om/props this))}})))
@@ -50,7 +50,13 @@
         (.set-query this next-props)))
   (render [this]
     (let [{:keys [rank-list/items start-date end-date active-area]} (om/props this)]
-      (pprint/pprint items)
-      (dom/div nil "some rank list."))))
+      (println "ranklist:" (take 1 items))
+      (dom/div #js {:className "rank-list"}
+        (dom/div #js {:className "rank-title"} "Persons Killed")
+        (apply dom/ul nil
+          (map #(dom/li #js {:className "rank-list-item"} (str (:streets %) ": " (:persons_killed %))) (take 10 (filter #(not (= "," (:streets %))) items))))))))
 
 (def rank-list (om/factory RankList))
+
+
+;(and (< 0 (:persons_killed %)) (= "," (:streets %)))

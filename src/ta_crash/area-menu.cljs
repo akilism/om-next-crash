@@ -62,8 +62,8 @@
     {:area-type "" :query false})
   static om/IQuery
   (query [_]
-    '[(:area/items {:area-type ?area-type :query ?query})
-      {:menu/items (om/get-query AreaMenuItem)}])
+      ;   (:area/items {:area-type ?area-type :query ?query})
+    '[{:menu/items (om/get-query AreaMenuItem)}])
   Object
   (toggle-menu [this show pos]
     (om/set-state! this {:show-sub show :pos pos}))

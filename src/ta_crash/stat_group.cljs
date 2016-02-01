@@ -61,10 +61,13 @@
     (when (not (props/same-props? (om/props this) next-props))
         (.set-query this next-props)))
   (render [this]
-    (let [{:keys [group/items]} (om/props this)]
+    (let [{:keys [group/items]} (om/props this)
+          {:keys [stat-change]} (om/get-computed this)]
+      (println (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order))
       (dom/div #js {:className "stat-box"}
         (apply dom/div #js {:className "stat-group"}
                (map group-item/group-item
-                    (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order)))))))
+                    (om/computed (hash-map (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order))
+                                 {:stat-change stat-change})))))))
 
 (def stat-group (om/factory StatGroup))
