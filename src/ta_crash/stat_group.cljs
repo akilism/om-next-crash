@@ -63,7 +63,6 @@
   (render [this]
     (let [{:keys [group/items]} (om/props this)
           {:keys [stat-change]} (om/get-computed this)]
-      (println (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order))
       (dom/div #js {:className "stat-box"}
         (apply dom/div #js {:className "stat-group"}
                (map #(group-item/group-item (om/computed % {:stat-change stat-change})) (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order)))))))

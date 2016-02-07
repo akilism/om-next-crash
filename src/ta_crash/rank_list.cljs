@@ -50,7 +50,6 @@
         (.set-query this next-props)))
   (render [this]
     (let [{:keys [rank-list/items start-date end-date active-area]} (om/props this)]
-      (println "ranklist:" (take 1 items))
       (dom/div #js {:className "rank-list"}
         (dom/div #js {:className "rank-title"} "Persons Killed")
         (apply dom/ul nil

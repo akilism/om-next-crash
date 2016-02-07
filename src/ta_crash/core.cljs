@@ -197,7 +197,6 @@
 (defui Root
   static om/IQuery
   (query [_]
-    (pprint/pprint (om/get-query area-menu/AreaMenu))
     '[{:menu/items (om/get-query area-menu/AreaMenu)}
       {:area/items (om/get-query area-menu/SubMenu)}
       {:group/items (om/get-query stat-group/StatGroup)}
@@ -269,7 +268,7 @@
                                               :query queries/stats-date
                                               :query-area queries/stats-date-by-area}
                                             {:stat-change #(.stat-change this %)}))
-        (stat-list/stat-list {:stat-list/items (take 15 (:stat-list/items (om/props this)))
+        (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
                                           "2015-12-26")
@@ -279,7 +278,7 @@
                               :active-area active-area
                               :query queries/all-factors-date
                               :query-area queries/all-factors-date-by-area})
-        (rank-list/rank-list {:rank-list/items (take 15 (:rank-list/items (om/props this)))
+        (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
                                           "2015-12-26")
