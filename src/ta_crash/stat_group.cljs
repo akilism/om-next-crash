@@ -66,8 +66,6 @@
       (println (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order))
       (dom/div #js {:className "stat-box"}
         (apply dom/div #js {:className "stat-group"}
-               (map group-item/group-item
-                    (om/computed (hash-map (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order))
-                                 {:stat-change stat-change})))))))
+               (map #(group-item/group-item (om/computed % {:stat-change stat-change})) (mapcat (fn [id] (filter #(= id (:id %)) items)) group-order)))))))
 
 (def stat-group (om/factory StatGroup))
