@@ -126,7 +126,7 @@
 
 (defmethod mutate 'stat/change
   [{:keys [state] :as env} key {:keys [id] :as params}]
-  (println "stat/change:" id)
+  (println "stat/change:" key " -> " id)
   (condp = key
     'stat/change {:value {:keys [:active-stat]}
           :action #(swap! state update :active-stat (fn [_] id))}
@@ -202,7 +202,7 @@
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
       {:rank-list/items (om/get-query rank-list/RankList)}
-      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area])
+      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area :active-stat])
   Object
   (area-change
     [this {:keys [type identifier]}]
@@ -215,8 +215,7 @@
     (om/merge! reconciler (merge (om/props this) {key date})))
   (stat-change
     [this {:keys [key id]}]
-    (println "stat-change: " key " : " id)
-    (om/transact! this `[(stat/change {~key ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
+    (om/transact! this `[(stat/change {:key ~key :id ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
   (componentWillMount [this]
     (go
       (let [result (<! (execute-query-carto queries/date-bounds []))
@@ -230,9 +229,8 @@
             :selected-date-max date-max
             :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area]} (om/props this)]
-      ;(println "Root render:" (:rank-list/items (om/props this)))
-      ;(pprint/pprint (om/props this))
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area active-stat]} (om/props this)]
+      (println "Root render:" (:active-stat (om/props this)))
       (dom/div #js {:className "root"}
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
         (header/header (om/computed {:date-max date-max
@@ -293,7 +291,8 @@
                               :start-date (if selected-date-min
                                             (.format selected-date-min "YYYY-MM-DD")
                                             "2015-01-01")
-                              :active-area active-area})))))
+                              :active-area active-area
+                              :active-stat active-stat})))))
 
 (om/add-root! reconciler
   Root (gdom/getElement "app"))

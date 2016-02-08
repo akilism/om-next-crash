@@ -18,5 +18,5 @@
         id-name (name id)
         classes (str id-name "-" type-name " " type-name " item")]
     (elem #js {:className classes
-               :onClick #(item-click-handler {:key type-keyword :id id-name})}
+               :onClick #(item-click-handler {:key type-keyword :id id})}
       (value/value {:value count :type type-keyword}) (label/label {:text display :type type-keyword}))))
