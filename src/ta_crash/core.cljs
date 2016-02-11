@@ -57,9 +57,9 @@
      :query queries/distinct-zip-code}]})
 
 (defn execute-query-carto
-  ([query params] (execute-query-carto (chan) query params))
-  ([c query params]
-   (carto-query/execute-query (query params)
+  ([query] (execute-query-carto (chan) query))
+  ([c query]
+   (carto-query/execute-query query
       #(put! c (:rows (js->clj % :keywordize-keys true)))
       #(println "ERROR: " %))
    c))
@@ -75,27 +75,29 @@
 
 (defmethod read :menu/items
   [{:keys [state] :as env} k _]
-  ;(println "read " k)
+  ; (println "read:menu/items" k)
   (let [st @state]
     {:value (get st k)}))
 
 (defmethod read :area/items
   [{:keys [state ast] :as env} k {:keys [area-type query]}]
-  ;(println "read" k area-type)
+  ; (println "read:area/items" k area-type)
   (merge
     {:value (get @state k [])}
     (when query
       {:area-menu ast})))
 
 (defmethod read :stat-list/items
-  [{:keys [state ast] :as env} k {:keys [params query] :as params}]
+  [{:keys [state ast] :as env} k {:keys [query] :as params}]
+  ;(println "read:stat-list/items" k)
   (merge
     {:value (get @state k [])}
     (when query
       {:stat-list ast})))
 
 (defmethod read :rank-list/items
-  [{:keys [state ast] :as env} k {:keys [params query] :as params}]
+  [{:keys [state ast] :as env} k {:keys [query] :as params}]
+  ; (println "read:rank-list/items" k)
   (merge
     {:value (get @state k [])}
     (when query
@@ -104,13 +106,14 @@
 (defmethod read :default
   [{:keys [state] :as env} k _]
   (let [st @state]
+    ; (println "default read:" k)
     {:value (get st k)}))
 
 (defmulti mutate om/dispatch)
 
 (defmethod mutate 'area/change
   [{:keys [state] :as env} key {:keys [area-type identifier] :as params}]
-  (println "area/change:" area-type " -> " identifier)
+  ; (println "area/change:" area-type " -> " identifier)
   (condp = key
     'area/change {:value {:keys [:active-area]}
           :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
@@ -118,7 +121,7 @@
 
 (defmethod mutate 'date/change
   [{:keys [state] :as env} key {:keys [date-key date] :as params}]
-  (println "date/change:" date-key " -> " (.format date "YYYY-MM-DD"))
+  ; (println "date/change:" date-key " -> " (.format date "YYYY-MM-DD"))
   (condp = key
     'date/change {:value {:keys [date-key]}
           :action #(swap! state update-in [date-key] (fn [_] date))}
@@ -126,7 +129,7 @@
 
 (defmethod mutate 'stat/change
   [{:keys [state] :as env} key {:keys [id] :as params}]
-  (println "stat/change:" key " -> " id)
+  ; (println "stat/change:" key " -> " id)
   (condp = key
     'stat/change {:value {:keys [:active-stat]}
           :action #(swap! state update :active-stat (fn [_] id))}
@@ -134,8 +137,8 @@
 
 (defn carto-loop [c]
   (go
-    (loop [[area-type query params formatter cb] (<! c)]
-      (let [result (<! (execute-query-carto query params))]
+    (loop [[area-type query formatter cb] (<! c)]
+      (let [result (<! (execute-query-carto query))]
         ;(println "carto result" result)
         (formatter result cb area-type))
       (recur (<! c)))))
@@ -146,15 +149,16 @@
         area-type (get-in area-menu [:params :area-type])
         query (get-in area-menu [:params :query])
         params (get-in area-menu [:params :params])]
-    (put! c [area-type query params data-formatter/for-area-menu cb])))
+    (put! c [area-type (query params) data-formatter/for-area-menu cb])))
 
 (defn get-stat-group
   [c cb stat-group]
+  ; (println "get-stat-group")
   (let [{[stat-group] :children} (om/query->ast stat-group)
         area-type (get-in stat-group [:params :area-type])
         query (get-in stat-group [:params :query])
         params (get-in stat-group [:params :params])]
-    (put! c [area-type query params data-formatter/for-stat-group cb])))
+    (put! c [area-type query data-formatter/for-stat-group cb])))
 
 (defn get-stat-list
   [c cb stat-list]
@@ -162,7 +166,7 @@
         area-type (get-in stat-list [:params :area-type])
         query (get-in stat-list [:params :query])
         params (get-in stat-list [:params :params])]
-    (put! c [area-type query params data-formatter/for-stat-list cb])))
+    (put! c [area-type query data-formatter/for-stat-list cb])))
 
 (defn get-rank-list
   [c cb rank-list]
@@ -170,10 +174,11 @@
         area-type (get-in rank-list [:params :area-type])
         query (get-in rank-list [:params :query])
         params (get-in rank-list [:params :params])]
-    (put! c [area-type query params data-formatter/for-rank-list cb])))
+    (put! c [area-type query data-formatter/for-rank-list cb])))
 
 (defn send-to-chan [c]
   (fn [{:keys [area-menu stat-group stat-list rank-list]} cb]
+    ; (println "send-to-chan" stat-group)
     (when
       area-menu (get-area-menu c cb area-menu))
     (when
@@ -218,7 +223,7 @@
     (om/transact! this `[(stat/change {:key ~key :id ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
   (componentWillMount [this]
     (go
-      (let [result (<! (execute-query-carto queries/date-bounds []))
+      (let [result (<! (execute-query-carto (queries/date-bounds [])))
             date-max (js/moment (:max_date (first result)))
             date-min (js/moment (:min_date (first result)))]
         (om/merge! reconciler (merge (om/props this)
@@ -242,9 +247,11 @@
                                   :active-area active-area }
                                   {:date-change #(.date-change this %)
                                    :month-change #(.month-change this %)}))
+        ; (println "header")
         (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
                                            :area/items (:area/items (om/props this))}
                                           {:area-change #(.area-change this %)}))
+        ; (println "area-menu")
         ;(when (and selected-date-max selected-date-min)
         ;  (date-range/date-range (om/computed {:date-max date-max
         ;                          :date-min date-min
@@ -266,6 +273,16 @@
                                               :query queries/stats-date
                                               :query-area queries/stats-date-by-area}
                                             {:stat-change #(.stat-change this %)}))
+        ; (println "stat-group")
+        (carto-map/carto-map {:end-date (if selected-date-max
+                                          (.format selected-date-max "YYYY-MM-DD")
+                                          "2015-12-26")
+                              :start-date (if selected-date-min
+                                            (.format selected-date-min "YYYY-MM-DD")
+                                            "2015-01-01")
+                              :active-area active-area
+                              :active-stat active-stat})
+        ;(println "carto-map")
         (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
@@ -276,6 +293,7 @@
                               :active-area active-area
                               :query queries/all-factors-date
                               :query-area queries/all-factors-date-by-area})
+        ; (println "stat-list")
         (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
@@ -285,14 +303,8 @@
                                             "2015-01-01")
                               :active-area active-area
                               :query queries/intersections-by-date-area-with-order})
-        (carto-map/carto-map {:end-date (if selected-date-max
-                                          (.format selected-date-max "YYYY-MM-DD")
-                                          "2015-12-26")
-                              :start-date (if selected-date-min
-                                            (.format selected-date-min "YYYY-MM-DD")
-                                            "2015-01-01")
-                              :active-area active-area
-                              :active-stat active-stat})))))
+        ; (println "rank-list")
+        ))))
 
 (om/add-root! reconciler
   Root (gdom/getElement "app"))

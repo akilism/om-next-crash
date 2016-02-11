@@ -856,7 +856,7 @@
 
 (defn get-filter-col
   [stat]
-  (condp stat
+  (condp = stat
     :total-killed "number_of_persons_killed"
     :total-injured "number_of_persons_injured"
     :total-persons-killed "number_of_persons_killed"
@@ -884,7 +884,7 @@
         {:end-date end-date
          :start-date start-date
          :filter-col (get-filter-col active-stat)})
-     (and (not (= "citywide" (:identifier active-area))) (nil? active-stat))
+     (and (not (= "citywide" (:identifier active-area))) (or (= :total-crashes active-stat) (nil? active-stat)))
       (by-date-area
         {:end-date end-date
          :start-date start-date
@@ -907,7 +907,6 @@
                       :by-date-area crashes-by-date-area
                       :by-date-area-filtered crashes-by-date-area-filtered}))
 
-
 (defmethod get-query :factors
   [_ params]
   (pick-query params {:by-date all-factors-date
@@ -929,3 +928,7 @@
                       :by-date-filtered stats-date-filtered
                       :by-date-area stats-date-by-area
                       :by-date-area-filtered stats-date-by-area-filtered}))
+
+(defmethod get-query :default
+  [id params]
+  false)

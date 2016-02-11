@@ -135,6 +135,13 @@ body {
   padding: 0;
 }
 
+
+@media screen and (min-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+  }
+}
+
 /* Date Range Styles */
 .date-range-block {
   min-width: 450px;
@@ -223,7 +230,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 100%;
+  width: 90%;
   margin: 0;
 }
 
@@ -320,8 +327,8 @@ body {
 }
 
 .carto-map {
-  margin: 4vh 0;
+  margin: 30px 0;
   height: 70vh;
-  width: 100%;
+  width: 50%;
   border: 1px solid black;
 }
