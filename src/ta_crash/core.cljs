@@ -211,7 +211,8 @@
   Object
   (area-change
     [this {:keys [type identifier]}]
-    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :rank-list/items :active-area]))
+    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :rank-list/items :active-area])
+    (om/transact! this `[(stat/change {:key :total-crashes :id :total-crashes}) :group/items :stat-list/items :rank-list/items :active-area]))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items :rank-list/items]))
