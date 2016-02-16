@@ -2,11 +2,22 @@
   box-sizing: border-box;
 }
 
+
+/*  old colors
+
+background-color: #F1F1EB;
+
+*/
 body {
   font-size: 16px;
-  font-family: 'Slabo 27px', serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4E4C50;
-  background-color: #F1F1EB;
+  /*background-color: #CFEEFF;*/
+}
+
+a {
+  color: #E9F7FF;
+  text-decoration: none;
 }
 
 .root {
@@ -14,8 +25,8 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
-  margin: 0 3vw;
+  align-items: stretch;
+  margin: 15px 60px 30px 60px;
 }
 
 .content-box {
@@ -38,16 +49,35 @@ body {
 }
 
 .static-head {
-  font-size: 2.25rem;
+  font-size: 1.25rem;
   font-weight: bold;
-  margin: 0.5rem 0 1.125rem 0;
+  margin: 0 0 15px 0;
+}
+
+.header-outer {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  margin: 20px 0 40px 0;
+  padding: 0;
+  border-bottom: 1px solid black;
+}
+
+.content-outer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border-bottom: 1px solid black;
+  width: 100%;
+  margin: 0 0 10px 0;
+  padding: 0 0 30px 0;
 }
 
 /* Area Menu Styles */
 .area-menu {
   width: 100%;
-  padding: 0;
-  margin: 15px 0;
+  margin-bottom: 10px;
 }
 
 .area-menu ul {
@@ -55,20 +85,33 @@ body {
   margin: 0;
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .area-menu-item {
   cursor: pointer;
-  border: 1px solid black;
-  padding: 15px;
-  border-radius: 3px;
-  background-color: #FFFFEC;
+  padding: 10px;
+  margin: 10px 5px 10px 5px;
+  flex: 1;
+  white-space: nowrap;
+  width: 33%;
+  text-align: center;
+  transition: all 250ms;
+}
+
+
+.area-menu-item:first-child {
+  margin-left: 0;
+}
+
+.area-menu-item:last-child {
+  margin-right: 0;
 }
 
 .area-menu-item:hover {
-  background-color: #F9F9CE;
+
 }
 
 /* Area Sub Menu Styles*/
@@ -91,24 +134,27 @@ body {
 .area-sub-menu {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   position: absolute;
+  max-height: 70vh;
   top: 0;
   left: 0;
-  width: 20vw;
-  z-index: 8;
-  border: 1px solid black;
+/*  min-width: 185px;
+  max-width: 50vw; */
+  z-index: 10000;
 }
 
 .area-sub-menu-item {
-  width: 100%;
-  text-align: left;
-  padding: 20px;
-  background-color: #FFFFEC;
+  text-align: center;
+  /*padding: 20px 10px;*/
+  line-height: 3;
+  width: 250px;
+  background-color: #CFEEFF;
+  cursor: pointer;
 }
 
 .area-sub-menu-item:hover {
-  background-color: #F9F9CE;
+
 }
 
 .area-sub-menu-item-full {
@@ -119,8 +165,8 @@ body {
 
 /* Header Styles */
 .header {
-  border-bottom: 2px solid #000;
-  margin: 15px 0 10px 0;
+  border-bottom: 1px solid #000;
+  margin: 0 0 10px 0;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -152,9 +198,9 @@ body {
 }
 
 .date-range {
-  text-decoration: underline;
+  /*text-decoration: underline;*/
   cursor: pointer;
-  color: #0000FF;
+  color: #4F4FDA;
 }
 
 .date-range-spacer {
@@ -197,7 +243,7 @@ body {
 }
 
 .calendar-day.active:hover {
-  background-color: #F9F9CE;
+  background-color: #E9F7FF;
   cursor: pointer;
 }
 
@@ -215,7 +261,10 @@ body {
 
 .stat-box, .factor-box {
   width: 90vw;
-  margin-top: 30px;
+  margin: 0;
+  padding: 0 0 30px 0;
+  /*background-color: #EAEAEA;
+  box-shadow: 3px 4px 0 black;*/
 }
 
 @media screen and (min-width: 960px) {
@@ -240,7 +289,18 @@ body {
 }
 
 .item:hover {
-  background-color: #F9F9CE;
+  background-color: #E9F7FF;
+}
+
+.stat-list-item.item,
+.factor.item {
+  cursor: initial;
+  font-weight: normal;
+}
+
+.stat-list-item.item:hover,
+.factor.item:hover {
+  background-color: transparent;
 }
 
 .default-item {
@@ -309,14 +369,16 @@ body {
 
 .stat-list {
   margin: 0;
-  padding: 0 0 0 30px;
+  padding: 0;
+  width: 90%;
 }
 
 .stat-list-title {
   border-bottom: 1px solid black;
   font-size: 1.5em;
   line-height: 0.75;
-  margin-left: 30px;
+  margin: 0 0 15px 0;
+  width: 90%;
 }
 
 .stat-list-item {
@@ -327,8 +389,133 @@ body {
 }
 
 .carto-map {
-  margin: 30px 0;
+  padding: 0 0 60px 0;
+  margin: 0;
   height: 70vh;
   width: 50%;
+/*  background-color: #EAEAEA;
+  box-shadow: 3px 4px 0 black;*/
+}
+
+.cartodb-map-wrapper {
   border: 1px solid black;
 }
+
+
+.rank-list {
+  width: 50%;
+  padding: 0 0 30px 0;
+/*  background-color: #EAEAEA;
+  box-shadow: 3px 4px 0 black;*/
+}
+
+.rank-list-title {
+  border-bottom: 1px solid black;
+  font-size: 1.5em;
+  line-height: 0.75;
+  margin: 0 0 15px 0;
+  width: 90%;
+}
+
+.rank-list ul {
+  padding: 0;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.rank-list-item {
+  text-transform: capitalize;
+}
+
+
+
+/***********************
+ *  Begin Color Rules  *
+ ***********************/
+.borough,
+.neighborhood {
+  background-color:  rgba(255, 153, 19, 0.55);
+}
+
+.city-council,
+.precinct {
+  background-color: rgba(178, 102, 0, 0.55);
+}
+
+.community-board,
+.zip-code {
+  background-color:  rgba(255, 164, 44, 0.55);
+}
+
+.borough:hover,
+.neighborhood:hover {
+  background-color:  rgba(255, 153, 19, 1);
+  color: #fff;
+}
+
+.city-council:hover,
+.precinct:hover {
+  background-color: rgba(178, 102, 0, 1);
+  color: #fff;
+}
+
+.community-board:hover,
+.zip-code:hover {
+  background-color:  rgba(255, 164, 44, 1);
+  color: #fff;
+}
+
+
+.manhattan {
+  background-color: rgba(167, 204, 35, 1);
+  border: 2px solid rgba(167, 204, 35, 1);
+}
+
+.bronx {
+  background-color: rgba(172, 186, 120, 1);
+  border: 2px solid rgba(172, 186, 120, 1);
+}
+
+.brooklyn {
+  background-color: rgba(124, 143, 255, 1);
+  border: 2px solid rgba(124, 143, 255, 1);
+}
+
+.queens {
+  background-color: rgba(255, 229, 70, 1);
+  border: 2px solid rgba(255, 229, 70, 1);
+}
+
+.staten-island {
+  background-color: rgba(116, 152, 204, 1);
+  border: 2px solid rgba(116, 152, 204, 1);
+}
+
+.manhattan:hover {
+  background-color: rgba(167, 204, 35, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.bronx:hover {
+  background-color: rgba(172, 186, 120, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.brooklyn:hover {
+  background-color: rgba(124, 143, 255, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.queens:hover {
+  background-color: rgba(255, 229, 70, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.staten-island:hover {
+  background-color: rgba(116, 152, 204, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+/*********************
+ *  End Color Rules  *
+ *********************/

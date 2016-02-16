@@ -38,9 +38,38 @@
   (let [data (into [] (map set-stat-group (first raw-row)))]
     (cb {:group/items data})))
 
+(defn get-borough-from-council-id [id]
+  (cond
+    (< id 11) :manhattan
+    (< id 19) :bronx
+    (< id 33) :queens
+    (< id 49) :brooklyn
+    (< id 52) :staten-island))
+
+(defn get-borough-from-cb-id [id]
+  (cond
+    (< id 200) :manhattan
+    (< id 300) :bronx
+    (< id 400) :brooklyn
+    (< id 500) :queens
+    (< id 600) :staten-island))
+
+(defn to-keyword
+  [v]
+  (keyword (str/lower-case v)))
+
+(defn formatted-item
+  [type item]
+  (let [formatted-item {:parent type :item-type :sub :identifier (:identifier item)}]
+    (condp = type
+      :city-council (assoc formatted-item :b-key (get-borough-from-council-id (:identifier item)))
+      :community-board (assoc formatted-item :b-key (get-borough-from-cb-id (:identifier item)))
+      (assoc formatted-item :b-key (to-keyword (:borough item))))))
+
 (defn for-area-menu
   [raw-rows cb area-type]
-  (let [items (into [] (map #(assoc % :parent area-type :item-type :sub) raw-rows))]
+  (let [items (into [] (map #(formatted-item area-type %) raw-rows))]
+    (pprint/pprint raw-rows)
     (cb {:area/items items})))
 
 (defn factor-id

@@ -1,5 +1,6 @@
 (ns ta-crash.area-menu
   (:require [cljs.pprint :as pprint]
+            [clojure.string :as string]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
             [ta-crash.display :as display]))
@@ -17,7 +18,7 @@
   (render [this]
     (let [{:keys [area-menu area-type query item-type display-name]} (om/props this)
           {:keys [item-click-handler]} (om/get-computed this)]
-      (dom/li #js {:className (str (name item-type) "-area-menu-item area-menu-item")
+      (dom/li #js {:className (str (name area-type) " " (name item-type) "-area-menu-item area-menu-item")
                    :onClick #(item-click-handler area-type query %)}
       display-name))))
 
@@ -29,9 +30,10 @@
     '[:identifier :parent :item-type])
   Object
   (render [this]
-    (let [{:keys [identifier parent item-type]} (om/props this)
+    (let [{:keys [identifier parent item-type b-key]} (om/props this)
           area-change (:area-change (om/get-computed this))]
-      (dom/div #js {:className "area-sub-menu-item" :onClick #(area-change {:type parent :identifier identifier})} (display/get-area-display identifier parent)))))
+      (println b-key)
+      (dom/div #js {:className (str (string/replace (name b-key) #" " "-") " area-sub-menu-item") :onClick #(area-change {:type parent :identifier identifier})} (display/get-area-display identifier parent)))))
 
 (def sub-menu-item (om/factory SubMenuItem))
 
@@ -54,7 +56,7 @@
   [evt]
   (let [x (.-offsetLeft evt.target)
         y (.-offsetTop evt.target)]
-    {:x x :y (+ 47 y)}))
+    {:x x :y (+ 28 y)}))
 
 (defui AreaMenu
   static om/IQueryParams

@@ -796,6 +796,72 @@
   GROUP BY
     c.the_geom, c.the_geom_webmercator")
 
+(def-sql-query "--name: intersections-by-date-with-order
+  --Select all intersections filtered by date and order by a col
+  SELECT
+    concat_ws(',', c.latitude, c.longitude) as pos,
+    concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
+    c.the_geom,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    ((SUM(c.number_of_persons_killed) * 2.75) +
+     (SUM(c.number_of_persons_injured) * 1.5) +
+     (COUNT(c.cartodb_id) * 0.75)) as dval,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  GROUP BY
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+  ORDER BY
+    :order-col :order-dir
+  LIMIT 100")
+
+(def-sql-query "--name: intersections-by-date-with-order-filtered
+  --Select all intersections filtered by date and order by a col
+  SELECT
+    concat_ws(',', c.latitude, c.longitude) as pos,
+    concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
+    c.the_geom,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    ((SUM(c.number_of_persons_killed) * 2.75) +
+     (SUM(c.number_of_persons_injured) * 1.5) +
+     (COUNT(c.cartodb_id) * 0.75)) as dval,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (:filter-col > 0)
+  GROUP BY
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+  ORDER BY
+    :order-col :order-dir
+  LIMIT 100")
+
 (def-sql-query "--name: intersections-by-date-area-with-order
   --Select all intersections filtered by area and date and order by a col
   SELECT
@@ -831,7 +897,48 @@
   GROUP BY
     c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
   ORDER BY
-    :order-col :order-dir")
+    :order-col :order-dir
+  LIMIT 100")
+
+(def-sql-query "--name: intersections-by-date-area-with-order-filtered
+  --Select all intersections filtered by area and date and order by a col
+  SELECT
+    concat_ws(',', c.latitude, c.longitude) as pos,
+    concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
+    c.the_geom,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    ((SUM(c.number_of_persons_killed) * 2.75) +
+     (SUM(c.number_of_persons_injured) * 1.5) +
+     (COUNT(c.cartodb_id) * 0.75)) as dval,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  JOIN
+    :geo-table a
+  ON
+    ST_Within(c.the_geom, a.the_geom)
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (:filter-col > 0)
+  AND
+    (a.identifier = :identifier)
+  GROUP BY
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+  ORDER BY
+    :order-col :order-dir
+  LIMIT 100")
 
 
 ;;; Geo-table formatting
@@ -871,32 +978,40 @@
 (defn pick-query
   [params queries]
   (let [{:keys [by-date by-date-filtered by-date-area by-date-area-filtered]} queries
-        {:keys [start-date end-date active-area active-stat]} params
+        {:keys [start-date end-date active-area active-stat order-col order-dir]} params
         {:keys [area-type identifier]} active-area]
     (cond
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area))
           (or (= :total-crashes active-stat) (nil? active-stat)))
       (by-date
         {:end-date end-date
-         :start-date start-date})
+         :start-date start-date
+         :order-col order-col
+         :order-dir order-dir})
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area)) (not-nil? active-stat))
       (by-date-filtered
         {:end-date end-date
          :start-date start-date
-         :filter-col (get-filter-col active-stat)})
+         :filter-col (get-filter-col active-stat)
+         :order-col order-col
+         :order-dir order-dir})
      (and (not (= "citywide" (:identifier active-area))) (or (= :total-crashes active-stat) (nil? active-stat)))
       (by-date-area
         {:end-date end-date
          :start-date start-date
          :geo-table (get-geo-table area-type)
-         :identifier (get-geo-identifier identifier)})
+         :identifier (get-geo-identifier identifier)
+         :order-col order-col
+         :order-dir order-dir})
      (and (not (= "citywide" (:identifier active-area))) (not-nil? active-stat))
       (by-date-area-filtered
         {:end-date end-date
          :start-date start-date
          :geo-table (get-geo-table area-type)
          :identifier (get-geo-identifier identifier)
-         :filter-col (get-filter-col active-stat)}))))
+         :filter-col (get-filter-col active-stat)
+         :order-col order-col
+         :order-dir order-dir}))))
 
 (defmulti get-query (fn [type _] type))
 
@@ -928,6 +1043,13 @@
                       :by-date-filtered stats-date-filtered
                       :by-date-area stats-date-by-area
                       :by-date-area-filtered stats-date-by-area-filtered}))
+
+(defmethod get-query :rank
+  [_ params]
+  (pick-query params {:by-date intersections-by-date-with-order
+                      :by-date-filtered intersections-by-date-with-order-filtered
+                      :by-date-area intersections-by-date-area-with-order
+                      :by-date-area-filtered intersections-by-date-area-with-order-filtered}))
 
 (defmethod get-query :default
   [id params]

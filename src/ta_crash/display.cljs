@@ -17,7 +17,12 @@
 
 (defmethod get-area-display :community-board
   [id _]
-  (str "Community Board Dist. " id))
+  (cond
+    (< id 200) (str "Manhattan CB" (- id 100))
+    (< id 300) (str "Bronx CB" (- id 200))
+    (< id 400) (str "Brooklyn CB" (- id 300))
+    (< id 500) (str "Queens CB" (- id 400))
+    (< id 600) (str "Staten Island CB" (- id 500))))
 
 (defmethod get-area-display :precinct
   [id _]
