@@ -685,6 +685,8 @@
   SELECT
     c.the_geom,
     c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
     COUNT(c.cartodb_id) as total_crashes,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
@@ -703,13 +705,15 @@
   AND
     (date >= date ':start-date')
   GROUP BY
-    c.the_geom, c.the_geom_webmercator")
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
 (def-sql-query "--name: crashes-by-date-area
   -- Selects crashes for map by area and date.
   SELECT
     c.the_geom,
     c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
     COUNT(c.cartodb_id) as total_crashes,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
@@ -734,13 +738,15 @@
   AND
     (a.identifier = :identifier)
   GROUP BY
-    c.the_geom, c.the_geom_webmercator")
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
 (def-sql-query "--name: crashes-by-date-filtered
   -- Selects crashes for map by date.
   SELECT
     c.the_geom,
     c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
     COUNT(c.cartodb_id) as total_crashes,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
@@ -761,13 +767,15 @@
   AND
     (:filter-col > 0)
   GROUP BY
-    c.the_geom, c.the_geom_webmercator")
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
 (def-sql-query "--name: crashes-by-date-area-filtered
   -- Selects crashes for map by area and date.
   SELECT
     c.the_geom,
     c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
     COUNT(c.cartodb_id) as total_crashes,
     SUM(c.number_of_cyclist_injured) as cyclist_injured,
     SUM(c.number_of_cyclist_killed) as cyclist_killed,
@@ -794,7 +802,7 @@
   AND
     (a.identifier = :identifier)
   GROUP BY
-    c.the_geom, c.the_geom_webmercator")
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
 (def-sql-query "--name: intersections-by-date-with-order
   --Select all intersections filtered by date and order by a col

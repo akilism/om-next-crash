@@ -8,6 +8,100 @@
 background-color: #F1F1EB;
 
 */
+
+
+/***********************
+ *  Begin Color Rules  *
+ ***********************/
+.borough,
+.neighborhood {
+  background-color:  rgba(255, 153, 19, 0.55);
+}
+
+.city-council,
+.precinct {
+  background-color: rgba(178, 102, 0, 0.55);
+}
+
+.community-board,
+.zip-code {
+  background-color:  rgba(255, 164, 44, 0.55);
+}
+
+.borough:hover,
+.neighborhood:hover {
+  background-color:  rgba(255, 153, 19, 1);
+  color: #fff;
+}
+
+.city-council:hover,
+.precinct:hover {
+  background-color: rgba(178, 102, 0, 1);
+  color: #fff;
+}
+
+.community-board:hover,
+.zip-code:hover {
+  background-color:  rgba(255, 164, 44, 1);
+  color: #fff;
+}
+
+
+.manhattan {
+  background-color: rgba(167, 204, 35, 1);
+  border: 2px solid rgba(167, 204, 35, 1);
+}
+
+.bronx {
+  background-color: rgba(172, 186, 120, 1);
+  border: 2px solid rgba(172, 186, 120, 1);
+}
+
+.brooklyn {
+  background-color: rgba(124, 143, 255, 1);
+  border: 2px solid rgba(124, 143, 255, 1);
+}
+
+.queens {
+  background-color: rgba(255, 229, 70, 1);
+  border: 2px solid rgba(255, 229, 70, 1);
+}
+
+.staten-island {
+  background-color: rgba(116, 152, 204, 1);
+  border: 2px solid rgba(116, 152, 204, 1);
+}
+
+.manhattan:hover {
+  background-color: rgba(167, 204, 35, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.bronx:hover {
+  background-color: rgba(172, 186, 120, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.brooklyn:hover {
+  background-color: rgba(124, 143, 255, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.queens:hover {
+  background-color: rgba(255, 229, 70, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.staten-island:hover {
+  background-color: rgba(116, 152, 204, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+/*********************
+ *  End Color Rules  *
+ *********************/
+
+
 body {
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -16,7 +110,7 @@ body {
 }
 
 a {
-  color: #E9F7FF;
+  color: #4F4FDA;
   text-decoration: none;
 }
 
@@ -26,8 +120,9 @@ a {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: stretch;
-  margin: 15px 60px 30px 60px;
+  margin: 15px 30px;
 }
+
 
 .content-box {
   display: flex;
@@ -78,6 +173,7 @@ a {
 .area-menu {
   width: 100%;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .area-menu ul {
@@ -141,7 +237,7 @@ a {
   left: 0;
 /*  min-width: 185px;
   max-width: 50vw; */
-  z-index: 10000;
+  z-index: 10000000;
 }
 
 .area-sub-menu-item {
@@ -149,7 +245,7 @@ a {
   /*padding: 20px 10px;*/
   line-height: 3;
   width: 250px;
-  background-color: #CFEEFF;
+  /*background-color: #CFEEFF;*/
   cursor: pointer;
 }
 
@@ -172,20 +268,14 @@ a {
   justify-content: flex-start;
   align-items: flex-end;
   line-height: 0.75;
+  flex-wrap: wrap;
 }
 
 .area-header {
   font-size: 3rem;
   text-transform: capitalize;
-  margin: 0 20px 0 0;
+  margin: 0 20px 15px 0;
   padding: 0;
-}
-
-
-@media screen and (min-width: 1100px) {
-  .header {
-    flex-wrap: wrap;
-  }
 }
 
 /* Date Range Styles */
@@ -195,6 +285,7 @@ a {
   justify-content: flex-start;
   font-size: 1.75rem;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .date-range {
@@ -208,13 +299,16 @@ a {
 }
 
 .date-range-spacer:first-child {
-  margin: 0 0.25em 0 0;
+  margin: 10px 0.25em 5px 0;
+  width: 100%;
+  line-height: 1;
 }
 
 /* Calendar Styles */
 .cal-holder {
   position: absolute;
-  background-color: #F1F1EB;
+  background-color: #FFF;
+  z-index: 10000;
 }
 
 .calendar {
@@ -263,15 +357,8 @@ a {
   width: 90vw;
   margin: 0;
   padding: 0 0 30px 0;
-  /*background-color: #EAEAEA;
-  box-shadow: 3px 4px 0 black;*/
 }
 
-@media screen and (min-width: 960px) {
-  .stat-box, .factor-box {
-    width: 50%;
-  }
-}
 
 .stat-group {
   display: flex;
@@ -279,7 +366,7 @@ a {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 90%;
+  width: 100%;
   margin: 0;
 }
 
@@ -392,9 +479,7 @@ a {
   padding: 0 0 60px 0;
   margin: 0;
   height: 70vh;
-  width: 50%;
-/*  background-color: #EAEAEA;
-  box-shadow: 3px 4px 0 black;*/
+  width: 100%;
 }
 
 .cartodb-map-wrapper {
@@ -403,10 +488,8 @@ a {
 
 
 .rank-list {
-  width: 50%;
+  width: 100%;
   padding: 0 0 30px 0;
-/*  background-color: #EAEAEA;
-  box-shadow: 3px 4px 0 black;*/
 }
 
 .rank-list-title {
@@ -427,95 +510,44 @@ a {
   text-transform: capitalize;
 }
 
-
-
-/***********************
- *  Begin Color Rules  *
- ***********************/
-.borough,
-.neighborhood {
-  background-color:  rgba(255, 153, 19, 0.55);
+.cartodb-tooltip-content h3 {
+  margin: 0;
 }
 
-.city-council,
-.precinct {
-  background-color: rgba(178, 102, 0, 0.55);
-}
+@media screen and (min-width: 960px) {
+  .stat-box, .factor-box {
+    width: 50%;
+  }
 
-.community-board,
-.zip-code {
-  background-color:  rgba(255, 164, 44, 0.55);
-}
+  .root {
+    margin: 15px 60px 30px 60px;
+  }
 
-.borough:hover,
-.neighborhood:hover {
-  background-color:  rgba(255, 153, 19, 1);
-  color: #fff;
-}
+  .area-header {
+    margin: 0 20px 0 0;
+  }
 
-.city-council:hover,
-.precinct:hover {
-  background-color: rgba(178, 102, 0, 1);
-  color: #fff;
-}
+  .stat-group {
+    width: 90%;
+  }
 
-.community-board:hover,
-.zip-code:hover {
-  background-color:  rgba(255, 164, 44, 1);
-  color: #fff;
+  .carto-map {
+    width: 50%;
+  }
+
+  .rank-list {
+    width: 50%;
+  }
+
+  .date-range-spacer:first-child {
+    width: auto;
+    margin: 0 0.25em 0 0;
+  }
 }
 
 
-.manhattan {
-  background-color: rgba(167, 204, 35, 1);
-  border: 2px solid rgba(167, 204, 35, 1);
+@media screen and (min-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+  }
 }
-
-.bronx {
-  background-color: rgba(172, 186, 120, 1);
-  border: 2px solid rgba(172, 186, 120, 1);
-}
-
-.brooklyn {
-  background-color: rgba(124, 143, 255, 1);
-  border: 2px solid rgba(124, 143, 255, 1);
-}
-
-.queens {
-  background-color: rgba(255, 229, 70, 1);
-  border: 2px solid rgba(255, 229, 70, 1);
-}
-
-.staten-island {
-  background-color: rgba(116, 152, 204, 1);
-  border: 2px solid rgba(116, 152, 204, 1);
-}
-
-.manhattan:hover {
-  background-color: rgba(167, 204, 35, 1);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.bronx:hover {
-  background-color: rgba(172, 186, 120, 1);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.brooklyn:hover {
-  background-color: rgba(124, 143, 255, 1);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.queens:hover {
-  background-color: rgba(255, 229, 70, 1);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.staten-island:hover {
-  background-color: rgba(116, 152, 204, 1);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-/*********************
- *  End Color Rules  *
- *********************/

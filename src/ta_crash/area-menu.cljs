@@ -32,8 +32,12 @@
   (render [this]
     (let [{:keys [identifier parent item-type b-key]} (om/props this)
           area-change (:area-change (om/get-computed this))]
-      (println b-key)
-      (dom/div #js {:className (str (string/replace (name b-key) #" " "-") " area-sub-menu-item") :onClick #(area-change {:type parent :identifier identifier})} (display/get-area-display identifier parent)))))
+      (dom/div #js {:className (str (string/replace (name b-key) #" " "-") " area-sub-menu-item")
+                    :onClick (fn [_]
+                               (println js/window)
+                               (.scrollTo js/window 0 0)
+                               (area-change {:type parent :identifier identifier}))}
+               (display/get-area-display identifier parent)))))
 
 (def sub-menu-item (om/factory SubMenuItem))
 
@@ -56,7 +60,7 @@
   [evt]
   (let [x (.-offsetLeft evt.target)
         y (.-offsetTop evt.target)]
-    {:x x :y (+ 28 y)}))
+    {:x 0 :y (+ 38 y)}))
 
 (defui AreaMenu
   static om/IQueryParams

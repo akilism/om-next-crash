@@ -202,7 +202,7 @@
 (defui Root
   static om/IQuery
   (query [_]
-    (println "ROOT QUERY")
+    ;; (println "ROOT QUERY FIX THIS")
     '[{:menu/items (om/get-query area-menu/AreaMenu)}
       {:area/items (om/get-query area-menu/SubMenu)}
       {:group/items (om/get-query stat-group/StatGroup)}

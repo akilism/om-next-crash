@@ -69,7 +69,6 @@
 (defn for-area-menu
   [raw-rows cb area-type]
   (let [items (into [] (map #(formatted-item area-type %) raw-rows))]
-    (pprint/pprint raw-rows)
     (cb {:area/items items})))
 
 (defn factor-id
@@ -89,5 +88,5 @@
 (defn for-rank-list
   [raw-rows cb type]
   (let []
-    (pprint/pprint (str "rank count: " (count raw-rows)))
+    ;;(pprint/pprint (str "FIX THIS rank count: " (count raw-rows)))
     (cb {:rank-list/items raw-rows})))

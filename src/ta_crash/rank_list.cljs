@@ -22,7 +22,6 @@
   (componentWillMount [this]
     (.set-query this))
   (componentWillReceiveProps [this next-props]
-    (println "rank-list same-props?:" (ta-props/same-props? (om/props this) next-props))
     (when (not (ta-props/same-props? (om/props this) next-props))
         (.set-query this next-props)))
   (render [this]
