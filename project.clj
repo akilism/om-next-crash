@@ -4,4 +4,5 @@
                  [org.clojure/clojurescript "1.7.170"]
                  [org.omcljs/om "1.0.0-alpha24"]
                  [org.clojure/core.async "0.2.371"]
+                 [secretary "1.2.3"]
                  [figwheel-sidecar "0.5.0-SNAPSHOT" :scope "test"]])

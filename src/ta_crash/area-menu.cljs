@@ -3,12 +3,12 @@
             [clojure.string :as string]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [ta-crash.display :as display]))
+            [ta-crash.conversion :as conversion]))
 
 (defn build-sub-item
   [item sub-item]
   (assoc sub-item :query (:query item)
-    :display-name (display/get-area-display (:identifier sub-item) (:area-type item))))
+    :display-name (conversion/convert-type (:identifier sub-item) (:area-type item))))
 
 (defui AreaMenuItem
   static om/IQuery
@@ -37,7 +37,7 @@
                                (println js/window)
                                (.scrollTo js/window 0 0)
                                (area-change {:type parent :identifier identifier}))}
-               (display/get-area-display identifier parent)))))
+               (conversion/convert-type identifier parent)))))
 
 (def sub-menu-item (om/factory SubMenuItem))
 

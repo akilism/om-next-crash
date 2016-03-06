@@ -2,7 +2,7 @@
 (:require [cljs.pprint :as pprint]
           [om.next :as om :refer-macros [defui]]
           [om.dom :as dom]
-          [ta-crash.display :as display]
+          [ta-crash.conversion :as conversion]
           [ta-crash.date-range :as date-range]))
 
 (defui Header
@@ -14,7 +14,7 @@
     (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area]} (om/props this)
           {:keys [area-type identifier]} active-area]
       (dom/div #js {:className "header"}
-      (dom/h1 #js {:className "area-header"} (display/get-area-display identifier area-type))
+      (dom/h1 #js {:className "area-header"} (conversion/convert-type identifier area-type))
       (when (and selected-date-max selected-date-min)
           (date-range/date-range (om/computed {:date-max date-max
                                   :date-min date-min

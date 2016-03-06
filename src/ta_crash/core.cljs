@@ -1,11 +1,15 @@
 (ns ta-crash.core
+  (:import goog.History)
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs.pprint :as pprint]
             [cljs.core.async :as async :refer [<! >! put! chan]]
             [clojure.string :as string]
             [goog.dom :as gdom]
+            [goog.events :as events]
+            [goog.history.EventType :as EventType]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
+            [secretary.core :as secretary :refer-macros [defroute]]
             [ta-crash.carto-query :as carto-query]
             [ta-crash.formatter :as data-formatter]
             [ta-crash.sql-queries :as queries]
@@ -15,7 +19,8 @@
             [ta-crash.stat-group :as stat-group]
             [ta-crash.stat-list :as stat-list]
             [ta-crash.rank-list :as rank-list]
-            [ta-crash.carto-map :as carto-map]))
+            [ta-crash.carto-map :as carto-map]
+            [ta-crash.conversion :as conversion]))
 
 (enable-console-print!)
 
@@ -195,9 +200,13 @@
     {:parser (om/parser {:read read :mutate mutate})
      :remotes [:remote :stat-group :area-menu :stat-list :rank-list]
      :send (send-to-chan send-chan)
-     :state init-data}))
+     :state {}}))
 
 (carto-loop send-chan)
+
+(defn url
+  [type identifier]
+  (str "/" (name type) "/" (conversion/normalize (conversion/convert-type identifier type))))
 
 (defui Root
   static om/IQuery
@@ -212,8 +221,14 @@
   Object
   (area-change
     [this {:keys [type identifier]}]
-    (om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :rank-list/items :active-area])
-    (om/transact! this `[(stat/change {:key :total-crashes :id :total-crashes}) :group/items :stat-list/items :rank-list/items :active-area]))
+    (let [history (.-history js/window)
+          next-page (url type identifier)]
+      (println (str type ":" identifier ":" next-page))
+      (.pushState history "" "" next-page)
+      (secretary/dispatch! next-page))
+    ;(om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :rank-list/items :active-area])
+    ;(om/transact! this `[(stat/change {:key :total-crashes :id :total-crashes}) :group/items :stat-list/items :rank-list/items :active-area])
+    )
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items :rank-list/items]))
@@ -289,5 +304,41 @@
                                             "2015-01-01")
                               :active-area active-area}))))))
 
-(om/add-root! reconciler
-  Root (gdom/getElement "app"))
+(defn render-page
+  [state]
+  (om/merge! reconciler state)
+  (om/add-root! reconciler
+      Root (gdom/getElement "app")))
+
+(defn get-client-route []
+  (let [location (.-location js/window)
+        path (.-pathname location)
+        search (.-search location)]
+    (println (str path search))
+    (str path search)))
+
+(defroute home-route "/" []
+  (render-page init-data))
+
+(defroute area-route "/:area/:ident" [area ident query-params]
+  (let [area-type (keyword area)
+        rev-area-type (keyword (str area "-rev"))
+        identifier (conversion/convert-type ident rev-area-type)]
+    (println "area-route" area-type ":" identifier)
+    (render-page (assoc init-data :active-area {:area-type area-type :identifier identifier}))))
+
+;(defroute default-path "/:area-type/:identifier" {:as params}
+;  (go
+;    (let [identifier (keyword (:identifier params))
+;          area-type (keyword (:area-type params))
+;          data (<! (requester/get-data :crashes area-type identifier))
+;          geo-data (<! (requester/get-geo-data area-type identifier))]
+;      (set-state-data! :stats data)
+;      (set-state-data! :geo (assoc geo-data :active-type area-type))
+;      (render-page :crashes data))))
+
+
+(let
+  [route (get-client-route)]
+    (aset js/window "onpopstate" #(secretary/dispatch! (get-client-route)))
+    (secretary/dispatch! route))
