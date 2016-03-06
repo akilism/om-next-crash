@@ -2,6 +2,7 @@
   (:require-macros [sqlize.core :refer [def-sql-query]])
   (:require [clojure.string :as string]))
 
+
 ;;; These return query functions
 
 (def-sql-query "-- name: distinct-borough

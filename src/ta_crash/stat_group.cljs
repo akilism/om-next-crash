@@ -2,8 +2,8 @@
   (:require [cljs.pprint :as pprint]
             [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [ta-crash.sql-queries :as queries]
             [ta-crash.props :as ta-props]
+            [ta-crash.sql-queries :as queries]
             [ta-crash.group-item :as group-item]))
 
 (def group-order [:total-crashes
