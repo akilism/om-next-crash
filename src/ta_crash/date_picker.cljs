@@ -40,8 +40,8 @@
 (defn get-cell
   [day-change-handler day]
   (if (= 0 day)
-    (dom/td #js {:className "calendar-day inactive"} "X")
-    (dom/td #js {:className "calendar-day active" :onClick #(day-change-handler {:key :picker :date day})} (.format day "DD"))))
+    (dom/td #js {:className "calendar-day inactive" :key (* 1000 (.random js/Math))} "X")
+    (dom/td #js {:className "calendar-day active" :key day :onClick #(day-change-handler {:key :picker :date day})} (.format day "DD"))))
 
 (defn get-row
   [day-change-handler days]

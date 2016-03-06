@@ -223,12 +223,8 @@
     [this {:keys [type identifier]}]
     (let [history (.-history js/window)
           next-page (url type identifier)]
-      (println (str type ":" identifier ":" next-page))
       (.pushState history "" "" next-page)
-      (secretary/dispatch! next-page))
-    ;(om/transact! this `[(area/change {:area-type ~type :identifier ~identifier}) :group/items :stat-list/items :rank-list/items :active-area])
-    ;(om/transact! this `[(stat/change {:key :total-crashes :id :total-crashes}) :group/items :stat-list/items :rank-list/items :active-area])
-    )
+      (secretary/dispatch! next-page)))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items :rank-list/items]))
@@ -314,7 +310,6 @@
   (let [location (.-location js/window)
         path (.-pathname location)
         search (.-search location)]
-    (println (str path search))
     (str path search)))
 
 (defroute home-route "/" []
@@ -324,19 +319,7 @@
   (let [area-type (keyword area)
         rev-area-type (keyword (str area "-rev"))
         identifier (conversion/convert-type ident rev-area-type)]
-    (println "area-route" area-type ":" identifier)
     (render-page (assoc init-data :active-area {:area-type area-type :identifier identifier}))))
-
-;(defroute default-path "/:area-type/:identifier" {:as params}
-;  (go
-;    (let [identifier (keyword (:identifier params))
-;          area-type (keyword (:area-type params))
-;          data (<! (requester/get-data :crashes area-type identifier))
-;          geo-data (<! (requester/get-geo-data area-type identifier))]
-;      (set-state-data! :stats data)
-;      (set-state-data! :geo (assoc geo-data :active-type area-type))
-;      (render-page :crashes data))))
-
 
 (let
   [route (get-client-route)]
