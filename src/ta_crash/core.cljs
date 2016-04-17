@@ -31,6 +31,7 @@
    :date-min nil
    :active-area {:area-type :citywide :identifier "citywide"}
    :active-stat nil
+   :area-overlay nil
    :group/items []
    :stat-list/items []
    :rank-list/items []
@@ -132,6 +133,14 @@
           :action #(swap! state update-in [date-key] (fn [_] date))}
     :else {:value :not-found}))
 
+(defmethod mutate 'overlay/change
+  [{:keys [state] :as env} key {:keys [area-type query] :as params}]
+  ; (println "overlay/change:" area-type " -> " area-type)
+  (condp = key
+    'overlay/change {:value {:keys [:area-overlay]}
+          :action #(swap! state update-in [:area-overlay] (fn [_] {:area-type area-type :query query}))}
+    :else {:value :not-found}))
+
 (defmethod mutate 'stat/change
   [{:keys [state] :as env} key {:keys [id] :as params}]
   ; (println "stat/change:" key " -> " id)
@@ -154,6 +163,8 @@
         area-type (get-in area-menu [:params :area-type])
         query (get-in area-menu [:params :query])
         params (get-in area-menu [:params :params])]
+    (println "get-area-menu")
+    (pprint/pprint query)
     (put! c [area-type (query params) data-formatter/for-area-menu cb])))
 
 (defn get-stat-group
@@ -217,14 +228,19 @@
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
       {:rank-list/items (om/get-query rank-list/RankList)}
-      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area :active-stat])
+      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area :active-stat :area-overlay])
   Object
   (area-change
+    ;"Handler for selecting an exact area"
     [this {:keys [type identifier]}]
     (let [history (.-history js/window)
           next-page (url type identifier)]
       (.pushState history "" "" next-page)
       (secretary/dispatch! next-page)))
+  (area-select
+    ;"Handler for selecting an area type"
+    [this area-type query]
+    (om/transact! this `[(overlay/change {:area-type ~area-type :query ~query}) :area-overlay]))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items :rank-list/items]))
@@ -247,7 +263,7 @@
             :selected-date-max date-max
             :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area active-stat]} (om/props this)]
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area active-stat area-overlay]} (om/props this)]
       ;;(println "Root render:" (:active-stat (om/props this)))
       (dom/div #js {:className "root"}
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
@@ -263,7 +279,8 @@
                                    :month-change #(.month-change this %)}))
           (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
                                              :area/items (:area/items (om/props this))}
-                                            {:area-change #(.area-change this %)})))
+                                            {:area-change #(.area-change this %)
+                                             :area-select #(.area-select this %1 %2)})))
         (dom/div #js {:className "content-outer"}
           (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
                                               :end-date (if selected-date-max
@@ -280,6 +297,7 @@
                               :start-date (if selected-date-min
                                             (.format selected-date-min "YYYY-MM-DD")
                                             "2015-01-01")
+                              :area-overlay area-overlay
                               :active-area active-area
                               :active-stat active-stat})
         (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))

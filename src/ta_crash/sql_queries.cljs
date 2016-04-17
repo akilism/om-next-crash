@@ -9,7 +9,8 @@
   -- Selects distinct boroughs
   SELECT DISTINCT
     borough,
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_borough
   ORDER BY
@@ -18,7 +19,8 @@
 (def-sql-query "-- name: distinct-city-council
   -- Selects distinct city council districts
   SELECT DISTINCT
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_city_council
   ORDER BY
@@ -27,7 +29,8 @@
 (def-sql-query "-- name: distinct-community-board
   -- Selects distinct community boards
   SELECT DISTINCT
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_community_board
   ORDER BY
@@ -37,7 +40,8 @@
   -- Selects distinct neighborhoods
   SELECT DISTINCT
     borough,
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_neighborhood
   ORDER BY
@@ -47,7 +51,8 @@
   -- Selects distinct nypd precincts
   SELECT DISTINCT
     borough,
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_nypd_precinct
   ORDER BY
@@ -57,7 +62,8 @@
   -- Selects distinct zip codes
   SELECT DISTINCT
     borough,
-    identifier
+    identifier,
+    the_geom_webmercator
   FROM
     nyc_zip_codes
   ORDER BY

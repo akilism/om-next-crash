@@ -73,26 +73,30 @@
   Object
   (toggle-menu [this show pos]
     (om/set-state! this {:show-sub show :pos pos}))
+;  (menu-item-click
+;    [this area-type query evt]
+;    (let [prev-area-type (:area-type (om/get-params this))
+;          show-sub (:show-sub (om/get-state this))]
+;      (if (and (= area-type prev-area-type) show-sub)
+;        (do (om/set-query! this {:params {:area-type nil :query false}})
+;          (.toggle-menu this false (get-sub-menu-pos evt)))
+;        (do (om/set-query! this {:params {:area-type area-type :query query}})
+;          (.toggle-menu this true (get-sub-menu-pos evt))))))
   (menu-item-click
     [this area-type query evt]
-    (let [prev-area-type (:area-type (om/get-params this))
-          show-sub (:show-sub (om/get-state this))]
-      (if (and (= area-type prev-area-type) show-sub)
-        (do (om/set-query! this {:params {:area-type nil :query false}})
-          (.toggle-menu this false (get-sub-menu-pos evt)))
-        (do (om/set-query! this {:params {:area-type area-type :query query}})
-          (.toggle-menu this true (get-sub-menu-pos evt))))))
+    (let [area-select (:area-select (om/get-computed this))]
+      (area-select area-type query)))
   (componentWillMount [this]
     (om/set-state! this {:show-sub false :pos {:x 10 :y 10}}))
   (render [this]
     (let [area-items (:area/items (om/props this))
           menu-items (:menu/items (om/props this))
           area-change (:area-change (om/get-computed this))
+          area-select (:area-select (om/get-computed this))
           {:keys [show-sub pos]} (om/get-state this)]
       (if (:item-type (first menu-items))
         (let [item-type (name (:item-type (first menu-items)))]
           (dom/div #js {:className "area-menu"}
-
             (apply dom/ul
               #js {:className (str item-type "-area-menu")}
               (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
