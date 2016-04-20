@@ -10,6 +10,7 @@
   SELECT DISTINCT
     borough,
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_borough
@@ -20,6 +21,7 @@
   -- Selects distinct city council districts
   SELECT DISTINCT
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_city_council
@@ -30,6 +32,7 @@
   -- Selects distinct community boards
   SELECT DISTINCT
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_community_board
@@ -41,6 +44,7 @@
   SELECT DISTINCT
     borough,
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_neighborhood
@@ -52,6 +56,7 @@
   SELECT DISTINCT
     borough,
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_nypd_precinct
@@ -63,6 +68,7 @@
   SELECT DISTINCT
     borough,
     identifier,
+    cartodb_id,
     the_geom_webmercator
   FROM
     nyc_zip_codes

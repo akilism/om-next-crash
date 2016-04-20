@@ -79,10 +79,21 @@
   [precinct _]
   (string/replace (normalize precinct) #"-police-precinct" ""))
 
+(defn is-hyphenated?
+  [neighborhood]
+  (condp = neighborhood
+    "bedford-stuyvesant" "Bedford-Stuyvesant"
+    "co-op-city" "Co-op City"
+    "prospect-lefferts-gardens" "Prospect-Lefferts Gardens"
+    "green-wood-cemetery" "Green-Wood Cemetery"
+    false))
+
 
 (defmethod convert-type :neighborhood-rev
   [neighborhood _]
-  (string/join " " (map denormalize (string/split neighborhood #"-"))))
+  (if-let [converted-neighborhood (is-hyphenated? neighborhood)]
+    converted-neighborhood
+    (string/join " " (map denormalize (string/split neighborhood #"-")))))
 
 
 (defmethod convert-type :default [id _] id)

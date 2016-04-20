@@ -291,7 +291,7 @@
                                                             "2015-01-01")
                                               :active-area active-area}
                                             {:stat-change #(.stat-change this %)}))
-        (carto-map/carto-map {:end-date (if selected-date-max
+        (carto-map/carto-map (om/computed {:end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")
                                           "2015-12-26")
                               :start-date (if selected-date-min
@@ -299,7 +299,8 @@
                                             "2015-01-01")
                               :area-overlay area-overlay
                               :active-area active-area
-                              :active-stat active-stat})
+                              :active-stat active-stat}
+                              {:area-change #(.area-change this %)}))
         (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
                               :end-date (if selected-date-max
                                           (.format selected-date-max "YYYY-MM-DD")

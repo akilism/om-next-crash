@@ -237,7 +237,7 @@ a {
   left: 0;
 /*  min-width: 185px;
   max-width: 50vw; */
-  z-index: 10000000;
+  z-index: 10;
 }
 
 .area-sub-menu-item {
@@ -476,9 +476,12 @@ a {
 }
 
 .carto-map {
+  height: 70vh;
+}
+
+.map-box {
   padding: 0 0 60px 0;
   margin: 0;
-  height: 70vh;
   width: 100%;
 }
 
@@ -531,7 +534,7 @@ a {
     width: 90%;
   }
 
-  .carto-map {
+  .map-box {
     width: 50%;
   }
 
@@ -550,4 +553,12 @@ a {
   .header {
     flex-wrap: wrap;
   }
+}
+
+.area-tooltip {
+  position: absolute;
+  z-index: 100000;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 5px 10px;
 }
