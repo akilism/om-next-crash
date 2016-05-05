@@ -15,6 +15,7 @@
 (defn set-map
   [query layer map-el]
   (let [c-sql (js/cartodb.SQL. (clj->js {:user "akilism"}))]
+    (println query)
     (.setSQL layer query)
     (-> (.getBounds c-sql query)
         (.done #(.fitBounds map-el %)))))
@@ -40,7 +41,7 @@
           sub-layer (.getSubLayer data-layer 0)
           sub-layer-count (.getSubLayerCount data-layer)]
       (when (> sub-layer-count 1)
-        (let [overlay-layer (.getSubLayer sub-layer 1)]
+        (let [overlay-layer (.getSubLayer data-layer 1)]
           (.hide overlay-layer)
           (.show sub-layer)
           (.setInteraction overlay-layer false)
@@ -48,7 +49,6 @@
       (set-map (queries/get-query :crashes props) sub-layer (.getNativeMap vis))))
   (set-area-layer
     ; TODO DRY ALL OF THIS UP.
-    ; fix loading in new area shapes when there is already a set on the map.
     [this vis query]
     (let [area-layer (nth (.getLayers vis) 1)
           sub-layer-count (.getSubLayerCount area-layer)
@@ -67,9 +67,9 @@
                     identifier (:identifier (js->clj data :keywordize-keys true))
                     feature-name (conversion/convert-type identifier area-type)
                     x (.-clientX e)
-                    y (.-clientY e)]
-                (println [feature-name x y])
-                (om/set-state! this {:hover {:name feature-name :x x :y y}})
+                    y (.-clientY e)
+                    curr-state (om/get-state this)]
+                (om/set-state! this (assoc curr-state :hover {:name feature-name :x x :y y}))
                 ; e.target.classList.add
                 )))
             (.on sub-layer "featureClick" (fn [e latlng pos data layer]
@@ -100,11 +100,11 @@
     (let [vis (:vis (om/get-state this))
           curr-overlay (:area-overlay (om/props this))
           area-overlay (:area-overlay next-props)]
-      (when (and vis (not (props/same-props? (om/props this) next-props)))
-        (.map-new-parameters this vis next-props))
-      (when (and vis (not (= (:area-type curr-overlay) (:area-type area-overlay))))
-        (println (str "carto-map:" (:area-type area-overlay)))
-        (.set-area-layer this vis (:query area-overlay)))))
+      (if vis
+        (cond
+          (not (= (:area-type curr-overlay) (:area-type area-overlay))) (.set-area-layer this vis (:query area-overlay))
+          (not (props/same-props? (om/props this) next-props)) (.map-new-parameters this vis next-props)
+          :else nil))))
   (render [this]
     (let [{:keys [text type]} (om/props this)
           hover (tooltip (:hover (om/get-state this)))]
