@@ -20,7 +20,7 @@
           {:keys [item-click-handler]} (om/get-computed this)]
       (dom/li #js {:className (str (name area-type) " " (name item-type) "-area-menu-item area-menu-item")
                    :onClick #(item-click-handler area-type query %)}
-      display-name))))
+       display-name))))
 
 (def area-menu-item (om/factory AreaMenuItem))
 
@@ -101,12 +101,12 @@
               #js {:className (str item-type "-area-menu")}
               (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
             (sub-menu (om/computed {:area/items area-items
-                                   :show-sub show-sub
-                                   :pos pos}
+                                    :show-sub show-sub
+                                    :pos pos}
                                   {:area-change (fn [selected-area]
                                                   (.toggle-menu this false {:x 0 :y 0})
                                                   (area-change selected-area))}))
-            (when (< 0 (count area-items)) )))
+            (when (< 0 (count area-items)))))
         (dom/span nil "Error")))))
 
 (def area-menu (om/factory AreaMenu))

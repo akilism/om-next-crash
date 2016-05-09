@@ -1004,35 +1004,35 @@
     (cond
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area))
           (or (= :total-crashes active-stat) (nil? active-stat)))
-      (by-date
-        {:end-date end-date
-         :start-date start-date
-         :order-col order-col
-         :order-dir order-dir})
+     (by-date
+       {:end-date end-date
+        :start-date start-date
+        :order-col order-col
+        :order-dir order-dir})
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area)) (not-nil? active-stat))
-      (by-date-filtered
-        {:end-date end-date
-         :start-date start-date
-         :filter-col (get-filter-col active-stat)
-         :order-col order-col
-         :order-dir order-dir})
+     (by-date-filtered
+       {:end-date end-date
+        :start-date start-date
+        :filter-col (get-filter-col active-stat)
+        :order-col order-col
+        :order-dir order-dir})
      (and (not (= "citywide" (:identifier active-area))) (or (= :total-crashes active-stat) (nil? active-stat)))
-      (by-date-area
-        {:end-date end-date
-         :start-date start-date
-         :geo-table (get-geo-table area-type)
-         :identifier (get-geo-identifier identifier)
-         :order-col order-col
-         :order-dir order-dir})
+     (by-date-area
+       {:end-date end-date
+        :start-date start-date
+        :geo-table (get-geo-table area-type)
+        :identifier (get-geo-identifier identifier)
+        :order-col order-col
+        :order-dir order-dir})
      (and (not (= "citywide" (:identifier active-area))) (not-nil? active-stat))
-      (by-date-area-filtered
-        {:end-date end-date
-         :start-date start-date
-         :geo-table (get-geo-table area-type)
-         :identifier (get-geo-identifier identifier)
-         :filter-col (get-filter-col active-stat)
-         :order-col order-col
-         :order-dir order-dir}))))
+     (by-date-area-filtered
+       {:end-date end-date
+        :start-date start-date
+        :geo-table (get-geo-table area-type)
+        :identifier (get-geo-identifier identifier)
+        :filter-col (get-filter-col active-stat)
+        :order-col order-col
+        :order-dir order-dir}))))
 
 (defmulti get-query (fn [type _] type))
 
@@ -1048,8 +1048,8 @@
   (pick-query params {:by-date all-factors-date
                       :by-date-filtered all-factors-date-filtered
                       :by-date-area all-factors-date-by-area
-                      :by-date-area-filtered all-factors-date-by-area-filtered
-                      }))
+                      :by-date-area-filtered all-factors-date-by-area-filtered}))
+
 
 (defmethod get-query :vehicles
   [_ params]

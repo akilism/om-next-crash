@@ -63,23 +63,23 @@
             (.setInteraction sub-layer true)
             (.setZoom map-el 11)
             (.on sub-layer "featureOver" (fn [e latlng pos data layer]
-              (let [area-type (get-in (om/props this) [:area-overlay :area-type])
-                    identifier (:identifier (js->clj data :keywordize-keys true))
-                    feature-name (conversion/convert-type identifier area-type)
-                    x (.-clientX e)
-                    y (.-clientY e)
-                    curr-state (om/get-state this)]
-                (om/set-state! this (assoc curr-state :hover {:name feature-name :x x :y y}))
+                                          (let [area-type (get-in (om/props this) [:area-overlay :area-type])
+                                                identifier (:identifier (js->clj data :keywordize-keys true))
+                                                feature-name (conversion/convert-type identifier area-type)
+                                                x (.-clientX e)
+                                                y (.-clientY e)
+                                                curr-state (om/get-state this)]
+                                            (om/set-state! this (assoc curr-state :hover {:name feature-name :x x :y y})))))
                 ; e.target.classList.add
-                )))
+
             (.on sub-layer "featureClick" (fn [e latlng pos data layer]
-              (let [area-type (get-in (om/props this) [:area-overlay :area-type])
-                    area-change (:area-change (om/get-computed this))
-                    identifier (:identifier (js->clj data :keywordize-keys true))]
+                                           (let [area-type (get-in (om/props this) [:area-overlay :area-type])
+                                                 area-change (:area-change (om/get-computed this))
+                                                 identifier (:identifier (js->clj data :keywordize-keys true))]
                 ; nav to selected area.
-                (.scrollTo js/window 0 0)
-                (area-change {:type area-type :identifier identifier})
-                ))))
+                                             (.scrollTo js/window 0 0)
+                                             (area-change {:type area-type :identifier identifier})))))
+
         2 (let [sub-layer (.getSubLayer area-layer 1)
                 crash-layer (.getSubLayer area-layer 0)]
             (.setInteraction crash-layer false)

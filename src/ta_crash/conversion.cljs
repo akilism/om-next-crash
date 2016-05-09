@@ -64,11 +64,11 @@
   [cb _]
   (let [norm-cb (normalize cb)]
     (cond
-    (>= (.indexOf norm-cb "manhattan") 0) (cb-identifier norm-cb 100)
-    (>= (.indexOf norm-cb "bronx") 0) (cb-identifier norm-cb 200)
-    (>= (.indexOf norm-cb "brooklyn") 0) (cb-identifier norm-cb 300)
-    (>= (.indexOf norm-cb "queens") 0) (cb-identifier norm-cb 400)
-    (>= (.indexOf norm-cb "staten") 0) (cb-identifier norm-cb 500))))
+     (>= (.indexOf norm-cb "manhattan") 0) (cb-identifier norm-cb 100)
+     (>= (.indexOf norm-cb "bronx") 0) (cb-identifier norm-cb 200)
+     (>= (.indexOf norm-cb "brooklyn") 0) (cb-identifier norm-cb 300)
+     (>= (.indexOf norm-cb "queens") 0) (cb-identifier norm-cb 400)
+     (>= (.indexOf norm-cb "staten") 0) (cb-identifier norm-cb 500))))
 
 
 (defmethod convert-type :precinct

@@ -37,7 +37,11 @@
    :rank-list/items []
    :area/items []
    :menu/items
-   [{:display-name "Borough"
+   [{:display-name "Citywide"
+     :item-type :group
+     :area-type :citywide
+     :query nil}
+    {:display-name "Borough"
      :item-type :group
      :area-type :borough
      :query queries/distinct-borough}
@@ -122,7 +126,7 @@
   ; (println "area/change:" area-type " -> " identifier)
   (condp = key
     'area/change {:value {:keys [:active-area]}
-          :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
+                  :action #(swap! state update :active-area (fn [_] {:area-type area-type :identifier identifier}))}
     :else {:value :not-found}))
 
 (defmethod mutate 'date/change
@@ -130,7 +134,7 @@
   ; (println "date/change:" date-key " -> " (.format date "YYYY-MM-DD"))
   (condp = key
     'date/change {:value {:keys [date-key]}
-          :action #(swap! state update-in [date-key] (fn [_] date))}
+                  :action #(swap! state update-in [date-key] (fn [_] date))}
     :else {:value :not-found}))
 
 (defmethod mutate 'overlay/change
@@ -138,7 +142,7 @@
   ; (println "overlay/change:" area-type " -> " area-type)
   (condp = key
     'overlay/change {:value {:keys [:area-overlay]}
-          :action #(swap! state update-in [:area-overlay] (fn [_] {:area-type area-type :query query}))}
+                     :action #(swap! state update-in [:area-overlay] (fn [_] {:area-type area-type :query query}))}
     :else {:value :not-found}))
 
 (defmethod mutate 'stat/change
@@ -146,7 +150,7 @@
   ; (println "stat/change:" key " -> " id)
   (condp = key
     'stat/change {:value {:keys [:active-stat]}
-          :action #(swap! state update :active-stat (fn [_] id))}
+                  :action #(swap! state update :active-stat (fn [_] id))}
     :else {:value :not-found}))
 
 (defn carto-loop [c]
@@ -240,7 +244,11 @@
   (area-select
     ;"Handler for selecting an area type"
     [this area-type query]
-    (om/transact! this `[(overlay/change {:area-type ~area-type :query ~query}) :area-overlay]))
+    (if (nil? query)
+     (do
+      (.pushState (.-history js/window) "" "" "/")
+      (secretary/dispatch! "/"))
+     (om/transact! this `[(overlay/change {:area-type ~area-type :query ~query}) :area-overlay])))
   (date-change
     [this {:keys [key date]}]
     (om/transact! this `[(date/change {:date-key ~key :date ~date}) :group/items :stat-list/items :rank-list/items]))
@@ -256,12 +264,12 @@
             date-max (js/moment (:max_date (first result)))
             date-min (js/moment (:min_date (first result)))]
         (om/merge! reconciler (merge (om/props this)
-           {:date-max date-max
-            :date-min date-min
-            :cal-date-max date-max
-            :cal-date-min date-min
-            :selected-date-max date-max
-            :selected-date-min date-min})))))
+                               {:date-max date-max
+                                :date-min date-min
+                                :cal-date-max date-max
+                                :cal-date-min date-min
+                                :selected-date-max date-max
+                                :selected-date-min date-min})))))
   (render [this]
     (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area active-stat area-overlay]} (om/props this)]
       ;;(println "Root render:" (:active-stat (om/props this)))
@@ -269,12 +277,12 @@
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
         (dom/section #js {:className "header-outer"}
           (header/header (om/computed {:date-max date-max
-                                  :date-min date-min
-                                  :cal-date-max cal-date-max
-                                  :cal-date-min cal-date-min
-                                  :selected-date-max selected-date-max
-                                  :selected-date-min selected-date-min
-                                  :active-area active-area }
+                                       :date-min date-min
+                                       :cal-date-max cal-date-max
+                                       :cal-date-min cal-date-min
+                                       :selected-date-max selected-date-max
+                                       :selected-date-min selected-date-min
+                                       :active-area active-area}
                                   {:date-change #(.date-change this %)
                                    :month-change #(.month-change this %)}))
           (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
@@ -283,41 +291,41 @@
                                              :area-select #(.area-select this %1 %2)})))
         (dom/div #js {:className "content-outer"}
           (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
-                                              :end-date (if selected-date-max
-                                                          (.format selected-date-max "YYYY-MM-DD")
-                                                          "2015-12-26")
-                                              :start-date (if selected-date-min
-                                                            (.format selected-date-min "YYYY-MM-DD")
-                                                            "2015-01-01")
-                                              :active-area active-area}
+                                               :end-date (if selected-date-max
+                                                           (.format selected-date-max "YYYY-MM-DD")
+                                                           "2015-12-26")
+                                               :start-date (if selected-date-min
+                                                             (.format selected-date-min "YYYY-MM-DD")
+                                                             "2015-01-01")
+                                               :active-area active-area}
                                             {:stat-change #(.stat-change this %)}))
-        (carto-map/carto-map (om/computed {:end-date (if selected-date-max
-                                          (.format selected-date-max "YYYY-MM-DD")
-                                          "2015-12-26")
-                              :start-date (if selected-date-min
-                                            (.format selected-date-min "YYYY-MM-DD")
-                                            "2015-01-01")
-                              :area-overlay area-overlay
-                              :active-area active-area
-                              :active-stat active-stat}
-                              {:area-change #(.area-change this %)}))
-        (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
-                              :end-date (if selected-date-max
-                                          (.format selected-date-max "YYYY-MM-DD")
-                                          "2015-12-26")
-                              :start-date (if selected-date-min
-                                            (.format selected-date-min "YYYY-MM-DD")
-                                            "2015-01-01")
-                              :active-area active-area
-                              :active-stat active-stat})
-        (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
-                              :end-date (if selected-date-max
-                                          (.format selected-date-max "YYYY-MM-DD")
-                                          "2015-12-26")
-                              :start-date (if selected-date-min
-                                            (.format selected-date-min "YYYY-MM-DD")
-                                            "2015-01-01")
-                              :active-area active-area}))))))
+         (carto-map/carto-map (om/computed {:end-date (if selected-date-max
+                                                       (.format selected-date-max "YYYY-MM-DD")
+                                                       "2015-12-26")
+                                            :start-date (if selected-date-min
+                                                          (.format selected-date-min "YYYY-MM-DD")
+                                                          "2015-01-01")
+                                            :area-overlay area-overlay
+                                            :active-area active-area
+                                            :active-stat active-stat}
+                               {:area-change #(.area-change this %)}))
+         (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
+                               :end-date (if selected-date-max
+                                           (.format selected-date-max "YYYY-MM-DD")
+                                           "2015-12-26")
+                               :start-date (if selected-date-min
+                                             (.format selected-date-min "YYYY-MM-DD")
+                                             "2015-01-01")
+                               :active-area active-area
+                               :active-stat active-stat})
+         (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
+                               :end-date (if selected-date-max
+                                           (.format selected-date-max "YYYY-MM-DD")
+                                           "2015-12-26")
+                               :start-date (if selected-date-min
+                                             (.format selected-date-min "YYYY-MM-DD")
+                                             "2015-01-01")
+                               :active-area active-area}))))))
 
 (defn render-page
   [state]
@@ -342,5 +350,5 @@
 
 (let
   [route (get-client-route)]
-    (aset js/window "onpopstate" #(secretary/dispatch! (get-client-route)))
-    (secretary/dispatch! route))
+  (aset js/window "onpopstate" #(secretary/dispatch! (get-client-route)))
+  (secretary/dispatch! route))
