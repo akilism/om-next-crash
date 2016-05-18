@@ -93,13 +93,16 @@
           menu-items (:menu/items (om/props this))
           area-change (:area-change (om/get-computed this))
           area-select (:area-select (om/get-computed this))
+          toggle-edit (:toggle-edit (om/get-computed this))
           {:keys [show-sub pos]} (om/get-state this)]
       (if (:item-type (first menu-items))
         (let [item-type (name (:item-type (first menu-items)))]
           (dom/div #js {:className "area-menu"}
             (apply dom/ul
               #js {:className (str item-type "-area-menu")}
-              (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
+              (conj (into [] (map #(area-menu-item (om/computed % {:item-click-handler (fn [area-type query evt] (.menu-item-click this area-type query evt))})) menu-items))
+               (dom/li #js {:className "custom group-area-menu-item area-menu-item"
+                            :onClick toggle-edit} "Custom")))
             (sub-menu (om/computed {:area/items area-items
                                     :show-sub show-sub
                                     :pos pos}

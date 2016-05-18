@@ -20,21 +20,24 @@
     (-> (.getBounds c-sql query)
         (.done #(.fitBounds map-el %)))))
 
-
 (defn tooltip
   [hoverData]
   (if hoverData
     (dom/div #js {:className "area-tooltip" :style #js {:top (+ 5 (:y hoverData)) :left (+ 5 (:x hoverData))}} (:name hoverData))
     ""))
 
+(defn draw-click-handler
+  [this evt]
+  (om/update-state! this update :points (fn [_] (conj (:points (om/get-state this)) (.-latlng evt)))))
+
 (defui CartoMap
   static om/IQuery
   (query [_]
-    [:start-date :end-date :active-area :active-stat :area-overlay])
+    [:start-date :end-date :active-area :active-stat :area-overlay :edit-mode])
   Object
   (create-handler
     [this vis layers]
-    (om/set-state! this {:vis vis}))
+    (om/update-state! this update :vis (fn [_] vis)))
   (map-new-parameters
     [this vis props]
     (let [data-layer (nth (.getLayers vis) 1)
@@ -87,6 +90,31 @@
             ;(.setSQL sub-layer (query))
             (set-map (query) sub-layer map-el)
             (.setZoom map-el 11)))))
+  (draw-off
+    [this vis]
+    (let [l-map (.getNativeMap vis)]
+     (.off l-map "click" (:draw-click-handler (om/get-state this)))
+     (println "turn drawing off on the map")))
+  (draw-on
+    [this vis]
+    (let [l-map (.getNativeMap vis)]
+     (.on l-map "click" (:draw-click-handler (om/get-state this)))
+     (println "turn drawing on on the map")))
+  (toggle-draw-mode [this]
+    (let [{:keys [draw-mode vis]} (om/get-state this)
+          new-draw-mode (not draw-mode)]
+     (if draw-mode
+       (do
+        (om/update-state! this update :draw-mode (fn [_] new-draw-mode))
+        (.draw-off this vis))
+       (do
+        (om/update-state! this update :draw-mode (fn [_] new-draw-mode))
+        (.draw-on this vis)))))
+  (delete-shape [this]
+    (om/update-state! this update :points (fn [_] []))
+    (println "remove shape from localstorage and map."))
+  (add-custom-shape [this]
+    (println "add-custom-shape"))
   (componentDidMount [this]
     (let [{:keys [text type]} (om/props this)
           viz "https://akilism.cartodb.com/api/v2/viz/fcdfe28c-b6de-11e5-849b-0e787de82d45/viz.json"]
@@ -94,7 +122,11 @@
           (.done (fn [vis layers] (.create-handler this vis layers)))
           (.error error-handler))))
   (componentWillMount [this]
-    (om/set-state! this {:vis nil}))
+    (om/set-state! this {:vis nil
+                         :draw-click-handler (partial draw-click-handler this)
+                         :draw-mode false
+                         :points []
+                         :custom-shape nil}))
   (componentWillReceiveProps
     [this next-props]
     (let [vis (:vis (om/get-state this))
@@ -106,10 +138,16 @@
           (not (props/same-props? (om/props this) next-props)) (.map-new-parameters this vis next-props)
           :else nil))))
   (render [this]
-    (let [{:keys [text type]} (om/props this)
-          hover (tooltip (:hover (om/get-state this)))]
+    (let [{:keys [edit-mode text type]} (om/props this)
+          hover (tooltip (:hover (om/get-state this)))
+          points (:points (om/get-state this))]
+      (when (< 0 (count points))
+        (.add-custom-shape this))
       (dom/div #js {:className "map-box"}
         hover
+        (when edit-mode
+          (dom/div #js {:className "edit-mode-menu"}
+           (dom/ul nil [(dom/ul #js {:onClick #(.toggle-draw-mode this)} "Draw Shape") (dom/ul #js {:onClick #(.delete-shape this)} "Delete Shape")])))
         (dom/div #js {:className "carto-map" :ref "cartoMap" :id "cartoMap"})))))
 
 (def carto-map (om/factory CartoMap))

@@ -32,6 +32,7 @@
    :active-area {:area-type :citywide :identifier "citywide"}
    :active-stat nil
    :area-overlay nil
+   :edit-mode false
    :group/items []
    :stat-list/items []
    :rank-list/items []
@@ -167,8 +168,6 @@
         area-type (get-in area-menu [:params :area-type])
         query (get-in area-menu [:params :query])
         params (get-in area-menu [:params :params])]
-    (println "get-area-menu")
-    (pprint/pprint query)
     (put! c [area-type (query params) data-formatter/for-area-menu cb])))
 
 (defn get-stat-group
@@ -232,7 +231,7 @@
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
       {:rank-list/items (om/get-query rank-list/RankList)}
-      :cal-date-max :cal-date-min :date-max :date-min :selected-date-max :selected-date-min :active-area :active-stat :area-overlay])
+      :cal-date-max :cal-date-min :date-max :date-min :edit-mode :selected-date-max :selected-date-min :active-area :active-stat :area-overlay])
   Object
   (area-change
     ;"Handler for selecting an exact area"
@@ -255,6 +254,10 @@
   (month-change
     [this {:keys [key date]}]
     (om/merge! reconciler (merge (om/props this) {key date})))
+  (toggle-edit-mode
+    [this]
+    (let [edit-mode (:edit-mode (om/props this))]
+     (om/merge! reconciler (merge (om/props this) {:edit-mode (not edit-mode)}))))
   (stat-change
     [this {:keys [key id]}]
     (om/transact! this `[(stat/change {:key ~key :id ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
@@ -271,7 +274,7 @@
                                 :selected-date-max date-max
                                 :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min active-area active-stat area-overlay]} (om/props this)]
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min edit-mode active-area active-stat area-overlay]} (om/props this)]
       ;;(println "Root render:" (:active-stat (om/props this)))
       (dom/div #js {:className "root"}
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
@@ -288,18 +291,9 @@
           (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
                                              :area/items (:area/items (om/props this))}
                                             {:area-change #(.area-change this %)
-                                             :area-select #(.area-select this %1 %2)})))
+                                             :area-select #(.area-select this %1 %2)
+                                             :toggle-edit #(.toggle-edit-mode this)})))
         (dom/div #js {:className "content-outer"}
-         (carto-map/carto-map (om/computed {:end-date (if selected-date-max
-                                                       (.format selected-date-max "YYYY-MM-DD")
-                                                       "2015-12-26")
-                                            :start-date (if selected-date-min
-                                                          (.format selected-date-min "YYYY-MM-DD")
-                                                          "2015-01-01")
-                                            :area-overlay area-overlay
-                                            :active-area active-area
-                                            :active-stat active-stat}
-                               {:area-change #(.area-change this %)}))
          (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
                                               :end-date (if selected-date-max
                                                           (.format selected-date-max "YYYY-MM-DD")
@@ -309,7 +303,17 @@
                                                             "2015-01-01")
                                               :active-area active-area}
                                            {:stat-change #(.stat-change this %)}))
-
+         (carto-map/carto-map (om/computed {:end-date (if selected-date-max
+                                                       (.format selected-date-max "YYYY-MM-DD")
+                                                       "2015-12-26")
+                                            :start-date (if selected-date-min
+                                                          (.format selected-date-min "YYYY-MM-DD")
+                                                          "2015-01-01")
+                                            :edit-mode edit-mode
+                                            :area-overlay area-overlay
+                                            :active-area active-area
+                                            :active-stat active-stat}
+                               {:area-change #(.area-change this %)}))
          (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
                                :end-date (if selected-date-max
                                            (.format selected-date-max "YYYY-MM-DD")

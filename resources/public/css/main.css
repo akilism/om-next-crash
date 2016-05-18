@@ -14,7 +14,8 @@ background-color: #F1F1EB;
  *  Begin Color Rules  *
  ***********************/
 .borough,
-.neighborhood {
+.neighborhood,
+.custom {
   background-color: rgba(178, 102, 0, 0.55);
 }
 
@@ -30,7 +31,8 @@ background-color: #F1F1EB;
 }
 
 .borough:hover,
-.neighborhood:hover {
+.neighborhood:hover,
+.custom:hover {
   background-color: rgba(178, 102, 0, 1);
   color: #fff;
 }
@@ -169,6 +171,7 @@ a {
   width: 100%;
   margin: 0 0 10px 0;
   padding: 0 0 30px 0;
+  position: relative;
 }
 
 /* Area Menu Styles */
@@ -191,7 +194,7 @@ a {
 .area-menu-item {
   cursor: pointer;
   padding: 10px 0;
-  margin: 5px 0;
+  margin: 5px 5px;
   white-space: nowrap;
   width: 50%;
   text-align: center;
@@ -200,11 +203,11 @@ a {
 
 
 .area-menu-item:first-child {
-  margin-left: 0;
+  /*margin-left: 0;*/
 }
 
 .area-menu-item:last-child {
-  margin-right: 0;
+  /*margin-right: 0;*/
 }
 
 .area-menu-item:hover {
@@ -356,13 +359,23 @@ a {
 /* Date Range Styles: End */
 /* Header Styles: End */
 
-
 .stat-box, .factor-box {
   width: 90vw;
   margin: 0;
   padding: 0 0 30px 0;
 }
 
+.stat-box {
+  position: absolute;
+  z-index: 100;
+  width: 320px;
+  padding: 10px;
+  background-color: #fff;
+  top: 95px;
+  border: 1px solid #4E4C50;
+  border-left-width: 0;
+  border-radius: 0 3px 3px 0;
+}
 
 .stat-group {
   display: flex;
@@ -404,7 +417,7 @@ a {
 
 .stat-group > .header-item {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5rem;
   border: 1px solid #4E4C50;
   width: 100%;
   margin: 3vh 0 0 0;
@@ -417,7 +430,7 @@ a {
 
 .sub-header-item {
   display: inline-block;
-  width: 50%;
+  width: 100%;
   border: 1px solid #4E4C50;
   border-top-width: 0;
   padding: 0.25em;
@@ -465,9 +478,9 @@ a {
 }
 
 .stat-list-title {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   font-size: 1.5em;
-  line-height: 0.75;
+  line-height: 0.8;
   margin: 0 0 15px 0;
   width: 90%;
 }
@@ -538,44 +551,18 @@ a {
 
 
 @media screen and (min-width: 1100px) {
-  body {
-    font-size: 26px;
-  }
-
-  .stat-box, .factor-box {
-    width: 100%;
-  }
-
   .area-menu-item {
-    width: 25%;
+    width: 24%;
   }
-
-
 }
 
 @media screen and (min-width: 1330px) {
-  body {
-    font-size: 30px;
-  }
-  
-  .stat-box, .factor-box {
-    width: 100%;
-  }
-
   .root {
     margin: 15px 60px 30px 60px;
   }
 
   .area-header {
     margin: 0 20px 20px 0;
-  }
-
-  .stat-group {
-    width: 90%;
-  }
-
-  .map-box {
-    width: 50%;
   }
 
   .rank-list {
