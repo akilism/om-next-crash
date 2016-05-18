@@ -114,7 +114,15 @@
     (om/update-state! this update :points (fn [_] []))
     (println "remove shape from localstorage and map."))
   (add-custom-shape [this]
-    (println "add-custom-shape"))
+    (let [{:keys [vis points custom-shape]} (om/get-state this)
+          l-map (.getNativeMap vis)
+          js-points (clj->js points)]
+         (println (count points))
+         (if custom-shape
+           (.setLatLngs custom-shape js-points)
+           (om/update-state! this update :custom-shape (fn [_] (-> js/L
+                                                                (.polyline js-points #js {:color "blue"})
+                                                                (.addTo l-map)))))))
   (componentDidMount [this]
     (let [{:keys [text type]} (om/props this)
           viz "https://akilism.cartodb.com/api/v2/viz/fcdfe28c-b6de-11e5-849b-0e787de82d45/viz.json"]
