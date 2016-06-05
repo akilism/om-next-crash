@@ -606,3 +606,7 @@ a {
 .draw-button:hover {
   background-color: rgba(#8783b0, 0.98);
 }
+
+.edit-map {
+  cursor: pointer;
+}

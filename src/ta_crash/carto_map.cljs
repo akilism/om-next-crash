@@ -30,6 +30,13 @@
   [this evt]
   (om/update-state! this update :points (fn [_] (conj (:points (om/get-state this)) (.-latlng evt)))))
 
+(defn lat-lngs
+  [str-shape]
+  (map #(let [parts (clojure.string/split % #" ")]
+          {:lat (first (rest parts))
+           :lng (first parts)})
+        (clojure.string/split str-shape #", ")))
+
 (defui CartoMap
   static om/IQuery
   (query [_]
@@ -104,6 +111,8 @@
           area-layer (nth (.getLayers vis) 1)
           crash-layer (.getSubLayer area-layer 0)]
       (.setInteraction crash-layer false)
+      ;; TODO add hover handler to show next line.
+      ;; (.on l-map "mouseover" (.draw-mouseover-handler (om/get-state this)))
       (.on l-map "click" (:draw-click-handler (om/get-state this)))
       (println "turn drawing on on the map")))
   (toggle-draw-mode [this]
@@ -148,11 +157,15 @@
           (.done (fn [vis layers] (.create-handler this vis layers)))
           (.error error-handler))))
   (componentWillMount [this]
-    (om/set-state! this {:vis nil
+    (let [custom-area (:custom-area (om/props this))
+          initial-state {:vis nil
                          :draw-click-handler (partial draw-click-handler this)
                          :draw-mode false
                          :points []
-                         :custom-shape nil}))
+                         :custom-shape nil}]
+      (if custom-area
+        (om/set-state! this (assoc initial-state :points (lat-lngs custom-area)))
+        (om/set-state! this initial-state))))
   (componentWillReceiveProps
     [this next-props]
     (let [vis (:vis (om/get-state this))
@@ -164,11 +177,12 @@
           (not (props/same-props? (om/props this) next-props)) (.map-new-parameters this vis next-props)
           :else nil))))
   (render [this]
-    (let [{:keys [edit-mode text type]} (om/props this)
+    (let [{:keys [edit-mode text type custom-area]} (om/props this)
           draw-mode (:draw-mode (om/get-state this))
+          vis (:vis (om/get-state this))
           hover (tooltip (:hover (om/get-state this)))
           points (:points (om/get-state this))]
-      (when (< 0 (count points))
+      (when (and vis (< 0 (count points)))
         (.add-custom-shape this))
       (dom/div #js {:className "map-box"}
         hover
@@ -180,6 +194,6 @@
                                                  (when (<= 3 (count points))
                                                   (dom/li #js {:className "draw-button" :onClick #(.query-custom-shape this)} "Query Shape"))
                                                  (dom/li #js {:className "draw-button" :onClick #(.delete-shape this)} "Delete Shape")])))
-        (dom/div #js {:className "carto-map" :ref "cartoMap" :id "cartoMap"})))))
+        (dom/div #js {:className (if edit-mode "carto-map edit-map" "carto-map") :ref "cartoMap" :id "cartoMap"})))))
 
 (def carto-map (om/factory CartoMap))

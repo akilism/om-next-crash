@@ -4,9 +4,9 @@
 
 (defn days-in-month
   ([date] (let [days-in-month (.daysInMonth date)]
-    (range 1 (+ 1 days-in-month))))
+           (range 1 (+ 1 days-in-month))))
   ([date formatter] (let [days-in-month (.daysInMonth date)]
-    (map #(formatter date %) (range 1 (+ 1 days-in-month))))))
+                     (map #(formatter date %) (range 1 (+ 1 days-in-month))))))
 
 (defn start-of-month
   ([date] (.startOf date "month"))
@@ -45,7 +45,7 @@
 
 (defn get-row
   [day-change-handler days]
-  (apply dom/tr #js {:className "calendar-week"}
+  (apply dom/tr #js {:className "calendar-week" :key (* 1000 (.random js/Math))}
     (map #(get-cell day-change-handler %) days)))
 
 (defn get-month-cells
@@ -58,7 +58,7 @@
     (dom/td #js {:className "calendar-day-of-week"} "T")
     (dom/td #js {:className "calendar-day-of-week"} "F")
     (dom/td #js {:className "calendar-day-of-week"} "S"))
-  (map #(get-row day-change-handler %) all-days)])
+   (map #(get-row day-change-handler %) all-days)])
 
 (defui DatePicker
   Object

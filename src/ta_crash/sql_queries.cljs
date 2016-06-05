@@ -245,7 +245,7 @@
     AND
       (date >= date ':start-date')
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
     UNION ALL
     SELECT
       contributing_factor_vehicle_2 as factor
@@ -256,7 +256,7 @@
     AND
       (date >= date ':start-date')
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_3 as factor
@@ -267,7 +267,7 @@
     AND
       (date >= date ':start-date')
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_4 as factor
@@ -278,7 +278,7 @@
     AND
       (date >= date ':start-date')
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_5 as factor
@@ -289,7 +289,7 @@
     AND
       (date >= date ':start-date')
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
   )
   SELECT
     COUNT(af.factor) as count_factor,
@@ -461,7 +461,7 @@
     AND
       (:filter-col > 0)
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
     UNION ALL
     SELECT
       contributing_factor_vehicle_2 as factor
@@ -474,7 +474,7 @@
     AND
       (:filter-col > 0)
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_3 as factor
@@ -487,7 +487,7 @@
     AND
       (:filter-col > 0)
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_4 as factor
@@ -500,7 +500,7 @@
     AND
       (:filter-col > 0)
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
       UNION ALL
     SELECT
       contributing_factor_vehicle_5 as factor
@@ -513,7 +513,7 @@
     AND
       (:filter-col > 0)
     AND
-      (ST_Contains(:shape, c.the_geom))
+      (ST_Contains(:shape, the_geom))
   )
   SELECT
     COUNT(af.factor) as count_factor,
@@ -1328,13 +1328,12 @@
 
 (defn postgis-polygon
   [shape]
-  (println (str "postgis-polygon: " shape))
   (str "ST_GeomFromText('POLYGON(( " shape " ))', 4326)"))
 
 (defn pick-query
   [params queries]
   (let [{:keys [by-date by-date-filtered by-date-area by-date-area-filtered by-date-custom-area by-date-custom-area-filtered]} queries
-        {:keys [start-date end-date active-area active-stat order-col order-dir shape]} params
+        {:keys [start-date end-date active-area active-stat order-col order-dir custom-area]} params
         {:keys [area-type identifier]} active-area]
     (cond
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area))
@@ -1355,14 +1354,14 @@
      (by-date-custom-area
        {:end-date end-date
         :start-date start-date
-        :shape (postgis-polygon shape)
+        :shape (postgis-polygon custom-area)
         :order-col order-col
         :order-dir order-dir})
      (and (= "custom" (:identifier active-area)) (not-nil? active-stat))
      (by-date-custom-area-filtered
        {:end-date end-date
         :start-date start-date
-        :shape (postgis-polygon shape)
+        :shape (postgis-polygon custom-area)
         :filter-col (get-filter-col active-stat)
         :order-col order-col
         :order-dir order-dir})

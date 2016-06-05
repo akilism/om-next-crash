@@ -43,7 +43,7 @@
      :item-type :group
      :area-type :citywide
      :query nil}
-    {:display-name "Custom"
+    {:display-name "Custom Area"
      :item-type :group
      :area-type :custom
      :query nil}
@@ -362,8 +362,10 @@
 (defroute custom-area-route "/custom/:encoded-shape" [encoded-shape]
   (let [decoded-shape (.atob js/window encoded-shape)]
     (render-page (assoc
-                  (assoc init-data :custom-shape decoded-shape)
+                  init-data
+                  :custom-area decoded-shape
                   :active-area {:area-type :custom :identifier "custom"}))))
+
 
 (defroute area-route "/:area/:ident" [area ident query-params]
   (let [area-type (keyword area)
