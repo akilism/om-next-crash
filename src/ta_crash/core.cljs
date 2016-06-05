@@ -33,6 +33,7 @@
    :active-stat nil
    :area-overlay nil
    :edit-mode false
+   :custom-area nil
    :group/items []
    :stat-list/items []
    :rank-list/items []
@@ -41,6 +42,10 @@
    [{:display-name "Citywide"
      :item-type :group
      :area-type :citywide
+     :query nil}
+    {:display-name "Custom"
+     :item-type :group
+     :area-type :custom
      :query nil}
     {:display-name "Borough"
      :item-type :group
@@ -220,7 +225,10 @@
 
 (defn url
   [type identifier]
-  (str "/" (name type) "/" (conversion/normalize (conversion/convert-type identifier type))))
+  (condp = type
+    :custom (str "/custom/" (.btoa js/window identifier))
+    (str "/" (name type) "/" (conversion/normalize (conversion/convert-type identifier type)))))
+
 
 (defui Root
   static om/IQuery
@@ -231,7 +239,7 @@
       {:group/items (om/get-query stat-group/StatGroup)}
       {:stat-list/items (om/get-query stat-list/StatList)}
       {:rank-list/items (om/get-query rank-list/RankList)}
-      :cal-date-max :cal-date-min :date-max :date-min :edit-mode :selected-date-max :selected-date-min :active-area :active-stat :area-overlay])
+      :cal-date-max :cal-date-min :date-max :date-min :edit-mode :selected-date-max :selected-date-min :active-area :active-stat :area-overlay :custom-area])
   Object
   (area-change
     ;"Handler for selecting an exact area"
@@ -274,7 +282,7 @@
                                 :selected-date-max date-max
                                 :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min edit-mode active-area active-stat area-overlay]} (om/props this)]
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min edit-mode active-area active-stat area-overlay custom-area]} (om/props this)]
       ;;(println "Root render:" (:active-stat (om/props this)))
       (dom/div #js {:className "root"}
         (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
@@ -301,7 +309,8 @@
                                               :start-date (if selected-date-min
                                                             (.format selected-date-min "YYYY-MM-DD")
                                                             "2015-01-01")
-                                              :active-area active-area}
+                                              :active-area active-area
+                                              :custom-area custom-area}
                                            {:stat-change #(.stat-change this %)}))
          (carto-map/carto-map (om/computed {:end-date (if selected-date-max
                                                        (.format selected-date-max "YYYY-MM-DD")
@@ -312,7 +321,8 @@
                                             :edit-mode edit-mode
                                             :area-overlay area-overlay
                                             :active-area active-area
-                                            :active-stat active-stat}
+                                            :active-stat active-stat
+                                            :custom-area custom-area}
                                {:area-change #(.area-change this %)}))
          (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
                                :end-date (if selected-date-max
@@ -322,7 +332,8 @@
                                              (.format selected-date-min "YYYY-MM-DD")
                                              "2015-01-01")
                                :active-area active-area
-                               :active-stat active-stat})
+                               :active-stat active-stat
+                               :custom-area custom-area})
          (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
                                :end-date (if selected-date-max
                                            (.format selected-date-max "YYYY-MM-DD")
@@ -330,7 +341,8 @@
                                :start-date (if selected-date-min
                                              (.format selected-date-min "YYYY-MM-DD")
                                              "2015-01-01")
-                               :active-area active-area}))))))
+                               :active-area active-area
+                               :custom-area custom-area}))))))
 
 (defn render-page
   [state]
@@ -346,6 +358,12 @@
 
 (defroute home-route "/" []
   (render-page init-data))
+
+(defroute custom-area-route "/custom/:encoded-shape" [encoded-shape]
+  (let [decoded-shape (.atob js/window encoded-shape)]
+    (render-page (assoc
+                  (assoc init-data :custom-shape decoded-shape)
+                  :active-area {:area-type :custom :identifier "custom"}))))
 
 (defroute area-route "/:area/:ident" [area ident query-params]
   (let [area-type (keyword area)

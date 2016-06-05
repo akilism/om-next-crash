@@ -233,6 +233,74 @@
   ORDER BY
     count_factor desc")
 
+(def-sql-query "-- name: all-factors-date-by-custom-area
+  -- Counts all factors for a given date range.
+  WITH all_factors as (
+    SELECT
+      contributing_factor_vehicle_1 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (ST_Contains(:shape, c.the_geom))
+    UNION ALL
+    SELECT
+      contributing_factor_vehicle_2 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_3 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_4 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_5 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (ST_Contains(:shape, c.the_geom))
+  )
+  SELECT
+    COUNT(af.factor) as count_factor,
+    af.factor
+  FROM
+    all_factors af
+  GROUP BY
+    af.factor
+  ORDER BY
+    count_factor desc")
+
 (def-sql-query "-- name: all-factors-date-by-area
   -- Counts all factors for a given date range filtered by some geometry table.
   WITH all_factors as (
@@ -368,6 +436,84 @@
       (date >= date ':start-date')
     AND
       (:filter-col > 0)
+  )
+  SELECT
+    COUNT(af.factor) as count_factor,
+    af.factor
+  FROM
+    all_factors af
+  GROUP BY
+    af.factor
+  ORDER BY
+    count_factor desc")
+
+(def-sql-query "-- name: all-factors-date-by-custom-area-filtered
+  -- Counts all factors for a given date range.
+  WITH all_factors as (
+    SELECT
+      contributing_factor_vehicle_1 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (:filter-col > 0)
+    AND
+      (ST_Contains(:shape, c.the_geom))
+    UNION ALL
+    SELECT
+      contributing_factor_vehicle_2 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (:filter-col > 0)
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_3 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (:filter-col > 0)
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_4 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (:filter-col > 0)
+    AND
+      (ST_Contains(:shape, c.the_geom))
+      UNION ALL
+    SELECT
+      contributing_factor_vehicle_5 as factor
+    FROM
+      table_20k_crashes
+    WHERE
+      (date <= date ':end-date')
+    AND
+      (date >= date ':start-date')
+    AND
+      (:filter-col > 0)
+    AND
+      (ST_Contains(:shape, c.the_geom))
   )
   SELECT
     COUNT(af.factor) as count_factor,
@@ -641,6 +787,29 @@
   AND
     (a.identifier = :identifier)")
 
+(def-sql-query "-- name: stats-date-by-custom-area
+  -- Counts all death / injury stats for a given date range filtered by a custom shape.
+  SELECT
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (ST_Contains(:shape, c.the_geom))")
+
 (def-sql-query "-- name: stats-date-filtered
   -- Counts all death / injury stats for a given date range
   SELECT
@@ -693,6 +862,31 @@
   AND
     (:filter-col > 0)")
 
+(def-sql-query "-- name: stats-date-by-custom-area-filtered
+  -- Counts all death / injury stats for a given date range
+  SELECT
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (:filter-col > 0)
+  AND
+    (ST_Contains(:shape, c.the_geom))")
+
 (def-sql-query "--name: crashes-by-date
   -- Selects crashes for map by date.
   SELECT
@@ -717,6 +911,37 @@
     (date <= date ':end-date')
   AND
     (date >= date ':start-date')
+  AND
+	 c.the_geom IS NOT NULL
+  GROUP BY
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
+
+(def-sql-query "--name: crashes-by-date-custom-area
+  -- Selects crashes for map by date filtered by a custom area.
+  SELECT
+    c.the_geom,
+    c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (ST_Contains(:shape, c.the_geom))
   GROUP BY
     c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
@@ -779,6 +1004,39 @@
     (date >= date ':start-date')
   AND
     (:filter-col > 0)
+  AND
+  	c.the_geom IS NOT NULL
+  GROUP BY
+    c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
+
+(def-sql-query "--name: crashes-by-date-custom-area-filtered
+  -- Selects crashes for map by date.
+  SELECT
+    c.the_geom,
+    c.the_geom_webmercator,
+    c.on_street_name,
+    c.cross_street_name,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (:filter-col > 0)
+  AND
+    (ST_Contains(:shape, c.the_geom))
   GROUP BY
     c.the_geom, c.the_geom_webmercator, c.on_street_name, c.cross_street_name")
 
@@ -961,6 +1219,76 @@
     :order-col :order-dir
   LIMIT 100")
 
+(def-sql-query "--name: intersections-by-date-custom-area-with-order
+  --Select all intersections filtered by date and order by a col
+  SELECT
+    concat_ws(',', c.latitude, c.longitude) as pos,
+    concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
+    c.the_geom,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    ((SUM(c.number_of_persons_killed) * 2.75) +
+     (SUM(c.number_of_persons_injured) * 1.5) +
+     (COUNT(c.cartodb_id) * 0.75)) as dval,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (ST_Contains(:shape, c.the_geom))
+  GROUP BY
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+  ORDER BY
+    :order-col :order-dir
+  LIMIT 100")
+
+(def-sql-query "--name: intersections-by-date-custom-area-with-order-filtered
+  --Select all intersections filtered by date and order by a col
+  SELECT
+    concat_ws(',', c.latitude, c.longitude) as pos,
+    concat_ws(',', c.on_street_name, c.cross_street_name) as streets,
+    c.the_geom,
+    COUNT(c.cartodb_id) as total_crashes,
+    SUM(c.number_of_cyclist_injured) as cyclist_injured,
+    SUM(c.number_of_cyclist_killed) as cyclist_killed,
+    SUM(c.number_of_motorist_injured) as motorist_injured,
+    SUM(c.number_of_motorist_killed) as motorist_killed,
+    SUM(c.number_of_pedestrians_injured) as pedestrians_injured,
+    SUM(c.number_of_pedestrians_killed) as pedestrians_killed,
+    SUM(c.number_of_persons_injured) as persons_injured,
+    SUM(c.number_of_persons_killed) as persons_killed,
+    ((SUM(c.number_of_persons_killed) * 2.75) +
+     (SUM(c.number_of_persons_injured) * 1.5) +
+     (COUNT(c.cartodb_id) * 0.75)) as dval,
+    SUM(CASE WHEN c.number_of_persons_injured > 0 THEN 1 ELSE 0 END) AS total_crashes_with_injury,
+    SUM(CASE WHEN c.number_of_persons_killed > 0 THEN 1 ELSE 0 END) AS total_crashes_with_death
+  FROM
+    table_20k_crashes c
+  WHERE
+    (date <= date ':end-date')
+  AND
+    (date >= date ':start-date')
+  AND
+    (:filter-col > 0)
+  AND
+    (ST_Contains(:shape, c.the_geom))
+  GROUP BY
+    c.the_geom, c.latitude, c.longitude, c.on_street_name, c.cross_street_name
+  ORDER BY
+    :order-col :order-dir
+  LIMIT 100")
+
 
 ;;; Geo-table formatting
 
@@ -971,7 +1299,8 @@
     :community-board "nyc_community_board"
     :neighborhood "nyc_neighborhood"
     :precinct "nyc_nypd_precinct"
-    :zip-code "nyc_zip_codes"))
+    :zip-code "nyc_zip_codes"
+    :not-found))
 
 (defn get-geo-identifier [identifier]
   (if (string? identifier)
@@ -994,12 +1323,18 @@
     :total-persons-injured "number_of_persons_injured"
     :total-pedestrian-injured "number_of_pedestrians_injured"
     :total-cyclist-injured "number_of_cyclist_injured"
-    :total-motorist-injured "number_of_motorist_injured"))
+    :total-motorist-injured "number_of_motorist_injured"
+    :not-found))
+
+(defn postgis-polygon
+  [shape]
+  (println (str "postgis-polygon: " shape))
+  (str "ST_GeomFromText('POLYGON(( " shape " ))', 4326)"))
 
 (defn pick-query
   [params queries]
-  (let [{:keys [by-date by-date-filtered by-date-area by-date-area-filtered]} queries
-        {:keys [start-date end-date active-area active-stat order-col order-dir]} params
+  (let [{:keys [by-date by-date-filtered by-date-area by-date-area-filtered by-date-custom-area by-date-custom-area-filtered]} queries
+        {:keys [start-date end-date active-area active-stat order-col order-dir shape]} params
         {:keys [area-type identifier]} active-area]
     (cond
      (and (or (= "citywide" (:identifier active-area)) (empty? active-area))
@@ -1013,6 +1348,21 @@
      (by-date-filtered
        {:end-date end-date
         :start-date start-date
+        :filter-col (get-filter-col active-stat)
+        :order-col order-col
+        :order-dir order-dir})
+     (and (= "custom" (:identifier active-area)) (or (= :total-crashes active-stat) (nil? active-stat)))
+     (by-date-custom-area
+       {:end-date end-date
+        :start-date start-date
+        :shape (postgis-polygon shape)
+        :order-col order-col
+        :order-dir order-dir})
+     (and (= "custom" (:identifier active-area)) (not-nil? active-stat))
+     (by-date-custom-area-filtered
+       {:end-date end-date
+        :start-date start-date
+        :shape (postgis-polygon shape)
         :filter-col (get-filter-col active-stat)
         :order-col order-col
         :order-dir order-dir})
@@ -1041,36 +1391,47 @@
   (pick-query params {:by-date crashes-by-date
                       :by-date-filtered crashes-by-date-filtered
                       :by-date-area crashes-by-date-area
-                      :by-date-area-filtered crashes-by-date-area-filtered}))
+                      :by-date-area-filtered crashes-by-date-area-filtered
+                      :by-date-custom-area crashes-by-date-custom-area
+                      :by-date-custom-area-filtered crashes-by-date-custom-area-filtered}))
 
 (defmethod get-query :factors
   [_ params]
   (pick-query params {:by-date all-factors-date
                       :by-date-filtered all-factors-date-filtered
                       :by-date-area all-factors-date-by-area
-                      :by-date-area-filtered all-factors-date-by-area-filtered}))
+                      :by-date-area-filtered all-factors-date-by-area-filtered
+                      :by-date-custom-area all-factors-date-by-custom-area
+                      :by-date-custom-area-filtered all-factors-date-by-custom-area-filtered}))
 
 
 (defmethod get-query :vehicles
   [_ params]
   (pick-query params {:by-date all-vehicle-types-date
                       :by-date-filtered all-vehicle-types-date-filtered
+;; TODO: Write the below.
                       :by-date-area crashes-by-date-area
-                      :by-date-area-filtered crashes-by-date-area-filtered}))
+                      :by-date-area-filtered crashes-by-date-area-filtered
+                      :by-date-custom-area crashes-by-date-custom-area
+                      :by-date-custom-area-filtered crashes-by-date-custom-area-filtered}))
 
 (defmethod get-query :stats
   [_ params]
   (pick-query params {:by-date stats-date
                       :by-date-filtered stats-date-filtered
                       :by-date-area stats-date-by-area
-                      :by-date-area-filtered stats-date-by-area-filtered}))
+                      :by-date-area-filtered stats-date-by-area-filtered
+                      :by-date-custom-area stats-date-by-custom-area
+                      :by-date-custom-area-filtered stats-date-by-custom-area-filtered}))
 
 (defmethod get-query :rank
   [_ params]
   (pick-query params {:by-date intersections-by-date-with-order
                       :by-date-filtered intersections-by-date-with-order-filtered
                       :by-date-area intersections-by-date-area-with-order
-                      :by-date-area-filtered intersections-by-date-area-with-order-filtered}))
+                      :by-date-area-filtered intersections-by-date-area-with-order-filtered
+                      :by-date-custom-area intersections-by-date-custom-area-with-order
+                      :by-date-custom-area-filtered intersections-by-date-custom-area-with-order-filtered}))
 
 (defmethod get-query :default
   [id params]
