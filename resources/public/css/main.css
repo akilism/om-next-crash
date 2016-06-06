@@ -109,7 +109,7 @@ background-color: #F1F1EB;
 body {
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #4E4C50;
+  color: #c3aea6;
   /*background-color: #CFEEFF;*/
 }
 
@@ -120,13 +120,35 @@ a {
 
 .root {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: stretch;
-  margin: 15px 30px;
 }
 
+.stats-col {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #c3aea6;
+  color: #2b0608;
+  height: 50vh;
+  overflow: scroll;
+  position: relative;
+}
+
+.map-col {
+  width: 100%;
+  padding: 30px 15px;
+  color: #c3aea6;
+  background-color: #2b0608;
+  height: 50vh;
+  overflow: scroll;
+  position: relative;
+}
+
+.cartodb-tooltip {
+  color: #2b0608;
+}
 
 .content-box {
   display: flex;
@@ -158,7 +180,7 @@ a {
   border-radius: 3px 3px 0 0;
   margin: 20px 0 40px 0;
   padding: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #c3aea6;
 }
 
 .content-outer {
@@ -167,18 +189,28 @@ a {
   justify-content: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #c3aea6;
   width: 100%;
   margin: 0 0 10px 0;
   padding: 0 0 30px 0;
   position: relative;
 }
 
+.btn-filter-menu {
+  position: absolute;
+  right: 30px;
+  top: 15px;
+  border-radius: 3px;
+  background-color: #C3AEA6;
+  border: 0px solid #2B0608;
+  padding: 5px 10px;
+  color: #2B0608;
+}
+
 /* Area Menu Styles */
 .area-menu {
-  width: 100%;
-  margin-bottom: 10px;
-  position: relative;
+  padding: 10px 0;
+  background-color: #2B0608;
 }
 
 .area-menu ul {
@@ -265,7 +297,7 @@ a {
 
 /* Header Styles */
 .header {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #c3aea6;
   margin: 0 0 10px 0;
   width: 100%;
   display: flex;
@@ -276,10 +308,11 @@ a {
 }
 
 .area-header {
-  font-size: 3em;
+  font-size: 5em;
   text-transform: capitalize;
-  margin: 0 20px 15px 0;
+  margin: 15px 15px 0 0;
   padding: 0;
+  line-height: 1;
   width: 100%;
 }
 
@@ -289,8 +322,9 @@ a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-size: 1.25em;
-  margin: 0;
+  font-size: 1.5em;
+  margin: 5px 0 5px 5px;
+  line-height: 1;
   flex-wrap: wrap;
 }
 
@@ -360,21 +394,22 @@ a {
 /* Header Styles: End */
 
 .stat-box, .factor-box {
-  width: 90vw;
+  /*width: 90vw;
   margin: 0;
-  padding: 0 0 30px 0;
+  padding: 0 0 30px 0;*/
 }
 
 .stat-box {
-  position: absolute;
-  z-index: 100;
-  width: 320px;
-  padding: 10px;
-  background-color: #fff;
-  top: 95px;
-  border: 1px solid #4E4C50;
-  border-left-width: 0;
-  border-radius: 0 3px 3px 0;
+  /*position: absolute;*/
+  /*z-index: 100;*/
+  /*width: 320px;*/
+  /*padding: 10px;*/
+  color: #2b0608;
+  /*background-color: #fff;*/
+  /*top: 95px;*/
+  /*border: 1px solid #4E4C50;*/
+  /*border-left-width: 0;*/
+  /*border-radius: 0 3px 3px 0;*/
 }
 
 .stat-group {
@@ -393,7 +428,8 @@ a {
 }
 
 .item:hover {
-  background-color: #E9F7FF;
+  color: #c3aea6;
+  background-color: #2b0608;
 }
 
 .stat-list-item.item,
@@ -493,13 +529,12 @@ a {
 }
 
 .carto-map {
-  height: 50vw;
+  height: 50vh;
 }
 
 .map-box {
-  padding: 0 0 60px 0;
+  padding: 0;
   margin: 0;
-  width: 98%;
 }
 
 .cartodb-map-wrapper {
@@ -509,7 +544,7 @@ a {
 
 .rank-list {
   width: 100%;
-  padding: 0 0 30px 0;
+  padding: 30px 0 30px 0;
 }
 
 .rank-list-title {
@@ -524,6 +559,7 @@ a {
   padding: 0;
   line-height: 1.5;
   list-style: none;
+  margin-top: 0;
 }
 
 .rank-list-item {
@@ -535,6 +571,10 @@ a {
 }
 
 @media screen and (min-width: 860px) {
+  .root {
+    flex-direction: row;
+  }
+
   .header {
     flex-wrap: wrap;
   }
@@ -547,6 +587,20 @@ a {
     width: auto;
     margin: 0 0.25em 0 0;
   }
+
+  .stats-col {
+    width: 40%;
+    height: 100vh;
+  }
+
+  .map-col {
+    width: 60%;
+    height: 100vh;
+  }
+
+  .carto-map {
+    height: 75vh;
+  }
 }
 
 
@@ -554,11 +608,19 @@ a {
   .area-menu-item {
     width: 24%;
   }
+
+  .stats-col {
+    width: 30%;
+  }
+
+  .map-col {
+    width: 70%;
+  }
 }
 
 @media screen and (min-width: 1330px) {
   .root {
-    margin: 15px 60px 30px 60px;
+    /*margin: 15px 60px 30px 60px;*/
   }
 
   .area-header {
@@ -566,12 +628,16 @@ a {
   }
 
   .rank-list {
-    width: 50%;
+    /*width: 50%;*/
   }
 
   .date-range-spacer:first-child {
     width: auto;
     margin: 0 0.25em 0 0;
+  }
+
+  .carto-map {
+    /*height: 35vh;*/
   }
 }
 
@@ -607,6 +673,6 @@ a {
   background-color: rgba(#8783b0, 0.98);
 }
 
-.edit-map {
+.edit-map .leaflet-container {
   cursor: pointer;
 }

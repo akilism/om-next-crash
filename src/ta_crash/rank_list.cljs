@@ -27,7 +27,7 @@
   (render [this]
     (let [{:keys [rank-list/items start-date end-date active-area]} (om/props this)]
       (dom/div #js {:className "rank-list"}
-        (dom/div #js {:className "rank-list-title"} "Most Dangerous Intersections")
+        (dom/div #js {:className "rank-list-title"} "Dangerous Intersections")
         (apply dom/ul nil
           (map #(dom/li #js {:className "rank-list-item"} (str/lower-case (str/replace (str (:streets %)) #"," " & "))) (take 10 (filter #(not (= "," (:streets %))) items))))))))
 

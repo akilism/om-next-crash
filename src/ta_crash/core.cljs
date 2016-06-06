@@ -43,10 +43,10 @@
      :item-type :group
      :area-type :citywide
      :query nil}
-    {:display-name "Custom Area"
-     :item-type :group
-     :area-type :custom
-     :query nil}
+    ; {:display-name "Custom Area"
+    ;  :item-type :group
+    ;  :area-type :custom
+    ;  :query nil}
     {:display-name "Borough"
      :item-type :group
      :area-type :borough
@@ -266,6 +266,10 @@
     [this]
     (let [edit-mode (:edit-mode (om/props this))]
      (om/merge! reconciler (merge (om/props this) {:edit-mode (not edit-mode)}))))
+  (toggle-area-menu
+    [this]
+    (let [show-area-menu (:show-area-menu (om/get-state this))]
+      (om/update-state! this update :show-area-menu #(not show-area-menu))))
   (stat-change
     [this {:keys [key id]}]
     (om/transact! this `[(stat/change {:key ~key :id ~id}) :group/items :stat-list/items :rank-list/items :active-area]))
@@ -282,11 +286,45 @@
                                 :selected-date-max date-max
                                 :selected-date-min date-min})))))
   (render [this]
-    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min edit-mode active-area active-stat area-overlay custom-area]} (om/props this)]
+    (let [{:keys [selected-date-max selected-date-min cal-date-max cal-date-min date-max date-min edit-mode active-area active-stat area-overlay custom-area]} (om/props this)
+          {:keys [show-area-menu]} (om/get-state this)]
       ;;(println "Root render:" (:active-stat (om/props this)))
       (dom/div #js {:className "root"}
-        (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
-        (dom/section #js {:className "header-outer"}
+        (dom/div #js {:className "stats-col"}
+          (dom/div #js {:className "static-head"} "Transportation Alternatives: CrashStats")
+          (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
+                                               :end-date (if selected-date-max
+                                                           (.format selected-date-max "YYYY-MM-DD")
+                                                           "2015-12-26")
+                                               :start-date (if selected-date-min
+                                                             (.format selected-date-min "YYYY-MM-DD")
+                                                             "2015-01-01")
+                                               :active-area active-area
+                                               :custom-area custom-area}
+                                              {:stat-change #(.stat-change this %)}))
+          (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
+                                :end-date (if selected-date-max
+                                            (.format selected-date-max "YYYY-MM-DD")
+                                            "2015-12-26")
+                                :start-date (if selected-date-min
+                                              (.format selected-date-min "YYYY-MM-DD")
+                                              "2015-01-01")
+                                :active-area active-area
+                                :active-stat active-stat
+                                :custom-area custom-area})
+          (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
+                                :end-date (if selected-date-max
+                                            (.format selected-date-max "YYYY-MM-DD")
+                                            "2015-12-26")
+                                :start-date (if selected-date-min
+                                              (.format selected-date-min "YYYY-MM-DD")
+                                              "2015-01-01")
+                                :active-area active-area
+                                :custom-area custom-area}))
+        (dom/div #js {:className "map-col"}
+          (dom/button #js {:className "btn-filter-menu" :onClick #(.toggle-area-menu this)} (if show-area-menu
+                                                                                              "Hide Filters"
+                                                                                              "Filter Crashes"))
           (header/header (om/computed {:date-max date-max
                                        :date-min date-min
                                        :cal-date-max cal-date-max
@@ -296,53 +334,29 @@
                                        :active-area active-area}
                                   {:date-change #(.date-change this %)
                                    :month-change #(.month-change this %)}))
-          (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
-                                             :area/items (:area/items (om/props this))}
-                                            {:area-change #(.area-change this %)
-                                             :area-select #(.area-select this %1 %2)
-                                             :toggle-edit #(.toggle-edit-mode this)})))
-        (dom/div #js {:className "content-outer"}
-         (stat-group/stat-group (om/computed {:group/items (:group/items (om/props this))
-                                              :end-date (if selected-date-max
-                                                          (.format selected-date-max "YYYY-MM-DD")
-                                                          "2015-12-26")
-                                              :start-date (if selected-date-min
-                                                            (.format selected-date-min "YYYY-MM-DD")
-                                                            "2015-01-01")
-                                              :active-area active-area
-                                              :custom-area custom-area}
-                                           {:stat-change #(.stat-change this %)}))
-         (carto-map/carto-map (om/computed {:end-date (if selected-date-max
-                                                       (.format selected-date-max "YYYY-MM-DD")
-                                                       "2015-12-26")
-                                            :start-date (if selected-date-min
+          (when show-area-menu
+            (area-menu/area-menu (om/computed {:menu/items (:menu/items (om/props this))
+                                               :area/items (:area/items (om/props this))}
+                                              {:area-change #(.area-change this %)
+                                               :area-select #(.area-select this %1 %2)
+                                               :toggle-edit #(.toggle-edit-mode this)})))
+          (carto-map/carto-map (om/computed {:end-date (if selected-date-max
+                                                        (.format selected-date-max "YYYY-MM-DD")
+                                                        "2015-12-26")
+                                             :start-date (if selected-date-min
                                                           (.format selected-date-min "YYYY-MM-DD")
                                                           "2015-01-01")
-                                            :edit-mode edit-mode
-                                            :area-overlay area-overlay
-                                            :active-area active-area
-                                            :active-stat active-stat
-                                            :custom-area custom-area}
-                               {:area-change #(.area-change this %)}))
-         (rank-list/rank-list {:rank-list/items (:rank-list/items (om/props this))
-                               :end-date (if selected-date-max
-                                           (.format selected-date-max "YYYY-MM-DD")
-                                           "2015-12-26")
-                               :start-date (if selected-date-min
-                                             (.format selected-date-min "YYYY-MM-DD")
-                                             "2015-01-01")
-                               :active-area active-area
-                               :active-stat active-stat
-                               :custom-area custom-area})
-         (stat-list/stat-list {:stat-list/items (:stat-list/items (om/props this))
-                               :end-date (if selected-date-max
-                                           (.format selected-date-max "YYYY-MM-DD")
-                                           "2015-12-26")
-                               :start-date (if selected-date-min
-                                             (.format selected-date-min "YYYY-MM-DD")
-                                             "2015-01-01")
-                               :active-area active-area
-                               :custom-area custom-area}))))))
+                                             :edit-mode edit-mode
+                                             :area-overlay area-overlay
+                                             :active-area active-area
+                                             :active-stat active-stat
+                                             :custom-area custom-area}
+                                            {:area-change #(.area-change this %)})))
+        (dom/section #js {:className "header-outer1"})
+        (dom/div #js {:className "content-outer1"})))))
+
+
+
 
 (defn render-page
   [state]

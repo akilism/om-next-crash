@@ -18,7 +18,7 @@
     (println query)
     (.setSQL layer query)
     (-> (.getBounds c-sql query)
-        (.done #(.fitBounds map-el %)))))
+        (.done #(.fitBounds map-el % #js {:maxZoom 15})))))
 
 (defn tooltip
   [hoverData]
@@ -111,6 +111,7 @@
           area-layer (nth (.getLayers vis) 1)
           crash-layer (.getSubLayer area-layer 0)]
       (.setInteraction crash-layer false)
+      (.scrollIntoView (.querySelector js/document ".map-box"))
       ;; TODO add hover handler to show next line.
       ;; (.on l-map "mouseover" (.draw-mouseover-handler (om/get-state this)))
       (.on l-map "click" (:draw-click-handler (om/get-state this)))
