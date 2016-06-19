@@ -30,12 +30,27 @@
   [this evt]
   (om/update-state! this update :points (fn [_] (conj (:points (om/get-state this)) (.-latlng evt)))))
 
+(defn draw-mouseover-handler
+  [this evt]
+  (let [points (:points (om/get-state this))]
+    (when (< 0 (count points))
+      (om/update-state! this update :dash-points (fn [_] [(last points) (.-latlng evt)])))))
+
 (defn lat-lngs
   [str-shape]
   (map #(let [parts (clojure.string/split % #" ")]
           {:lat (first (rest parts))
            :lng (first parts)})
         (clojure.string/split str-shape #", ")))
+
+(defn closed-points
+  [points]
+  (conj (into [] points) (first points)))
+
+(defn postgis-points
+  [points]
+  ;; build a str of all the points in this format "LNG LAT, LNG LAT, ..."
+  (clojure.string/join ", " (map #(str (.-lng %) " " (.-lat %)) points)))
 
 (defui CartoMap
   static om/IQuery
@@ -113,7 +128,7 @@
       (.setInteraction crash-layer false)
       (.scrollIntoView (.querySelector js/document ".map-box"))
       ;; TODO add hover handler to show next line.
-      ;; (.on l-map "mouseover" (.draw-mouseover-handler (om/get-state this)))
+      (.on l-map "mousemove" (:draw-mouseover-handler (om/get-state this)))
       (.on l-map "click" (:draw-click-handler (om/get-state this)))
       (println "turn drawing on on the map")))
   (toggle-draw-mode [this]
@@ -138,18 +153,27 @@
            (om/update-state! this update :custom-shape (fn [_] (-> js/L
                                                                 (.polyline js-points #js {:color "blue"})
                                                                 (.addTo l-map)))))))
+  (add-dash-line [this]
+    (let [{:keys [vis dash-points dash-line]} (om/get-state this)
+          l-map (.getNativeMap vis)
+          js-points (clj->js dash-points)]
+         (println dash-points)
+         (if dash-line
+           (.setLatLngs dash-line js-points)
+           (om/update-state! this update :dash-line (fn [_] (-> js/L
+                                                                (.polyline js-points #js {:color "red"})
+                                                                (.addTo l-map)))))))
   (query-custom-shape [this]
     (let [{:keys [vis points custom-shape]} (om/get-state this)
           {:keys [area-change]} (om/get-computed this)
-          js-points (clj->js (conj (into [] points) (first points)))
-          ;; build a str of all the points in this format "LNG LAT, LNG LAT, ..."
-          str-points (clojure.string/join ", " (map #(str (.-lng %) " " (.-lat %)) (conj (into [] points) (first points))))]
-      (println "close shape.")
-      (println (str "ST_GeomFromText('POLYGON(( " str-points " ))', 4326)"))
+          js-points (clj->js (closed-points points))
+          str-points (postgis-points (closed-points points))]
+        ;; TODO: FINISH THIS. finish delete shape. finish close shape / draw off.
+      (if (= (first points) (last points))
+        (println "dont close shape.")
+        (println "close shape."))
       (.setLatLngs custom-shape js-points)
       (println "send latLngs to carto query.")
-      ;; (shape-change (str "ST_GeomFromText('POLYGON(( " str-points " ))', 4326)"))
-      ;; (shape-change str-points)
       (area-change {:type :custom :identifier str-points})))
   (componentDidMount [this]
     (let [{:keys [text type]} (om/props this)
@@ -161,8 +185,11 @@
     (let [custom-area (:custom-area (om/props this))
           initial-state {:vis nil
                          :draw-click-handler (partial draw-click-handler this)
+                         :draw-mouseover-handler (partial draw-mouseover-handler this)
                          :draw-mode false
                          :points []
+                         :dash-points []
+                         :dash-line nil
                          :custom-shape nil}]
       (if custom-area
         (om/set-state! this (assoc initial-state :points (lat-lngs custom-area)))
@@ -179,12 +206,12 @@
           :else nil))))
   (render [this]
     (let [{:keys [edit-mode text type custom-area]} (om/props this)
-          draw-mode (:draw-mode (om/get-state this))
-          vis (:vis (om/get-state this))
-          hover (tooltip (:hover (om/get-state this)))
-          points (:points (om/get-state this))]
+          {:keys [draw-mode vis points dash-points]} (om/get-state this)
+          hover (tooltip (:hover (om/get-state this)))]
       (when (and vis (< 0 (count points)))
         (.add-custom-shape this))
+      (when (and draw-mode (< 0 (count dash-points)))
+        (.add-dash-line this))
       (dom/div #js {:className "map-box"}
         hover
         (when edit-mode
@@ -194,7 +221,8 @@
                                                                                                                             "Draw Custom Shape"))
                                                  (when (<= 3 (count points))
                                                   (dom/li #js {:className "draw-button" :onClick #(.query-custom-shape this)} "Query Shape"))
-                                                 (dom/li #js {:className "draw-button" :onClick #(.delete-shape this)} "Delete Shape")])))
+                                                 (dom/li #js {:className "draw-button" :onClick #(.delete-shape this)} "Delete Shape")])
+           (when draw-mode (dom/div #js {:className "edit-mode-signpost"} "Click map to add points."))))
         (dom/div #js {:className (if edit-mode "carto-map edit-map" "carto-map") :ref "cartoMap" :id "cartoMap"})))))
 
 (def carto-map (om/factory CartoMap))
