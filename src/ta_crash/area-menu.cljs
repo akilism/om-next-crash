@@ -34,7 +34,6 @@
           area-change (:area-change (om/get-computed this))]
       (dom/div #js {:className (str (string/replace (name b-key) #" " "-") " area-sub-menu-item")
                     :onClick (fn [_]
-                               (println js/window)
                                (.scrollTo js/window 0 0)
                                (area-change {:type parent :identifier identifier}))}
                (conversion/convert-type identifier parent)))))
